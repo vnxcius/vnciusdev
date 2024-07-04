@@ -2,11 +2,24 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./pages/error-page";
 import ExternalRedirect from "./components/external-redirect";
+import LanguageRedirect from "./components/language-redirect";
 
 const Routes = createBrowserRouter([
   {
+    path: '*',
+    element: <ErrorPage />
+  },
+  {
     path: '/',
-    element: <App />,
+    element: <LanguageRedirect />
+  },
+  {
+    path: '/:lng',
+    element:
+    <>
+      <LanguageRedirect />
+      <App />
+    </>,
     errorElement: <ErrorPage />
   },
   {

@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "hi": "Hi, my name is",
+    "or": "or",
+    "about": "About",
+    "contact": "Contact",
+    "projects": "Projects",
+    "certifications": "Certifications",
+    "skillsInterests": "Skills and Interests",
+    "aboutMe": "Since my childhood, I have been passionate about technology, so I decided to combine the useful with the pleasant, and today I am a fullstack developer. I don't have formal experience, like CLT, but I am a freelancer with some projects I am working on. I am eager to learn day by day and improve every aspect that a true fullstack developer can offer.",
+    "jvlfDesc": "Website to show the fictitious PDTI/PSI 2025-26 of Banco do Brasil.",
+    "medellinDesc": "E-commerce of clothes and accessories. I participated in all development, from scratch to production.",
+    "olieArtDesc": "Simple portfolio website for a designer.",
+    "restfulApiDesc": "RESTful API that registers, retrieves, and updates students. Test-driven."
+  }
+}

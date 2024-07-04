@@ -3,9 +3,15 @@ import CertCard from "./components/CertCard"
 import ProjectCard from "./components/ProjectCard"
 import Github from "./assets/icons/github";
 import LinkedIn from "./assets/icons/linkedin";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import i18n from "./utils/i18n";
 const SkillCard = lazy(() => import("./components/SkillCard"));
 
 function App() {
+  const { t } = useTranslation()
+  const { lng } = useParams()
+
   const [show, setShow] = useState(false)
   const [lastScroll, setLastScroll] = useState(100)
 
@@ -19,6 +25,12 @@ function App() {
   }
 
   useEffect(() => {
+    if (lng && i18n.language !== lng) {
+      i18n.changeLanguage(lng)
+    }
+  }, [lng])
+
+  useEffect(() => {
     window.addEventListener("scroll", controlNavbar)
     return () => {
       window.removeEventListener("scroll", controlNavbar)
@@ -30,17 +42,17 @@ function App() {
         <ul className="flex justify-center md:justify-normal items-center gap-10 text-neutral-50 max-w-xs md:max-w-3xl lg:max-w-5xl mx-auto">
           <li>
             <a href="#sobre" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> Sobre
+              <span className="text-accent">#</span> {t("about")}
             </a>
           </li>
           <li>
             <a href="#projetos" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> Projetos
+              <span className="text-accent">#</span> {t("projects")}
             </a>
           </li>
           <li>
             <a href="#certificacoes" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> Certificações
+              <span className="text-accent">#</span> {t("certifications")}
             </a>
           </li>
           <li>
@@ -67,21 +79,16 @@ function App() {
         flex-col-reverse md:flex-row">
           <div className="max-w-lg clear-start">
             <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-              <span className="text-accent">#</span> Sobre
+              <span className="text-accent">#</span> {t('about')}
             </h1>
-            <p className="text-accent font-mono">Oi, meu nome é</p>
+            <p className="text-accent font-mono">{t('hi')}</p>
             <div className="my-5">
               <h1 className="text-2xl font-extrabold tracking-wide">Vinícius Simon</h1>
               <h2 className="tracking-wider italic">Fullstack Developer Jr</h2>
             </div>
 
             <p className="my-10">
-              Desde minha infância fui apaixonado por tecnologia, então
-              decidi juntar o útil ao agradável e hoje sou um desenvolvedor
-              fullstack. Não possuo experiência formal, como CLT, mas sou
-              freelancer com alguns projetos que estou trabalhando.
-              Tenho ânsia para aprender dia a pós dia e melhorar cada aspecto
-              que um verdadeiro dev fullstack pode oferecer.
+              {t('aboutMe')}
             </p>
             <div className="flex items-center gap-5">
               <div>
@@ -89,10 +96,10 @@ function App() {
                   className="flex items-center gap-2 w-fit px-6 py-1.5 bg-accent text-neutral-925 font-medium rounded hover:brightness-75
                 focus:outline-none focus:ring-2 ring-purple-300">
                   <img src="/icons/gmail.svg" alt="" className="size-5" />
-                  <span className="font-medium">Contato</span>
+                  <span className="font-medium">{t('contact')}</span>
                 </a>
               </div>
-              <span className="text-neutral-600">ou</span>
+              <span className="text-neutral-600">{t('or')}</span>
               <ul className="flex gap-4">
                 <li>
                   <a href="https://github.com/vnxcius" target="_blank" className="fill-white hover:fill-accent duration-150">
@@ -118,7 +125,7 @@ function App() {
 
       <section className="w-full py-8 relative bg-neutral-900 z-20">
         <h1 className="text-lg text-neutral-300 mb-8 font-mono mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
-          <span className="text-accent">#</span> Habilidades e Interesses
+          <span className="text-accent">#</span> {t('skillsInterests')}
         </h1>
         <div className="max-w-sm md:max-w-3xl lg:max-w-5xl mx-auto w-fit flex gap-7 overflow-hidden">
           <div className="grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
@@ -141,14 +148,14 @@ function App() {
       <section id="projetos" className="w-full py-10">
         <div className="mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
           <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-            <span className="text-accent">#</span> Projetos
+            <span className="text-accent">#</span> {t('projects')}
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <ProjectCard
               link="https://jvlf.site"
               name="jvlf.site"
               img="/img/jvlf_site.webp"
-              description="Site para mostrar o PDTI/PSI 2025-26 fictício do Banco do Brasil."
+              description={t('jvlfDesc')}
               stack={[
                 "react",
                 "tailwind",
@@ -158,7 +165,7 @@ function App() {
               link="https://medellincompany.com.br"
               name="Medellin Original Company"
               img="/img/medellin.webp"
-              description="E-commerce de roupas e acessórios. Participei de todo desenvolvimento, do zero a produção."
+              description={t('medellinDesc')}
               stack={[
                 "go",
                 "tailwind",
@@ -171,7 +178,7 @@ function App() {
               link="https://olieart.com.br"
               name="Olie Art - Portfólio"
               img="/img/olieart.webp"
-              description="Site portfólio simples para uma designer."
+              description={t('olieArtDesc')}
               stack={[
                 "firebase",
                 "html",
@@ -183,7 +190,7 @@ function App() {
               link="https://github.com/vnxcius/rest-api-gin"
               name="RESTful API com Gin"
               img="/img/api-gin.webp"
-              description="RESTful API que registra, busca e atualiza Alunos. Orientada a testes."
+              description={t('restfulApiDesc')}
               stack={[
                 "go",
                 "gin",
@@ -197,7 +204,7 @@ function App() {
       <section id="certificacoes" className="w-full py-10">
         <div className="mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
           <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-            <span className="text-accent">#</span> Certificações
+            <span className="text-accent">#</span> {t('certifications')}
           </h1>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 place-items-center">
             <CertCard

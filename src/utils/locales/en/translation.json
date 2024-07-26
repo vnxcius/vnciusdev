@@ -1,9 +1,11 @@
 {
   "translation": {
-    "hi": "Hi, my name is",
-    "or": "or",
+    "hi": "Hi! I'm",
+    "role": "Fullstack Developer Jr.",
+    "description": "Passionate about technology and it's possibilities.",
+    "contact": "Talk with me",
+    "myWork": "See my work",
     "about": "About",
-    "contact": "Contact",
     "projects": "Projects",
     "certifications": "Certifications",
     "skillsInterests": "Skills and Interests",

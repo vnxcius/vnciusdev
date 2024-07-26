@@ -1,9 +1,11 @@
 {
   "translation": {
-    "hi": "Olá, meu nome é",
-    "or": "ou",
+    "hi": "Oi! Me chamo",
+    "role": "Desenvolvedor Fullstack Jr.",
+    "description": "Apaixonado por tecnologia e suas possibilidades.",
+    "contact": "Fale comigo",
+    "myWork": "Veja meu trabalho",
     "about": "Sobre",
-    "contact": "Contato",
     "projects": "Projetos",
     "certifications": "Certificações",
     "skillsInterests": "Habilidades e Interesses",

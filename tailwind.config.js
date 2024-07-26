@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'source-sans': ["'Source Sans 3', 'sans-serif'"],
         'merriweather': ["'Merriweather', 'serif'"],
+        'playwrite': ["'Playwrite DK Loopet', 'serif'"],
       },
       colors: {
         'neutral-925': '#101010',

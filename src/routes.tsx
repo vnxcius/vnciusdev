@@ -22,7 +22,7 @@ const Routes = createBrowserRouter([
     loader: async () => { return redirect('https://linkedin.com/in/vinicius-simon-gouveia-hilton/') }
   },
   {
-    path: 'mail',
+    path: '/mail',
     loader: async () => { return redirect('mailto:contato@vncius.dev') }
   }
 ]);

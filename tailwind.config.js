@@ -8,8 +8,7 @@ export default {
     extend: {
       fontFamily: {
         'source-sans': ["'Source Sans 3', 'sans-serif'"],
-        'merriweather': ["'Merriweather', 'serif'"],
-        'playwrite': ["'Playwrite DK Loopet', 'serif'"],
+        'adamina': ["'Adamina', 'serif'"],
       },
       colors: {
         'neutral-925': '#101010',

@@ -27,8 +27,8 @@ const LanguageSelector = () => {
   };
 
   useEffect(() => {
-    const handleWindowClick = (event: any) => {
-      const target = event.target.closest('button');
+    const handleWindowClick = (event: MouseEvent) => {
+      const target = (event.target as HTMLElement).closest('button');
       if (target) {
         return;
       }
@@ -42,7 +42,7 @@ const LanguageSelector = () => {
 
   return (
     <>
-      <Button content={selectedLanguage?.emoji!} variant="secondary" onClick={() => setIsOpen(!isOpen)} />
+      <Button content={selectedLanguage?.emoji} variant="secondary" onClick={() => setIsOpen(!isOpen)} />
       {isOpen && <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

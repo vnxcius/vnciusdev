@@ -1,8 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./pages/error-page";
-import ExternalRedirect from "./components/external-redirect";
-import LanguageRedirect from "./components/language-redirect";
 
 const Routes = createBrowserRouter([
   {
@@ -11,28 +9,21 @@ const Routes = createBrowserRouter([
   },
   {
     path: '/',
-    element: <LanguageRedirect />
-  },
-  {
-    path: '/:lng',
-    element:
-    <>
-      <LanguageRedirect />
-      <App />
-    </>,
+    element: <App />,
     errorElement: <ErrorPage />
   },
   {
     path: '/github',
-    element: <ExternalRedirect link="https://github.com/vnxcius" />
+    loader: async () => { return redirect('https://github.com/vnxcius') }
+    
   },
   {
     path: '/linkedin',
-    element: <ExternalRedirect link="https://www.linkedin.com/in/vinicius-simon-gouveia-hilton" />
+    loader: async () => { return redirect('https://linkedin.com/in/vinicius-simon-gouveia-hilton/') }
   },
   {
-    path: 'mail',
-    element: <ExternalRedirect link="mailto:contato@vncius.dev" />
+    path: '/mail',
+    loader: async () => { return redirect('mailto:contato@vncius.dev') }
   }
 ]);
 

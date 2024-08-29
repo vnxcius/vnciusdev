@@ -1,232 +1,281 @@
-import { lazy, useEffect, useState } from "react"
-import CertCard from "./components/CertCard"
-import ProjectCard from "./components/ProjectCard"
-import Github from "./assets/icons/github";
-import LinkedIn from "./assets/icons/linkedin";
-import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import i18n from "./utils/i18n";
-const SkillCard = lazy(() => import("./components/SkillCard"));
+import { t } from "i18next";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Copy, MoonIcon, SunIcon } from "lucide-react";
+import * as icons from "./assets/icons";
+import LanguageSelector from "./components/languague-selector";
+import Button from "./components/button";
+import ProjectCard from "./components/project-card";
+import AnimatedIcon from "./components/animated-icon";
+import { useState } from "react";
 
 function App() {
-  const { t } = useTranslation()
-  const { lng } = useParams()
+  const theme = localStorage.getItem("theme");
+  if (theme === "light") document.documentElement.classList.remove("dark");
 
-  const [show, setShow] = useState(false)
-  const [lastScroll, setLastScroll] = useState(100)
-
-  const controlNavbar = () => {
-    if (window.scrollY > lastScroll) { // 
-      setShow(true)
-    } else {
-      setShow(false)
-    }
-    setLastScroll(100)
+  const changeTheme = () => {
+    if (theme === "dark") localStorage.setItem("theme", "light");
+    else localStorage.setItem("theme", "dark");
+    document.documentElement.classList.toggle("dark");
   }
 
-  useEffect(() => {
-    if (lng && i18n.language !== lng) {
-      i18n.changeLanguage(lng)
-    }
-  }, [lng])
+  const [clicks, setClicks] = useState(0)
+  const easterEgg = () => setClicks(clicks + 1); console.log(clicks)
 
-  useEffect(() => {
-    window.addEventListener("scroll", controlNavbar)
-    return () => {
-      window.removeEventListener("scroll", controlNavbar)
-    }
-  }, [lastScroll])
+  if (clicks >= 19) {
+    setClicks(0)
+    alert("🐝")
+  }
+
   return (
     <>
-      <nav className={"p-5 fixed w-full bg-neutral-900/80 backdrop-blur left-0 top-0 transition-all duration-500 z-50 " + (show ? "visible -translate-y-0 " : "invisible -translate-y-16")}>
-        <ul className="flex justify-center md:justify-normal items-center gap-10 text-neutral-50 max-w-xs md:max-w-3xl lg:max-w-5xl mx-auto">
-          <li>
-            <a href="#sobre" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> {t("about")}
-            </a>
-          </li>
-          <li>
-            <a href="#projetos" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> {t("projects")}
-            </a>
-          </li>
-          <li>
-            <a href="#certificacoes" className="hover:underline underline-offset-2">
-              <span className="text-accent">#</span> {t("certifications")}
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/vnxcius" target="_blank" className="fill-white hover:fill-accent duration-150">
-              <Github width={20} height={20} />
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/vinicius-simon-gouveia-hilton" target="_blank" className="fill-white hover:fill-accent duration-150">
-              <LinkedIn width={20} height={20} />
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div className="bg-accent rounded-full absolute top-28 left-1/3 -z-10 opacity-10 w-64 h-52 md:w-[500px] md:h-[300px] blur-3xl"></div>
-
-      <section id="sobre"
-        className="text-neutral-300 py-32 relative">
-          <div className="bg-[url('/img/grid.svg')] bg-repeat grid-mask w-full h-full absolute top-0 -z-10"></div>
-        <div className="
-        mx-auto flex gap-20 justify-between items-end
-        max-w-xs md:max-w-3xl lg:max-w-5xl
-        flex-col-reverse md:flex-row">
-          <div className="max-w-lg clear-start">
-            <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-              <span className="text-accent">#</span> {t('about')}
-            </h1>
-            <p className="text-accent font-mono">{t('hi')}</p>
-            <div className="my-5">
-              <h1 className="text-2xl font-extrabold tracking-wide">Vinícius Simon</h1>
-              <h2 className="tracking-wider italic">Fullstack Developer Jr</h2>
+      <header className="py-5">
+        <nav className="sm:max-w-5xl max-w-xs flex mx-auto justify-end">
+          <ul className="relative flex items-center gap-5">
+            <li>
+              <button onClick={changeTheme} className="block">
+                <MoonIcon className="text-neutral-300 dark:invisible dark:hidden" />
+                <SunIcon className="invisible hidden dark:visible dark:block dark:text-neutral-300" />
+              </button>
+            </li>
+            <li>
+              <LanguageSelector />
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section className="grid sm:grid-cols-2 gap-10 relative max-w-xs sm:max-w-5xl my-14 mx-auto text-neutral-800 dark:text-neutral-300">
+        <div className="sm:sticky top-10 flex flex-col place-self-start items-start gap-10">
+          <button onClick={easterEgg} className="relative">
+            <img src="/img/quack.webp" alt="Vinícius Simon" className="rounded-[36px]" width={190} height={'auto'} />
+            <span className="absolute -bottom-2 -left-3 text-4xl">👋</span>
+          </button>
+          <div className="space-y-2">
+            <div className="font-adamina text-3xl">
+              <span>{t('hi')} Vinícius Simon</span>
             </div>
-
-            <p className="my-10">
-              {t('aboutMe')}
+            <p className="text-2xl text-neutral-600 dark:text-neutral-400">
+              {t('role')}
             </p>
-            <div className="flex items-center gap-5">
-              <div>
-                <a href="mailto:contato@vncius.dev" target="_blank" title="contato@vncius.dev"
-                  className="flex items-center gap-2 w-fit px-6 py-1.5 bg-accent text-neutral-925 font-medium rounded hover:brightness-75
-                focus:outline-none focus:ring-2 ring-purple-300">
-                  <img src="/icons/gmail.svg" alt="" className="size-5" />
-                  <span className="font-medium">{t('contact')}</span>
-                </a>
+            <a href="mailto:contato@vncius.dev" className="text-neutral-500 hover:underline">contato@vncius.dev</a>
+
+            <hr className="border-neutral-200 dark:border-neutral-800" />
+
+            <h3 className="text-neutral-500 text-lg font-adamina dark:text-neutral-600">
+              {t('socials')}
+            </h3>
+
+            <div className="flex space-x-5">
+              <Link
+                to="/linkedin" target="_blank" title="LinkedIn"
+                className="w-fit block">
+                <icons.LinkedIn className="size-6 fill-neutral-500 hover:brightness-75 duration-300 dark:fill-neutral-600" />
+              </Link>
+              <Link
+                to="/github" target="_blank" title="Github"
+                className="w-fit block">
+                <icons.Github className="size-6 fill-neutral-500 hover:brightness-75 duration-300 dark:fill-neutral-600" />
+              </Link>
+              <div className="flex flex-col items-start">
+                <icons.Discord className="size-6 fill-neutral-500 dark:fill-neutral-600" />
+                <div className="inline-flex items-center gap-1 -translate-x-5">
+                  <p className="text-neutral-500 text-xs">@vncius.dev</p>
+                  <button onClick={() => navigator.clipboard.writeText('vncius.dev')} className="p-1 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded">
+                    <Copy className="size-3 text-neutral-500" />
+                  </button>
+                </div>
               </div>
-              <span className="text-neutral-600">{t('or')}</span>
-              <ul className="flex gap-4">
-                <li>
-                  <a href="https://github.com/vnxcius" target="_blank" className="fill-white hover:fill-accent duration-150">
-                    <Github width={20} height={20} />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.linkedin.com/in/vinicius-simon-gouveia-hilton" target="_blank" className="fill-white hover:fill-accent duration-150">
-                    <LinkedIn width={20} height={20} />
-                  </a>
-                </li>
-              </ul>
             </div>
-            <p className="text-neutral-500 text-sm m-1">contato@vncius.dev</p>
-          </div>
 
-          <div>
-            <img src="/img/handsome.webp" alt="" className="rounded-xl md:min-w-96 md:w-96 md:min-h-96 md:h-96" />
-          </div>
-        </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .5, delay: .5 }}>
+              <h3 className="text-neutral-500 text-lg font-adamina pt-4 dark:text-neutral-600">
+                {t('shortcuts')}
+              </h3>
 
-      </section>
-
-      <section className="w-full py-8 relative bg-neutral-900 z-20">
-        <h1 className="text-lg text-neutral-300 mb-8 font-mono mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
-          <span className="text-accent">#</span> {t('skillsInterests')}
-        </h1>
-        <div className="max-w-sm md:max-w-3xl lg:max-w-5xl mx-auto w-fit flex gap-7 overflow-hidden">
-          <div className="grid gap-3 grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-            <SkillCard icon="/icons/react.svg" name="React" />
-            <SkillCard icon="/icons/go.svg" name="Golang" />
-            <SkillCard icon="/icons/docker.svg" name="Docker" />
-            <SkillCard icon="/icons/postgresql.svg" name="PostgreSQL" />
-            <SkillCard icon="/icons/php_dark.svg" name="PHP" />
-            <SkillCard icon="/icons/tailwind.svg" name="TailwindCSS" />
-            <SkillCard icon="/icons/java.svg" name="Java" />
-            <SkillCard icon="/icons/figma.svg" name="Figma" />
-            <SkillCard icon="/icons/cobol.svg" name="Cobol" />
-            <SkillCard icon="/icons/ibm.svg" name="z/OS" />
-            <SkillCard icon="/icons/laravel.svg" name="Laravel" />
-            <SkillCard icon="/icons/gin.svg" name="Gin" />
+              <ul className="list-disc list-inside text-neutral-500">
+                <motion.li
+                  initial={{ x: -100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: .5, delay: .8, ease: 'circOut', type: 'spring', stiffness: 100, bounce: true }}>
+                  <a href="#stack" className="underline-offset-2 hover:underline">
+                    Stack
+                  </a>
+                </motion.li>
+                <motion.li
+                  initial={{ x: -100, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ duration: .5, delay: .9, ease: 'circOut', type: 'spring', stiffness: 100, bounce: true }}>
+                  <a href="#projects" className="underline-offset-2 hover:underline">
+                    {t('myProjects')}
+                  </a>
+                </motion.li>
+              </ul>
+            </motion.div>
           </div>
         </div>
-      </section>
+        <div className="space-y-3">
+          <p className="font-adamina text-2xl pb-5">
+            {t('description')}
+          </p>
 
-      <section id="projetos" className="w-full py-10">
-        <div className="mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
-          <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-            <span className="text-accent">#</span> {t('projects')}
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <ProjectCard
-              link="https://jvlf.site"
-              name="jvlf.site"
-              img="/img/jvlf_site.webp"
-              description={t('jvlfDesc')}
-              stack={[
-                "react",
-                "tailwind",
-              ]}
-            />
-            <ProjectCard
-              link="https://medellincompany.com.br"
-              name="Medellin Original Company"
-              img="/img/medellin.webp"
-              description={t('medellinDesc')}
-              stack={[
-                "go",
-                "tailwind",
-                "docker",
-                "postgresql",
-              ]}
-            />
-
-            <ProjectCard
-              link="https://olieart.com.br"
-              name="Olie Art - Portfólio"
-              img="/img/olieart.webp"
-              description={t('olieArtDesc')}
-              stack={[
-                "firebase",
-                "html",
-                "tailwind",
-              ]}
-            />
-
-            <ProjectCard
-              link="https://github.com/vnxcius/rest-api-gin"
-              name="RESTful API com Gin"
-              img="/img/api-gin.webp"
-              description={t('restfulApiDesc')}
-              stack={[
-                "go",
-                "gin",
-                "mysql"
-              ]}
-            />
+          <div className="space-x-4 pb-16">
+            <Button content={t('contact')} onClick={() => window.location.href = ('mailto:contato@vncius.dev')} />
+            <Button content={t('myWork')} variant="secondary" onClick={() => window.location.href = ('/#projects')} />
           </div>
+
+          <hr className="border-neutral-200 dark:border-neutral-800" />
+
+          <section>
+            <h2 id="stack" className="text-2xl font-adamina">
+              Stack
+            </h2>
+            <motion.p
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.3, type: "tween", stiffness: 100 }}
+              className="text-neutral-700 uppercase font-light text-sm tracking-wider dark:text-neutral-400">
+              {t('stackPrimary')}
+            </motion.p>
+            <div className="flex flex-wrap justify-items-center mx-auto w-fit gap-5 my-7">
+              <AnimatedIcon delay={.10}>
+                <icons.Go className="w-14 h-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.15}>
+                <icons.ReactIcon className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.20}>
+                <icons.Nextjs className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.25}>
+                <icons.Docker className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.30}>
+                <icons.PostgreSQL className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.35}>
+                <icons.TailwindCSS className="size-8" />
+              </AnimatedIcon>
+            </div>
+
+            <motion.hr
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 1 }}
+              className="border-neutral-200 mb-5 mt-10 max-w-xs mx-auto dark:border-neutral-800"
+            />
+
+            <motion.p
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.40 }}
+              className="text-neutral-700 uppercase font-light text-sm tracking-wider dark:text-neutral-400">
+              {t('stackSecondary')}
+            </motion.p>
+
+            <div className="flex flex-wrap justify-center mx-auto w-fit gap-5 my-7">
+              <AnimatedIcon delay={.45}>
+                <icons.MySQL className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.50}>
+                <icons.TypeScript className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.55}>
+                <icons.Firebase className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.60}>
+                <icons.Figma className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.65}>
+                <icons.Laravel className="size-8" />
+              </AnimatedIcon>
+              <AnimatedIcon delay={.70}>
+                <icons.Php className="size-8" />
+              </AnimatedIcon>
+              {/* <AnimatedIcon delay={.75}>
+                <icons.Java className="size-8" />
+              </AnimatedIcon> */}
+              <AnimatedIcon delay={.80}>
+                <icons.JavaScript className="size-8" />
+              </AnimatedIcon>
+              {/* <AnimatedIcon delay={.85}>
+                <icons.Cobol className="size-8" />
+              </AnimatedIcon> */}
+            </div>
+
+            <hr className="border-neutral-200 dark:border-neutral-800 mb-5 mt-10" />
+
+          </section>
+          <section>
+            <h2 id="projects" className="text-2xl font-adamina mb-7">
+              {t('myProjects')}
+            </h2>
+            <div className="space-y-5">
+              <ProjectCard
+                title="Medellin Original Company"
+                link="https://medellincompany.com.br/"
+                image="/img/medellin.webp"
+                description={t('medellinDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                  <icons.Prisma className="size-6 dark:fill-white" key={'prisma'} />,
+                  <icons.PostgreSQL className="size-6" key={'postgresql'} />,
+                ]}
+              />
+              <ProjectCard
+                title="Soft Skills Check"
+                link="https://softskillscheck.app.br"
+                repo="https://github.com/senac-volunteers/soft-skills-app"
+                image="/img/soft_skills_check.webp"
+                description={t('softSkillsCheckDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                ]}
+              />
+              <ProjectCard
+                title="Facilitando"
+                link="https://facilitando.vncius.dev/"
+                repo="https://github.com/vnxcius/facilitando"
+                image="/img/facilitando.webp"
+                description={t('facilitandoDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                  <icons.Prisma className="size-6 dark:fill-white" key={'prisma'} />,
+                  <icons.PostgreSQL className="size-6" key={'postgresql'} />,
+                ]}
+              />
+              <ProjectCard
+                title="JVLF"
+                link="https://jvlf.site/"
+                repo="https://github.com/vnxcius/jvlf"
+                image="/img/jvlf_site.webp"
+                description={t('jvlfDescription')}
+                date="06/2024"
+                stack={[
+                  <icons.ReactIcon className="size-6" key={'react'}/>,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                ]}
+              />
+              <ProjectCard
+                title="RESTful API com Gin"
+                link="https://github.com/vnxcius/rest-api-gin"
+                repo="https://github.com/vnxcius/rest-api-gin"
+                image="/img/api_gin.webp"
+                description={t('restfulApiDescription')}
+                date="07/2023"
+                stack={[
+                  <icons.Go className="w-10 h-6" key={'go'}/>
+                ]}
+              />
+            </div>
+          </section>
         </div>
       </section>
-
-      <section id="certificacoes" className="w-full py-10">
-        <div className="mx-auto max-w-xs md:max-w-3xl lg:max-w-5xl">
-          <h1 className="text-lg text-neutral-300 mb-8 font-mono">
-            <span className="text-accent">#</span> {t('certifications')}
-          </h1>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 place-items-center">
-            <CertCard
-              link="https://www.credly.com/badges/bbfbb6ac-ed1e-446e-a3ff-fff3b48ae80c/public_url"
-              img="/img/zxplore.webp"
-              name="IBM Z Xplore - Concepts"
-            />
-            <CertCard
-              link="https://www.credly.com/badges/670aeee4-679c-4ebb-adb8-0790eefc15fb/public_url"
-              img="/img/scrum.webp"
-              name="Scrum Foundation - SFPC™"
-            />
-          </div>
-        </div>
-      </section>
-
-      <footer className="w-full my-10 mt-20 flex justify-center">
-        <a href="https://github.com/vnxcius/vinisimondev" target="_blank" className="flex items-center gap-5 text-neutral-600 text-center px-5 hover:underline hover:text-accent">
-          <span>&copy; 2024 Developed with ❤ by Vinícius S. G. Hilton</span>
-          <Github width={16} height={16} fill="white" />
-        </a>
-      </footer>
     </>
   )
 }

@@ -3,37 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-neutral-925;
+  @apply bg-primary;
   @apply font-source-sans;
-}
-
-#scroller {
-  -webkit-mask:
-    linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-  mask: linear-gradient(90deg, transparent, white 10%, white 90%, transparent);
-}
-
-.bg-\[url\(\'\/img\/olieart\.webp\'\)\] {
-  background-image: url('/img/olieart.webp');
-}
-
-.bg-\[url\(\'\/img\/medellin\.webp\'\)\] {
-  background-image: url('/img/medellin.webp');
-}
-
-.bg-\[url\(\'\/img\/api-gin\.webp\'\)\] {
-  background-image: url('/img/api-gin.webp');
-  background-position: left;
-}
-
-.bg-\[url\(\'\/img\/jvlf_site\.webp\'\)\] {
-  background-image: url('/img/jvlf_site.webp');
-}
-
-.bg-\[url\(\'\/img\/skeleton_placeholder\.png\'\)\] {
-  background-image: url('/img/skeleton_placeholder.png');
-}
-
-.grid-mask {
-  mask-image: radial-gradient(rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, .1) 70%);
 }

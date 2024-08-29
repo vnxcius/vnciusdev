@@ -16,6 +16,8 @@ import LinkedIn from "./components/linkedin";
 import Github from "./components/github";
 import Cobol from "./components/cobol";
 import Discord from "./components/discord";
+import Prisma from "./components/prisma";
+import HTML5 from "./components/html-icon";
 
 export {
   ReactIcon,
@@ -35,5 +37,7 @@ export {
   LinkedIn,
   Github,
   Cobol,
-  Discord
+  Discord,
+  Prisma,
+  HTML5,
 }

@@ -1,21 +1,42 @@
 import { t } from "i18next";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Copy, MoonIcon } from "lucide-react";
+import { Copy, MoonIcon, SunIcon } from "lucide-react";
 import * as icons from "./assets/icons";
 import LanguageSelector from "./components/languague-selector";
 import Button from "./components/button";
 import ProjectCard from "./components/project-card";
+import AnimatedIcon from "./components/animated-icon";
+import { useState } from "react";
 
 function App() {
+  const theme = localStorage.getItem("theme");
+  if (theme === "light") document.documentElement.classList.remove("dark");
+
+  const changeTheme = () => {
+    if (theme === "dark") localStorage.setItem("theme", "light");
+    else localStorage.setItem("theme", "dark");
+    document.documentElement.classList.toggle("dark");
+  }
+
+  const [clicks, setClicks] = useState(0)
+  const easterEgg = () => setClicks(clicks + 1); console.log(clicks)
+
+  if (clicks >= 19) {
+    setClicks(0)
+    alert("🐝")
+  }
 
   return (
     <>
       <header className="py-5">
-        <nav className="max-w-5xl flex mx-auto justify-end">
+        <nav className="sm:max-w-5xl max-w-xs flex mx-auto justify-end">
           <ul className="relative flex items-center gap-5">
             <li>
-              <MoonIcon className="text-neutral-300" />
+              <button onClick={changeTheme} className="block">
+                <MoonIcon className="text-neutral-300 dark:invisible dark:hidden" />
+                <SunIcon className="invisible hidden dark:visible dark:block dark:text-neutral-300" />
+              </button>
             </li>
             <li>
               <LanguageSelector />
@@ -23,12 +44,12 @@ function App() {
           </ul>
         </nav>
       </header>
-      <section className="grid grid-cols-2 relative max-w-5xl my-14 mx-auto text-neutral-800 dark:text-neutral-300">
-        <div className="sticky top-10 flex flex-col place-self-start items-start gap-10">
-          <div className="relative">
+      <section className="grid sm:grid-cols-2 gap-10 relative max-w-xs sm:max-w-5xl my-14 mx-auto text-neutral-800 dark:text-neutral-300">
+        <div className="sm:sticky top-10 flex flex-col place-self-start items-start gap-10">
+          <button onClick={easterEgg} className="relative">
             <img src="/img/quack.webp" alt="Vinícius Simon" className="rounded-[36px]" width={190} height={'auto'} />
             <span className="absolute -bottom-2 -left-3 text-4xl">👋</span>
-          </div>
+          </button>
           <div className="space-y-2">
             <div className="font-adamina text-3xl">
               <span>{t('hi')} Vinícius Simon</span>
@@ -36,6 +57,7 @@ function App() {
             <p className="text-2xl text-neutral-600 dark:text-neutral-400">
               {t('role')}
             </p>
+            <a href="mailto:contato@vncius.dev" className="text-neutral-500 hover:underline">contato@vncius.dev</a>
 
             <hr className="border-neutral-200 dark:border-neutral-800" />
 
@@ -50,16 +72,18 @@ function App() {
                 <icons.LinkedIn className="size-6 fill-neutral-500 hover:brightness-75 duration-300 dark:fill-neutral-600" />
               </Link>
               <Link
-                to="/linkedin" target="_blank" title="Github"
+                to="/github" target="_blank" title="Github"
                 className="w-fit block">
                 <icons.Github className="size-6 fill-neutral-500 hover:brightness-75 duration-300 dark:fill-neutral-600" />
               </Link>
-              <div className="flex gap-2 items-center">
+              <div className="flex flex-col items-start">
                 <icons.Discord className="size-6 fill-neutral-500 dark:fill-neutral-600" />
-                <p className="text-neutral-500">vncius.dev</p>
-                <button onClick={() => navigator.clipboard.writeText('vncius.dev')} className="p-1 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded">
-                  <Copy className="size-4 text-neutral-500" />
-                </button>
+                <div className="inline-flex items-center gap-1 -translate-x-5">
+                  <p className="text-neutral-500 text-xs">@vncius.dev</p>
+                  <button onClick={() => navigator.clipboard.writeText('vncius.dev')} className="p-1 hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded">
+                    <Copy className="size-3 text-neutral-500" />
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -112,42 +136,25 @@ function App() {
               className="text-neutral-700 uppercase font-light text-sm tracking-wider dark:text-neutral-400">
               {t('stackPrimary')}
             </motion.p>
-            <div className="flex mx-auto w-fit gap-5 my-7">
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.1, stiffness: 100 }}>
+            <div className="flex flex-wrap justify-items-center mx-auto w-fit gap-5 my-7">
+              <AnimatedIcon delay={.10}>
                 <icons.Go className="w-14 h-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.2, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.15}>
                 <icons.ReactIcon className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.3, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.20}>
                 <icons.Nextjs className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.4, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.25}>
                 <icons.Docker className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.5, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.30}>
                 <icons.PostgreSQL className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.6, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.35}>
                 <icons.TailwindCSS className="size-8" />
-              </motion.span>
+              </AnimatedIcon>
             </div>
 
             <motion.hr
@@ -160,66 +167,39 @@ function App() {
             <motion.p
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.7 }}
+              transition={{ duration: 0.3, delay: 0.40 }}
               className="text-neutral-700 uppercase font-light text-sm tracking-wider dark:text-neutral-400">
               {t('stackSecondary')}
             </motion.p>
 
-            <div className="flex mx-auto w-fit gap-5 my-7">
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.8, stiffness: 100 }}>
+            <div className="flex flex-wrap justify-center mx-auto w-fit gap-5 my-7">
+              <AnimatedIcon delay={.45}>
                 <icons.MySQL className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 0.9, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.50}>
                 <icons.TypeScript className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.55}>
                 <icons.Firebase className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.1, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.60}>
                 <icons.Figma className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.2, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.65}>
                 <icons.Laravel className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.3, stiffness: 100 }}>
+              </AnimatedIcon>
+              <AnimatedIcon delay={.70}>
                 <icons.Php className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.4, stiffness: 100 }}>
+              </AnimatedIcon>
+              {/* <AnimatedIcon delay={.75}>
                 <icons.Java className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.5, stiffness: 100 }}>
+              </AnimatedIcon> */}
+              <AnimatedIcon delay={.80}>
                 <icons.JavaScript className="size-8" />
-              </motion.span>
-              <motion.span
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, type: "spring", delay: 1.6, stiffness: 100 }}>
+              </AnimatedIcon>
+              {/* <AnimatedIcon delay={.85}>
                 <icons.Cobol className="size-8" />
-              </motion.span>
+              </AnimatedIcon> */}
             </div>
 
             <hr className="border-neutral-200 dark:border-neutral-800 mb-5 mt-10" />
@@ -235,18 +215,62 @@ function App() {
                 link="https://medellincompany.com.br/"
                 image="/img/medellin.webp"
                 description={t('medellinDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                  <icons.Prisma className="size-6 dark:fill-white" key={'prisma'} />,
+                  <icons.PostgreSQL className="size-6" key={'postgresql'} />,
+                ]}
+              />
+              <ProjectCard
+                title="Soft Skills Check"
+                link="https://softskillscheck.app.br"
+                repo="https://github.com/senac-volunteers/soft-skills-app"
+                image="/img/soft_skills_check.webp"
+                description={t('softSkillsCheckDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                ]}
+              />
+              <ProjectCard
+                title="Facilitando"
+                link="https://facilitando.vncius.dev/"
+                repo="https://github.com/vnxcius/facilitando"
+                image="/img/facilitando.webp"
+                description={t('facilitandoDescription')}
+                date="08/2024"
+                stack={[
+                  <icons.Nextjs className="size-6" key={'nextjs 14'} />,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                  <icons.Prisma className="size-6 dark:fill-white" key={'prisma'} />,
+                  <icons.PostgreSQL className="size-6" key={'postgresql'} />,
+                ]}
               />
               <ProjectCard
                 title="JVLF"
                 link="https://jvlf.site/"
+                repo="https://github.com/vnxcius/jvlf"
                 image="/img/jvlf_site.webp"
                 description={t('jvlfDescription')}
+                date="06/2024"
+                stack={[
+                  <icons.ReactIcon className="size-6" key={'react'}/>,
+                  <icons.TypeScript className="size-6" key={'typescript'} />,
+                ]}
               />
               <ProjectCard
                 title="RESTful API com Gin"
                 link="https://github.com/vnxcius/rest-api-gin"
+                repo="https://github.com/vnxcius/rest-api-gin"
                 image="/img/api_gin.webp"
                 description={t('restfulApiDescription')}
+                date="07/2023"
+                stack={[
+                  <icons.Go className="w-10 h-6" key={'go'}/>
+                ]}
               />
             </div>
           </section>

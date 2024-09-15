@@ -7,25 +7,28 @@ import LanguageSelector from "./components/languague-selector";
 import Button from "./components/button";
 import ProjectCard from "./components/project-card";
 import AnimatedIcon from "./components/animated-icon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const theme = localStorage.getItem("theme");
-  if (theme === "light") document.documentElement.classList.remove("dark");
+  const initialTheme = localStorage.getItem("theme") ?? "light";
+  const [theme, setTheme] = useState(initialTheme);
 
   const changeTheme = () => {
-    if (theme === "dark") localStorage.setItem("theme", "light");
-    else localStorage.setItem("theme", "dark");
-    document.documentElement.classList.toggle("dark");
-  }
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   const [clicks, setClicks] = useState(0)
-  const easterEgg = () => setClicks(clicks + 1); console.log(clicks)
+  const easterEgg = () => setClicks(clicks + 1);
 
   if (clicks >= 19) {
     setClicks(0)
     alert("🐝")
   }
+
+  useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <>
@@ -257,7 +260,7 @@ function App() {
                 description={t('jvlfDescription')}
                 date="06/2024"
                 stack={[
-                  <icons.ReactIcon className="size-6" key={'react'}/>,
+                  <icons.ReactIcon className="size-6" key={'react'} />,
                   <icons.TypeScript className="size-6" key={'typescript'} />,
                 ]}
               />
@@ -269,7 +272,7 @@ function App() {
                 description={t('restfulApiDescription')}
                 date="07/2023"
                 stack={[
-                  <icons.Go className="w-10 h-6" key={'go'}/>
+                  <icons.Go className="w-10 h-6" key={'go'} />
                 ]}
               />
             </div>

@@ -24,7 +24,7 @@ const Routes = createBrowserRouter([
   {
     path: '/mail',
     loader: async () => { return redirect('mailto:contato@vncius.dev') }
-  }
+  },
 ]);
 
 export default Routes;

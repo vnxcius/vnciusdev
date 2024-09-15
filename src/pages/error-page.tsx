@@ -1,29 +1,20 @@
+import { MoveLeftIcon } from "lucide-react"
+
 const ErrorPage = () => {
+  const theme = localStorage.getItem("theme");
+  if (theme === "light") document.documentElement.classList.remove("dark");
+
   return (
-    <section className="bg-neutral-925">
-      <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
-        <div className="flex flex-col items-center max-w-sm mx-auto text-center">
-          <p className="p-3 text-sm font-medium text-accent rounded-full bg-accent/20">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-            </svg>
-          </p>
-          <h1 className="mt-3 text-2xl font-semibold text-neutral-200 md:text-3xl">Página não encontrada</h1>
-          <p className="mt-4 text-neutral-300">Acho que você se confundiu... Vamos tentar de novo.</p>
-
-          <div className="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
-            <button onClick={() => window.history.back()}
-              className="flex items-center justify-center w-1/2 px-5 py-2 text-sm text-neutral-800 transition-colors duration-200 bg-accent rounded-full gap-x-2 sm:w-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:rotate-180">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-              </svg>
-
-
-              <span>Voltar</span>
-            </button>
-          </div>
-        </div>
-      </div>
+    <section className="bg-primary h-screen w-full flex flex-col justify-center items-center text-neutral-700">
+      <p className="text-2xl">Oops!</p>
+      <p className="text-xl">A página que você procurou não foi encontrada.</p>
+      <h1 className="text-9xl font-extrabold leading-snug">ERROR 404</h1>
+      <hr className="my-5 w-full max-w-sm border-neutral-200" />
+      <button onClick={() => window.location.href = '/'}
+        className="flex items-center gap-3 my-20 bg-neutral-800 hover:bg-neutral-700 text-primary shadow py-2 px-6 rounded-full">
+        <MoveLeftIcon className="size-4" />{' '}
+        Voltar a página inicial
+      </button>
     </section>
   )
 }

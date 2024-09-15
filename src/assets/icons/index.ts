@@ -18,6 +18,7 @@ import Cobol from "./components/cobol";
 import Discord from "./components/discord";
 import Prisma from "./components/prisma";
 import HTML5 from "./components/html-icon";
+import Bluesky from "./components/bluesky";
 
 export {
   ReactIcon,
@@ -40,4 +41,5 @@ export {
   Discord,
   Prisma,
   HTML5,
+  Bluesky,
 }

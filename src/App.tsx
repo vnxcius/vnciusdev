@@ -50,7 +50,7 @@ function App() {
       <section className="grid sm:grid-cols-2 gap-10 relative max-w-xs sm:max-w-5xl my-14 mx-auto text-neutral-800 dark:text-neutral-300">
         <div className="sm:sticky top-10 flex flex-col place-self-start items-start gap-10">
           <button onClick={easterEgg} className="relative">
-            <img src="/img/quack.webp" alt="Vinícius Simon" className="rounded-[36px]" width={190} height={'auto'} />
+            <img src="/img/handsome.webp" alt="Vinícius Simon" className="rounded-[36px]" width={190} height={'auto'} />
             <span className="absolute -bottom-2 -left-3 text-4xl">👋</span>
           </button>
           <div className="space-y-2">

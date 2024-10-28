@@ -20,15 +20,21 @@ const Routes = createBrowserRouter([
   },
   {
     path: '/github',
-    loader: async () => { return redirect('https://github.com/vnxcius') }
+    loader: async () => {
+      return redirect('https://github.com/vnxcius')
+    }
   },
   {
     path: '/linkedin',
-    loader: async () => { return redirect('https://linkedin.com/in/vinicius-simon-gouveia-hilton/') }
+    loader: async () => {
+      return redirect('https://linkedin.com/in/vinicius-simon-gouveia-hilton/')
+    }
   },
   {
     path: '/mail',
-    loader: async () => { return redirect('mailto:contato@vncius.dev') }
+    loader: async () => {
+      return redirect('mailto:contato@vncius.dev')
+    }
   },
 ]);
 

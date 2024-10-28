@@ -20,11 +20,26 @@ const ProjectCard = (props: Props) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      className="bg-white border p-5 pb-8 rounded-3xl dark:bg-neutral-900 dark:border-neutral-800">
+      className="
+        bg-white border p-5 pb-8 rounded-3xl dark:bg-neutral-900
+        dark:border-neutral-800
+      ">
       <Link to={props.link!} target="_blank">
-        <img src={props.image} alt={props.title} className="rounded-xl sm:h-72 h-36 object-cover border dark:border-neutral-800" />
+        <img
+          src={props.image}
+          alt={props.title}
+          className="
+            rounded-xl sm:h-72 h-36 object-cover border
+            dark:border-neutral-800
+          "
+        />
       </Link>
-      <div className="flex items-center gap-5 my-2 bg-neutral-50 border w-fit mx-auto py-1.5 px-5 rounded-full dark:bg-neutral-900 dark:border-neutral-800">
+      <div
+        className="
+          flex items-center gap-5 my-2 bg-neutral-50 border w-fit
+          mx-auto py-1.5 px-5 rounded-full dark:bg-neutral-900
+          dark:border-neutral-800
+        ">
         {props.stack.map((stack) => (
           <span key={stack.key} title={stack.key!}>
             {stack}
@@ -41,7 +56,9 @@ const ProjectCard = (props: Props) => {
       <p className="text-neutral-400 text-xs my-1">Feito em {props.date}</p>
       {props.repo && (
         <Link to={props.repo} target="_blank" className="w-fit block mt-2">
-          <icons.Github className="fill-neutral-400 hover:fill-neutral-500 size-6" />
+          <icons.Github
+            className="fill-neutral-400 hover:fill-neutral-500 size-6"
+          />
         </Link>
       )}
     </motion.div>

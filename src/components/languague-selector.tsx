@@ -42,11 +42,20 @@ const LanguageSelector = () => {
 
   return (
     <>
-      <Button content={selectedLanguage?.emoji} variant="secondary" onClick={() => setIsOpen(!isOpen)} />
+      <Button
+        content={selectedLanguage?.emoji}
+        variant="secondary"
+        onClick={() => setIsOpen(!isOpen)}
+      />
       {isOpen && <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="absolute right-0 mt-2 w-max rounded-md bg-primary border border-neutral-200 text-neutral-800 z-50"
+        className="
+          absolute right-0 mt-2 w-max rounded-md bg-primary border
+          border-neutral-200 text-neutral-800 z-50
+          dark:bg-neutral-925 dark:border-neutral-800
+          dark:text-neutral-200
+        "
         role="menu"
         aria-orientation="vertical"
       >
@@ -56,11 +65,14 @@ const LanguageSelector = () => {
               <button
                 key={language.key}
                 onClick={() => handleLanguageChange(language)}
-                className={`${selectedLanguage?.key === language.key
-                  ? "backdrop-brightness-95"
-                  : "text-neutral-600"
-                  } px-4 py-2 text-sm text-start items-center inline-flex gap-2 hover:backdrop-brightness-95 `}
-                role="menuitem"
+                className={`
+                  ${selectedLanguage?.key === language.key
+                    ? "backdrop-brightness-95"
+                    : "text-neutral-600 dark:text-neutral-400"
+                  }
+                  px-4 py-2 text-sm text-start items-center inline-flex gap-2
+                  hover:backdrop-brightness-95
+                `}
               >
                 <span className="text-lg">{language.emoji}</span>
                 <span className="truncate">{language.name}</span>

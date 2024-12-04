@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         'source-sans': ["'Source Sans 3', 'sans-serif'"],
         'adamina': ["'Adamina', 'serif'"],
+        'mojangles': ["'Mojangles', 'monospace'"],
       },
       colors: {
         'neutral-925': '#101010',

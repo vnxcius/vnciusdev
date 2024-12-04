@@ -1,6 +1,7 @@
 import { MoveLeftIcon } from "lucide-react";
 import { useEffect } from "react";
 import { t } from "i18next";
+import { NavLink } from "react-router-dom";
 
 const ErrorPage = () => {
   const initialTheme = localStorage.getItem("theme") ?? "light";
@@ -28,8 +29,7 @@ const ErrorPage = () => {
           dark:border-neutral-800
         "
       />
-      <button
-        onClick={() => window.location.href = '/'}
+      <NavLink to={"/"}
         className="
           flex items-center gap-3 my-20 bg-neutral-800
           hover:bg-neutral-700 text-primary shadow py-2
@@ -37,7 +37,7 @@ const ErrorPage = () => {
         ">
         <MoveLeftIcon className="size-4" />{' '}
         {t("goBack")}
-      </button>
+      </NavLink>
     </section>
   )
 }

@@ -97,7 +97,7 @@ const MinecraftLayout = ({
           {children}
         </section>
       </main>
-      <footer>
+      <footer className="pb-5">
         <p className="text-center text-sm text-neutral-700 dark:text-neutral-400">
           &copy; 2024. Made with love by{' '}
           <NavLink to="/" target="_blank" rel="noopener noreferrer"

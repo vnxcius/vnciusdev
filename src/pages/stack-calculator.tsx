@@ -9,10 +9,15 @@ const StackCalculator = () => {
   const [stacksRemaining, setStacksRemaining] = useState<string>("");
   const [stacksResult, setStacksResult] = useState<string>("");
 
+  const [shulkers, setShulkers] = useState<string>("");
+  const [chests, setChests] = useState<string>("");
+
   const calculateItems = () => {
     if (items === "") {
       setStacks("");
       setStacksRemaining("");
+      setStacksResult("");
+      setResult({ stacks: 0, remainingItems: 0 });
       return;
     };
     const numericItems = parseInt(items, 10) || 0;
@@ -22,6 +27,30 @@ const StackCalculator = () => {
   const calculateStacks = () => {
     if (stacks === "" && stacksRemaining === "") return;
     countStacks(parseInt(stacks, 10) || 0, parseInt(stacksRemaining, 10) || 0);
+  };
+
+  const calculateShulkers = () => {
+    // 1728 items per shulker
+    if (items === "") {
+      setShulkers("");
+      return;
+    };
+
+    const numericItems = parseInt(items, 10) || 0;
+    const shulkers = Math.ceil(numericItems / 1728);
+    setShulkers(shulkers.toString());
+  };
+
+  const calculateChests = () => {
+    // 1728 items per chest and 3456 items per double chest
+    if (items === "") {
+      setChests("");
+      return;
+    };
+
+    const numericItems = parseInt(items, 10) || 0;
+    const chests = Math.ceil(numericItems / 3456);
+    setChests(chests.toString());
   };
 
   function countItems(items: number) {
@@ -48,6 +77,8 @@ const StackCalculator = () => {
 
   useEffect(() => {
     calculateItems();
+    calculateShulkers();
+    calculateChests();
   }, [items]);
 
   useEffect(() => {
@@ -57,16 +88,16 @@ const StackCalculator = () => {
   return (
     <MinecraftLayout>
       <Helmet title="Stack Calculator | Minecraft Tools" />
-      <div className="max-w-2xl mx-auto px-4 max-sm:max-w-sm">
-        <h1 className="text-4xl font-mojangles text-neutral-700 dark:text-neutral-200">
-          Stack Calculator
-        </h1>
-        <hr className="border-neutral-200 dark:border-[#292c32] mt-5" />
-        <div className="flex flex-col w-fit mt-7 space-y-1.5">
-          <label
-            htmlFor="items"
-            className="font-mojangles text-neutral-700 dark:text-neutral-200"
-          >
+      <div
+        className="
+          font-mojangles text-neutral-700 dark:text-neutral-200 mx-auto px-4
+          max-w-2xl max-sm:max-w-sm
+        "
+      >
+        <h1 className="text-4xl">Stack Calculator</h1>
+        <hr className="border-neutral-200 dark:border-[#292c32] mt-5 duration-100" />
+        <div className="flex flex-col mt-7 space-y-1.5">
+          <label htmlFor="items">
             Items
           </label>
           <input
@@ -76,9 +107,9 @@ const StackCalculator = () => {
             autoFocus
             placeholder="Enter number of items"
             className="
-              focus:outline-none [appearance:textfield] font-mojangles p-3 w-64
+              focus:outline-none [appearance:textfield] p-3 bg-black
               placeholder:text-neutral-400 border-2 border-neutral-400
-              bg-black text-neutral-200 shadow dark:border-neutral-50
+              dark:border-neutral-50 text-neutral-50
             "
             onChange={(e) => {
               // Allow only numeric input or an empty string
@@ -88,16 +119,14 @@ const StackCalculator = () => {
               }
             }}
           />
-          <div
-            className="
-              text-neutral-800 dark:text-neutral-200 text-lg py-2.5
-              flex items-center gap-3.5 font-mojangles
-            "
-          >
+          <div className="text-lg py-2.5 flex items-center gap-3.5">
             <div className="flex items-center gap-2">
               <img
                 src="/img/spruce_planks_stack.png"
-                alt="Stack Spruce Planks Icons"
+                alt="Stack Spruce Planks Icon"
+                className="select-none"
+                draggable={false}
+                unselectable="on"
                 width={28}
                 height={28}
               />
@@ -108,7 +137,10 @@ const StackCalculator = () => {
             <div className="flex items-center gap-2">
               <img
                 src="/img/spruce_planks.png"
-                alt="Stack Spruce Planks Icons"
+                alt="Spruce Planks Icon"
+                className="select-none"
+                draggable={false}
+                unselectable="on"
                 width={28}
                 height={28}
               />
@@ -119,12 +151,9 @@ const StackCalculator = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-4 w-fit mt-7">
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="stacks"
-              className="font-mojangles text-neutral-700 dark:text-neutral-200"
-            >
+        <div className="flex flex-wrap gap-4 mt-7">
+          <div className="flex flex-col gap-2 flex-1">
+            <label htmlFor="stacks">
               Stacks
             </label>
             <input
@@ -133,9 +162,9 @@ const StackCalculator = () => {
               value={stacks}
               placeholder="Enter number of stacks"
               className="
-                focus:outline-none [appearance:textfield] font-mojangles p-3 w-64
+                focus:outline-none [appearance:textfield] p-3 bg-black
                 placeholder:text-neutral-400 border-2 border-neutral-400
-                bg-black text-neutral-200 shadow dark:border-neutral-50
+                dark:border-neutral-50 text-neutral-50
               "
               onChange={(e) => {
                 // Allow only numeric input or an empty string
@@ -146,11 +175,8 @@ const StackCalculator = () => {
               }}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="stacks"
-              className="font-mojangles text-neutral-700 dark:text-neutral-200"
-            >
+          <div className="flex flex-col gap-2 w-full flex-1">
+            <label htmlFor="stacks">
               Items
             </label>
             <input
@@ -159,9 +185,9 @@ const StackCalculator = () => {
               value={stacksRemaining}
               placeholder="Enter number of items"
               className="
-                focus:outline-none [appearance:textfield] font-mojangles p-3 w-64
+                focus:outline-none [appearance:textfield] p-3 bg-black
                 placeholder:text-neutral-400 border-2 border-neutral-400
-                bg-black text-neutral-200 shadow dark:border-neutral-50
+                dark:border-neutral-50 text-neutral-50
               "
               onChange={(e) => {
                 // Allow only numeric input or an empty string
@@ -173,21 +199,58 @@ const StackCalculator = () => {
             />
           </div>
         </div>
-        <div
-          className="
-            flex items-center text-neutral-800 dark:text-neutral-200
-            font-mojangles text-lg gap-2 py-2.5
-          "
-        >
+        <div className="flex items-center text-lg gap-2 py-4">
           <img
             src="/img/spruce_planks.png"
-            alt="Stack Spruce Planks Icons"
+            alt="Spruce Planks Icon"
+            className="select-none"
+            draggable={false}
+            unselectable="on"
             width={28}
             height={28}
           />
           <p>
             {stacksResult || "0"} items
           </p>
+        </div>
+        <p className="text-center">
+          or
+        </p>
+        <div className="flex justify-center items-center flex-wrap max-sm:gap-7 mt-7">
+          <div className="flex items-center text-lg gap-3 w-64">
+            <img
+              src="/img/shulker_box.webp"
+              alt="Shulker Box Icon"
+              className="select-none"
+              draggable={false}
+              unselectable="on"
+              width={28}
+              height={28}
+            />
+            <p>
+              {shulkers || "0"} shulker boxes
+              <span className="text-xs block text-neutral-400">
+                27 stacks per shulker
+              </span>
+            </p>
+          </div>
+          <div className="flex items-center text-lg gap-3 w-64">
+            <img
+              src="/img/chest.webp"
+              alt="Chest Icon"
+              className="select-none"
+              draggable={false}
+              unselectable="on"
+              width={28}
+              height={28}
+            />
+            <p>
+              {chests || "0"} double chests
+              <span className="text-xs block text-neutral-400">
+                54 stacks per double chest
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </MinecraftLayout>

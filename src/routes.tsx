@@ -4,6 +4,8 @@ import ErrorPage from "./pages/error-page";
 import CertFacSenac24 from "./pages/cert-fac-senac-24";
 import Article from "./pages/article";
 import Articles from "./pages/articles";
+import Minecraft from "./pages/minecraft";
+import StackCalculator from "./pages/stack-calculator";
 
 const Routes = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const Routes = createBrowserRouter([
   {
     path: '/blog/:slug',
     element: <Article />,
+  },
+  {
+    path: '/minecraft',
+    element: <Minecraft />,
+  },
+  {
+    path: '/minecraft/stack-calculator',
+    element: <StackCalculator />,
   },
   {
     path: '/github',

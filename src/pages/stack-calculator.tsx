@@ -10,13 +10,17 @@ const StackCalculator = () => {
   const [stacksResult, setStacksResult] = useState<string>("");
 
   const calculateItems = () => {
-    if (items === "") return;
+    if (items === "") {
+      setStacks("");
+      setStacksRemaining("");
+      return;
+    };
     const numericItems = parseInt(items, 10) || 0;
     setResult(countItems(numericItems));
   };
 
   const calculateStacks = () => {
-    if (stacks === "" || stacksRemaining === "") return;
+    if (stacks === "" && stacksRemaining === "") return;
     countStacks(parseInt(stacks, 10) || 0, parseInt(stacksRemaining, 10) || 0);
   };
 

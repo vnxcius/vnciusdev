@@ -1,4 +1,4 @@
-import ReactIcon from "./components/react";
+import React from "./components/react";
 import Docker from "./components/docker";
 import Nextjs from "./components/nextjs";
 import Go from "./components/go";
@@ -20,8 +20,8 @@ import Prisma from "./components/prisma";
 import HTML5 from "./components/html-icon";
 import Bluesky from "./components/bluesky";
 
-export {
-  ReactIcon,
+export const icons = {
+  React,
   Docker,
   Nextjs,
   Go,
@@ -42,4 +42,4 @@ export {
   Prisma,
   HTML5,
   Bluesky,
-}
+};

@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-soapstone text-neutral-800 dark:bg-cinder dark:text-neutral-200
+  }
+}

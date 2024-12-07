@@ -1,10 +1,10 @@
-import { motion } from "framer-motion"
+import { motion } from "motion/react";
 
 export default function AnimatedIcon({
   children,
   delay = 0
 }: Readonly<{
-  children: JSX.Element,
+  children: React.ReactNode,
   delay?: number
 }>) {
   return (
@@ -20,4 +20,4 @@ export default function AnimatedIcon({
       {children}
     </motion.span>
   )
-}
+};

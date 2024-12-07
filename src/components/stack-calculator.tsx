@@ -196,7 +196,7 @@ export default function StackCalculator({
         </p>
       </div>
       <p className="text-center">
-        or
+        {dict.minecraft.keywords.or}
       </p>
       <div className="flex justify-center items-center flex-wrap max-sm:gap-7 mt-7">
         <div className="flex items-center text-lg gap-3 w-64">

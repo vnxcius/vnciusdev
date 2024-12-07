@@ -18,47 +18,6 @@ export default function StackCalculator({
   const [shulkers, setShulkers] = useState<string>("");
   const [chests, setChests] = useState<string>("");
 
-  const calculateItems = () => {
-    if (items === "") {
-      setStacks("");
-      setStacksRemaining("");
-      setStacksResult("");
-      setResult({ stacks: 0, remainingItems: 0 });
-      return;
-    };
-    const numericItems = parseInt(items, 10) || 0;
-    setResult(countItems(numericItems));
-  };
-
-  const calculateStacks = () => {
-    if (stacks === "" && stacksRemaining === "") return;
-    countStacks(parseInt(stacks, 10) || 0, parseInt(stacksRemaining, 10) || 0);
-  };
-
-  const calculateShulkers = () => {
-    // 1728 items per shulker
-    if (items === "") {
-      setShulkers("");
-      return;
-    };
-
-    const numericItems = parseInt(items, 10) || 0;
-    const shulkers = Math.ceil(numericItems / 1728);
-    setShulkers(shulkers.toString());
-  };
-
-  const calculateChests = () => {
-    // 1728 items per chest and 3456 items per double chest
-    if (items === "") {
-      setChests("");
-      return;
-    };
-
-    const numericItems = parseInt(items, 10) || 0;
-    const chests = Math.ceil(numericItems / 3456);
-    setChests(chests.toString());
-  };
-
   function countItems(items: number) {
     const itemsPerStack = 64;
     const stacks = Math.floor(items / itemsPerStack); // Full stacks
@@ -75,20 +34,41 @@ export default function StackCalculator({
 
   function countStacks(stacks: number, remainingItems: number) {
     const itemsPerStack = 64;
-    const totalItems = stacks * itemsPerStack + remainingItems;
-
-    setStacksResult(totalItems.toString());
-    setItems(totalItems.toString());
-  };
+    return stacks * itemsPerStack + remainingItems;
+  }
 
   useEffect(() => {
-    calculateItems();
-    calculateShulkers();
-    calculateChests();
+    if (items === "") {
+      setStacks("");
+      setStacksRemaining("");
+      setStacksResult("");
+      setResult({ stacks: 0, remainingItems: 0 });
+      return;
+    };
+
+    const numericItems = parseInt(items, 10) || 0;
+    const { stacks, remainingItems } = countItems(numericItems);
+
+    setStacks(stacks.toString());
+    setStacksRemaining(remainingItems.toString());
+    setResult({ stacks, remainingItems });
+
+    const shulkers = Math.ceil(numericItems / 1728);
+    setShulkers(shulkers.toString());
+
+    const chests = Math.ceil(numericItems / 3456);
+    setChests(chests.toString());
   }, [items]);
 
   useEffect(() => {
-    calculateStacks();
+    if (stacks === "" && stacksRemaining === "") return;
+
+    const totalItems = countStacks(
+      parseInt(stacks, 10) || 0,
+      parseInt(stacksRemaining, 10) || 0
+    );
+
+    setStacksResult(totalItems.toString());
   }, [stacks, stacksRemaining]);
 
   return (
@@ -228,7 +208,7 @@ export default function StackCalculator({
             unoptimized
             width={0}
             height={0}
-            style={{width:'32px', height: "auto" }}
+            style={{ width: '32px', height: "auto" }}
           />
           <p className="lowercase">
             {shulkers || "0"} {dict.minecraft.keywords.shulkerBoxes}
@@ -246,7 +226,7 @@ export default function StackCalculator({
             unoptimized
             width={0}
             height={0}
-            style={{width:'32px', height: "auto" }}
+            style={{ width: '32px', height: "auto" }}
           />
           <p className="lowercase">
             {chests || "0"} {dict.minecraft.keywords.doubleChests}

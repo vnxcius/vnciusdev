@@ -36,7 +36,7 @@ export default async function MinecraftLayout({
   // https://nextjs.org/docs/messages/sync-dynamic-apis
   const { locale } = await params;
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`
           ${mojangles.className} text-neutral-700 dark:text-neutral-200

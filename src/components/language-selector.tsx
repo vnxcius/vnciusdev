@@ -23,7 +23,7 @@ export default function LanguageSelector() {
     if (lang !== storedLang) {
       window.location.href = pathname.replace(lang, storedLang);
     }
-  },[])
+  })
 
   useEffect(() => {
     const handleWindowClick = (event: MouseEvent) => {

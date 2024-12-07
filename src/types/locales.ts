@@ -1,6 +1,6 @@
 import json from '@/locales/br.json';
 
-const dictionaries = {
+export const dictionaries = {
   en: () => import('@/locales/en.json').then((module) => module.default),
   br: () => import('@/locales/br.json').then((module) => module.default),
   // TODO: add spanish translation

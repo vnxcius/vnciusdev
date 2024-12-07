@@ -191,7 +191,7 @@ export default function StackCalculator({
           width={28}
           height={28}
         />
-        <p>
+        <p className="lowercase">
           {stacksResult || "0"} {dict.minecraft.keywords.items}
         </p>
       </div>

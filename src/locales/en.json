@@ -95,7 +95,6 @@
   "minecraft": {
     "keywords": {
       "moreTools": "More tools coming soon",
-      "stackCalculator": "Stack Calculator",
       "or": "or",
       "items": "Items",
       "stacks": "Stacks",
@@ -104,7 +103,34 @@
       "shulkerBoxes": "Shulker Boxes",
       "doubleChests": "Double Chests",
       "stacksPerShulker": "Stacks per Shulker",
-      "stacksPerDoubleChest": "Stacks per Double Chest"
-    }
+      "stacksPerDoubleChest": "Stacks per Double Chest",
+      "stackCalculator": "Stack Calculator",
+      "stackCalculatorDescription": "How many stacks do 10,000 items make?",
+      "itemsList": "Items Checklist",
+      "itemsListDescription": "What about making a list to keep track of your progress?",
+      "itemSelector": "Select items",
+      "itemsClickHere": "Click here to select items",
+      "searchItems": "Search items",
+      "selectItems": "Select items",
+      "selectMore": "Select more items",
+      "selectedItems": "Selected items",
+      "selectedItemsDescription": "Select the items below to add to the list",
+      "clearSelection": "Clear Selection",
+      "totalQuantity": "Total quantity"
+    },
+    "tools": [
+      {
+        "id": 1,
+        "icon": "/img/minecraft/stack_calculator_icon.png",
+        "link": "/minecraft/stack-calculator",
+        "name": "Stack Calculator"
+      },
+      {
+        "id": 2,
+        "icon": "/img/minecraft/items_list_icon.png",
+        "link": "/minecraft/stack-calculator#items-list",
+        "name": "Items Checklist"
+      }
+    ]
   }
 }

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Link from "next/link";
-import HeaderMinecraft from "@/components/header-minecraft";
+import Header from "./header";
 import { ThemeProvider } from "next-themes";
 import "@/app/globals.css";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
   icons: {
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const mojangles = localFont({
-  src: "../../../fonts/Mojangles.woff",
+  src: "../../../fonts/Minecraft-Seven_v2.woff2",
   variable: "--font-mojangles",
   weight: "400",
 });
@@ -36,13 +38,17 @@ export default async function MinecraftLayout({
   // https://nextjs.org/docs/messages/sync-dynamic-apis
   const { locale } = await params;
   return (
-    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
+    <html
+      className="scroll-smooth"
+      lang={locale}
+      suppressHydrationWarning
+    >
       <body
-        className={`
-          ${mojangles.className} text-neutral-700 dark:text-neutral-200
-          transition-colors px-4 duration-150 mx-auto max-sm:max-w-sm
-          max-w-screen-md
-        `}
+        className={clsx(
+          "text-neutral-700 dark:text-neutral-200 transition-colors px-3",
+          "duration-150 mx-auto max-sm:max-w-sm max-w-screen-md",
+          mojangles.className
+        )}
       >
         <ThemeProvider
           attribute="class"
@@ -50,12 +56,13 @@ export default async function MinecraftLayout({
           enableSystem
         >
           <main
-            className=" mx-auto w-full py-16"
+            className="mx-auto w-full py-16"
           >
-            <HeaderMinecraft />
-            <section className="mt-10">
+            <Header />
+            <section className="my-10">
               {children}
             </section>
+            <ScrollToTop />
           </main>
           <footer className="pb-5 text-center text-xs text-neutral-400">
             <p className={`${inter.className}`}>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Sans_3 } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import HeaderPortfolio from "@/components/header-portfolio";
+import Header from "./header";
 import "@/app/globals.css";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
@@ -39,7 +39,7 @@ export default async function RootLayout({
           enableSystem
         >
           <main>
-            <HeaderPortfolio />
+            <Header />
             {children}
           </main>
           <ScrollToTop />

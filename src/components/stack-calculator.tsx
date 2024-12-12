@@ -3,28 +3,29 @@
 import Image from "next/image";
 import { DictionaryJSON } from "@/types/locales";
 import { useState, useEffect } from "react";
+import Separator from "@/components/ui/separator";
 
 export default function StackCalculator({
   dict
 }: {
   dict: DictionaryJSON
 }) {
-  const [items, setItems] = useState<string>("");
+  const [items, setItems] = useState<number>(0);
   const [result, setResult] = useState({ stacks: 0, remainingItems: 0 });
-  const [stacks, setStacks] = useState<string>("");
-  const [stacksRemaining, setStacksRemaining] = useState<string>("");
-  const [stacksResult, setStacksResult] = useState<string>("");
+  const [stacks, setStacks] = useState<number>(0);
+  const [stacksRemaining, setStacksRemaining] = useState<number>(0);
+  const [stacksResult, setStacksResult] = useState<number>(0);
 
-  const [shulkers, setShulkers] = useState<string>("");
-  const [chests, setChests] = useState<string>("");
+  const [shulkers, setShulkers] = useState<number>(0);
+  const [chests, setChests] = useState<number>(0);
 
   function countItems(items: number) {
     const itemsPerStack = 64;
     const stacks = Math.floor(items / itemsPerStack); // Full stacks
     const remainingItems = items % itemsPerStack; // Items left over
 
-    setStacks(stacks.toString());
-    setStacksRemaining(remainingItems.toString());
+    setStacks(stacks);
+    setStacksRemaining(remainingItems);
 
     return {
       stacks,
@@ -38,37 +39,23 @@ export default function StackCalculator({
   }
 
   useEffect(() => {
-    if (items === "") {
-      setStacks("");
-      setStacksRemaining("");
-      setStacksResult("");
-      setResult({ stacks: 0, remainingItems: 0 });
-      return;
-    };
+    const { stacks, remainingItems } = countItems(items);
 
-    const numericItems = parseInt(items, 10) || 0;
-    const { stacks, remainingItems } = countItems(numericItems);
-
-    setStacks(stacks.toString());
-    setStacksRemaining(remainingItems.toString());
+    setStacks(stacks);
+    setStacksRemaining(remainingItems);
     setResult({ stacks, remainingItems });
 
-    const shulkers = Math.ceil(numericItems / 1728);
-    setShulkers(shulkers.toString());
+    const shulkers = Math.ceil(items / 1728);
+    setShulkers(shulkers);
 
-    const chests = Math.ceil(numericItems / 3456);
-    setChests(chests.toString());
+    const chests = Math.ceil(items / 3456);
+    setChests(chests);
   }, [items]);
 
   useEffect(() => {
-    if (stacks === "" && stacksRemaining === "") return;
-
-    const totalItems = countStacks(
-      parseInt(stacks, 10) || 0,
-      parseInt(stacksRemaining, 10) || 0
-    );
-
-    setStacksResult(totalItems.toString());
+    const totalItems = countStacks(stacks, stacksRemaining);
+    setStacksResult(totalItems);
+    setItems(totalItems);
   }, [stacks, stacksRemaining]);
 
   return (
@@ -76,15 +63,16 @@ export default function StackCalculator({
       <h1 className="text-4xl">
         {dict.minecraft.keywords.stackCalculator}
       </h1>
-      <hr className="border-neutral-200 dark:border-baltic-sea mt-5 duration-150" />
-      <div className="flex flex-col mt-7 space-y-1.5">
+      <p className="text-neutral-400">{dict.minecraft.keywords.stackCalculatorDescription}</p>
+      <Separator className="mt-5" />
+      <div className="flex flex-col mt-7 space-y-1.5 text-lg">
         <label htmlFor="items">
           {dict.minecraft.keywords.items}
         </label>
         <input
           id="items"
           type="number"
-          value={items}
+          value={items === 0 ? "" : items}
           autoFocus
           placeholder={dict.minecraft.keywords.enterItems}
           className="
@@ -92,18 +80,12 @@ export default function StackCalculator({
             placeholder:text-neutral-400 border-2 border-neutral-400
             dark:border-neutral-50 text-neutral-50
           "
-          onChange={(e) => {
-            // Allow only numeric input or an empty string
-            const value = e.target.value;
-            if (/^\d*$/.test(value)) {
-              setItems(value);
-            }
-          }}
+          onChange={(e) => setItems(parseInt(e.target.value))}
         />
-        <div className="text-lg py-2.5 flex items-center gap-3.5">
+        <div className="py-2.5 flex items-center gap-3.5">
           <div className="flex items-center gap-2">
             <Image
-              src="/img/spruce_planks_stack.png"
+              src="/img/minecraft/spruce_planks_stack.png"
               alt="Stack Spruce Planks Icon"
               className="select-none"
               draggable={false}
@@ -117,7 +99,7 @@ export default function StackCalculator({
           </div>
           <div className="flex items-center gap-2">
             <Image
-              src="/img/spruce_planks.png"
+              src="/img/minecraft/spruce_planks.png"
               alt="Spruce Planks Icon"
               className="select-none"
               draggable={false}
@@ -132,7 +114,7 @@ export default function StackCalculator({
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4 mt-7">
+      <div className="flex flex-wrap gap-4 mt-7 text-lg">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="stacks">
             {dict.minecraft.keywords.stacks}
@@ -140,50 +122,38 @@ export default function StackCalculator({
           <input
             id="stacks"
             type="number"
-            value={stacks}
+            value={stacks === 0 ? "" : stacks}
             placeholder={dict.minecraft.keywords.enterPacks}
             className="
               focus:outline-none [appearance:textfield] p-3 bg-black
               placeholder:text-neutral-400 border-2 border-neutral-400
               dark:border-neutral-50 text-neutral-50
             "
-            onChange={(e) => {
-              // Allow only numeric input or an empty string
-              const value = e.target.value;
-              if (/^\d*$/.test(value)) {
-                setStacks(value);
-              }
-            }}
+            onChange={(e) => setStacks(parseInt(e.target.value))}
           />
         </div>
         <div className="flex flex-col gap-2 w-full flex-1">
-          <label htmlFor="stacks">
+          <label htmlFor="stacksRemaining">
             {dict.minecraft.keywords.items}
           </label>
           <input
-            id="items"
+            id="stacksRemaining"
             type="number"
-            value={stacksRemaining}
+            value={stacksRemaining === 0 ? "" : stacksRemaining}
             placeholder={dict.minecraft.keywords.enterItems}
             className="
               focus:outline-none [appearance:textfield] p-3 bg-black
               placeholder:text-neutral-400 border-2 border-neutral-400
               dark:border-neutral-50 text-neutral-50
             "
-            onChange={(e) => {
-              // Allow only numeric input or an empty string
-              const value = e.target.value;
-              if (/^\d*$/.test(value)) {
-                setStacksRemaining(value);
-              }
-            }}
+            onChange={(e) => setStacksRemaining(parseInt(e.target.value))}
           />
         </div>
       </div>
 
       <div className="flex items-center text-lg gap-2 py-4">
         <Image
-          src="/img/spruce_planks.png"
+          src="/img/minecraft/spruce_planks.png"
           alt="Spruce Planks Icon"
           className="select-none"
           draggable={false}
@@ -192,7 +162,7 @@ export default function StackCalculator({
           height={28}
         />
         <p className="lowercase">
-          {stacksResult || "0"} {dict.minecraft.keywords.items}
+          {stacksResult ?? "0"} {dict.minecraft.keywords.items}
         </p>
       </div>
       <p className="text-center">
@@ -201,7 +171,7 @@ export default function StackCalculator({
       <div className="flex justify-center items-center flex-wrap max-sm:gap-7 mt-7">
         <div className="flex items-center text-lg gap-3 w-64">
           <Image
-            src="/img/shulker_box.webp"
+            src="/img/minecraft/shulker_box.webp"
             alt="Shulker Box Icon"
             className="select-none"
             draggable={false}
@@ -219,7 +189,7 @@ export default function StackCalculator({
         </div>
         <div className="flex items-center text-lg gap-3 w-64">
           <Image
-            src="/img/chest.webp"
+            src="/img/minecraft/chest.webp"
             alt="Chest Icon"
             className="select-none"
             draggable={false}

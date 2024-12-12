@@ -95,16 +95,42 @@
   "minecraft": {
     "keywords": {
       "moreTools": "Mais ferramentas em breve",
-      "stackCalculator": "Calculadora de Packs",
       "or": "ou",
       "items": "Itens",
       "stacks": "Packs",
       "enterItems": "Digite a quantidade de itens",
       "enterPacks": "Digite a quantidade de packs",
       "shulkerBoxes": "Caixa de Shulker",
-      "doubleChests": "Baus Duplos",
+      "doubleChests": "Baús Duplos",
       "stacksPerShulker": "Packs por Shulker",
-      "stacksPerDoubleChest": "Packs por Bau Duplo"
-    }
+      "stacksPerDoubleChest": "Packs por Baú Duplo",
+      "stackCalculator": "Calculadora de Packs",
+      "stackCalculatorDescription": "Quantos packs são 10 mil itens?",
+      "itemsList": "Lista de Itens",
+      "itemsListDescription": "Que tal fazer uma lista para acompanhar o seu progresso?",
+      "itemSelector": "Selecione os itens",
+      "itemsClickHere": "Clique aqui para selecionar os itens",
+      "searchItems": "Procurar itens",
+      "selectItems": "Selecionar itens",
+      "selectMore": "Selecionar mais itens",
+      "selectedItems": "Itens selecionados",
+      "selectedItemsDescription": "Selecione os itens para adicionar a lista",
+      "clearSelection": "Limpar seleção",
+      "totalQuantity": "Quantidade total"
+    },
+    "tools": [
+      {
+        "id": 1,
+        "icon": "/img/minecraft/stack_calculator_icon.png",
+        "link": "/minecraft/stack-calculator",
+        "name": "Calculadora de Packs"
+      },
+      {
+        "id": 2,
+        "icon": "/img/minecraft/items_list_icon.png",
+        "link": "/minecraft/stack-calculator#items-list",
+        "name": "Lista de Itens"
+      }
+    ]
   }
 }

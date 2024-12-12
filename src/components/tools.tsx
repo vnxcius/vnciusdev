@@ -6,13 +6,15 @@ import { Howl } from "howler";
 import { DictionaryJSON } from "@/types/locales";
 
 const Button = ({
+  locale,
   icon,
   content,
-  locale,
+  link,
 }: {
+  locale: string;
   icon: string;
   content: string;
-  locale: string;
+  link: string;
 }) => {
   const play = () => {
     const audio = new Howl({
@@ -25,13 +27,16 @@ const Button = ({
   };
 
   return (
-    <button onClick={play}>
+    <button
+      onClick={play}
+      className="w-full max-w-md mx-auto"
+    >
       <Link
-        href={`/${locale}/minecraft/stack-calculator`}
+        href={`/${locale + link}`}
         className="
-          font-mojangles text-2xl flex w-fit items-center gap-3 leading-none
-          bg-green-600 border-y-[6px] border-t-green-500 px-6 py-2
-          border-b-green-700 text-white hover:bg-green-600/90
+          text-2xl flex w-full h-16 items-center px-6 py-2
+          bg-green-600 border-y-[6px] text-white border-t-green-500
+          border-b-green-700 hover:bg-green-600/90
         "
       >
         <Image
@@ -40,31 +45,32 @@ const Button = ({
           draggable={false}
           width={35}
           height={35}
-        />{' '}
-        {content}
+        />
+        <p className="ml-6">
+          {content}
+        </p>
       </Link>
     </button>
   )
 };
-
-const tools = [
-  { icon: "/img/stack_calculator_icon.png", content: "Stack Calculator" },
-]
 
 export default function Tools({
   dict
 }: {
   dict: DictionaryJSON
 }) {
+  const tools = dict.minecraft.tools;
+  const locale = dict.locale;
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex flex-col gap-8 justify-center w-full">
         {tools.map((tool) => (
           <Button
-            key={tool.content}
+            key={tool.id}
+            locale={locale}
             icon={tool.icon}
-            content={tool.content}
-            locale={dict.locale}
+            content={tool.name}
+            link={tool.link}
           />
         ))}
       </div>

@@ -5,11 +5,12 @@ import Link from "next/link";
 import { CopyIcon, DownloadIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import AnimatedIcon from "./animated-icon";
-import ProjectCard from "./project-card";
+import AnimatedIcon from "@/components/ui/animated-icon";
+import ProjectCard from "@/components/ui/project-card";
 import { DictionaryJSON } from "@/types/locales";
 import { Adamina } from "next/font/google";
 import Image from "next/image";
+import Separator from "@/components/ui/separator";
 
 const adamina = Adamina({
   subsets: ["latin"],
@@ -66,7 +67,7 @@ export default function Home({
             contato@vncius.dev
           </a>
 
-          <hr className="border-neutral-200 dark:border-baltic-sea duration-150" />
+          <Separator className="mt-10" />
 
           <h3
             className={`
@@ -253,7 +254,7 @@ export default function Home({
           </Link>
         </div>
 
-        <hr className="border-neutral-200 dark:border-neutral-800 duration-150" />
+        <Separator />
 
         <section>
           <h2 id="stack" className={`${adamina.className} text-2xl`}>
@@ -343,11 +344,7 @@ export default function Home({
             </AnimatedIcon>
           </div>
 
-          <hr
-            className="
-              border-neutral-200 dark:border-neutral-800 mb-5 mt-10 duration-150
-            "
-          />
+          <Separator className="mb-5 mt-10" />
 
         </section>
         <section>

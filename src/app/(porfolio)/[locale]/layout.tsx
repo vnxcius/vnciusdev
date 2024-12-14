@@ -4,6 +4,10 @@ import { ThemeProvider } from "next-themes";
 import Header from "./header";
 import "@/app/globals.css";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
+import { getMessages } from "next-intl/server";
+import { Locale, routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "Vinicius Hilton | Fullstack Developer Jr. Portfolio",
@@ -25,6 +29,13 @@ export default async function RootLayout({
 }>) {
   // https://nextjs.org/docs/messages/sync-dynamic-apis
   const { locale } = await params;
+
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as Locale)) notFound();
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
   return (
     <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <body
@@ -38,11 +49,13 @@ export default async function RootLayout({
           defaultTheme="system"
           enableSystem
         >
+          <NextIntlClientProvider messages={messages}>
           <main>
             <Header />
             {children}
           </main>
           <ScrollToTop />
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

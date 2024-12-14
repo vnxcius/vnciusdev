@@ -1,12 +1,17 @@
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { Locale, routing } from '@/i18n/routing';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import Link from "next/link";
-import Header from "./header";
 import { ThemeProvider } from "next-themes";
-import "@/app/globals.css";
-import { ScrollToTop } from "@/components/scroll-to-top";
+import Link from "next/link";
 import clsx from "clsx";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import { SquareArrowOutUpRightIcon } from "lucide-react";
+import Header from "./header";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   icons: {
@@ -37,6 +42,14 @@ export default async function MinecraftLayout({
 }>) {
   // https://nextjs.org/docs/messages/sync-dynamic-apis
   const { locale } = await params;
+
+  // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as Locale)) notFound();
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
   return (
     <html
       className="scroll-smooth"
@@ -55,27 +68,39 @@ export default async function MinecraftLayout({
           defaultTheme="system"
           enableSystem
         >
-          <main
-            className="mx-auto w-full py-16"
-          >
-            <Header />
-            <section className="my-10">
-              {children}
-            </section>
-            <ScrollToTop />
-          </main>
-          <footer className="pb-5 text-center text-xs text-neutral-400">
-            <p className={`${inter.className}`}>
-              &copy; 2024. Made with love by{' '}
+          <NextIntlClientProvider messages={messages}>
+            <main
+              className="mx-auto w-full py-16"
+            >
+              <Header />
+              <section className="my-10">
+                {children}
+              </section>
+              <ScrollToTop />
+            </main>
+            <footer className={clsx(
+              "pb-5 w-fit mx-auto text-xs text-neutral-400",
+              inter.className
+            )}>
+              <p>
+                &copy; 2024. Made with love by{' '}
+                <Link
+                  href="/"
+                  target="_blank"
+                  className="hover:underline"
+                >
+                  Vinicius Hilton.
+                </Link>
+              </p>
               <Link
-                href="/"
-                target="_blank"
-                className="hover:underline"
+                className="my-3 flex items-center gap-1 w-fit mx-auto hover:underline"
+                href={"/minecraft/changelog"}
               >
-                Vinicius Hilton.
+                Changelog
+                <SquareArrowOutUpRightIcon className="size-3" />
               </Link>
-            </p>
-          </footer>
+            </footer>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

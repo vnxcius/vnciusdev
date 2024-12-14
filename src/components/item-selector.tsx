@@ -1,12 +1,12 @@
 "use client"
 
-import { DictionaryJSON } from "@/types/locales";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { XIcon } from "lucide-react";
 import Separator from "@/components/ui/separator";
 import ItemButton from "@/components/ui/item-button";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 interface Item {
   name: string;
@@ -15,11 +15,8 @@ interface Item {
   done?: boolean;
 }
 
-export default function ItemSelector({
-  dict
-}: {
-  dict: DictionaryJSON
-}) {
+export default function ItemSelector() {
+  const t = useTranslations("minecraft");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [totalQuantity, setTotalQuantity] = useState<number>(0);
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
@@ -94,14 +91,14 @@ export default function ItemSelector({
           className="hover:underline"
           onClick={() => setIsOpen(true)}
         >
-          {dict.minecraft.keywords.itemsClickHere}
+          {t('itemsClickHere')}
         </button>
         {selectedItems.length > 0 && (
           <button
             className="text-red-500 hover:text-red-600 hover:underline"
             onClick={() => handleClearList()}
           >
-            {dict.minecraft.keywords.clearSelection}
+            {t('clearSelection')}
           </button>
         )}
       </div>
@@ -111,10 +108,10 @@ export default function ItemSelector({
       )}>
         <div className="sticky top-0 bg-black py-4 z-10">
           <h3 className="text-lg text-white">
-            {dict.minecraft.keywords.selectedItems}
+            {t('selectedItems')}
           </h3>
           <p className="text-neutral-500">
-            {dict.minecraft.keywords.totalQuantity}: {totalQuantity}
+            {t('totalQuantity')}: {totalQuantity}
           </p>
         </div>
         {selectedItems.map((item) => (
@@ -214,13 +211,13 @@ export default function ItemSelector({
             className="hover:underline w-fit mx-auto"
             onClick={() => setIsOpen(true)}
           >
-            {dict.minecraft.keywords.selectMore}
+            {t('selectMore')}
           </button>
           <button
             className="text-red-500 hover:text-red-600 hover:underline w-fit mx-auto"
             onClick={() => handleClearList()}
           >
-            {dict.minecraft.keywords.clearSelection}
+            {t('clearSelection')}
           </button>
         </div>
       </div>
@@ -246,7 +243,7 @@ export default function ItemSelector({
                   onClick={handleClearList}
                   className="text-red-500 hover:text-red-600 hover:underline duration-150"
                 >
-                  {dict.minecraft.keywords.clearSelection}
+                  {t('clearSelection')}
                 </button>
               )}
               <button
@@ -258,10 +255,10 @@ export default function ItemSelector({
 
             <div className="px-5 py-2.5 rounded-md">
               <h3 className="text-lg">
-                {dict.minecraft.keywords.selectedItems}
+                {t('selectedItems')}
               </h3>
               <p className="text-sm text-neutral-400">
-                {dict.minecraft.keywords.selectedItemsDescription}
+                {t('selectedItemsDescription')}
               </p>
               <div className="flex flex-wrap gap-1 h-32 overflow-auto py-2.5 px-2.5">
                 {selectedItems.map((item) => (
@@ -294,11 +291,10 @@ export default function ItemSelector({
             </div>
 
             <h1 className="text-xl">
-              {dict.minecraft.keywords.itemSelector}
+              {t('itemSelector')}
             </h1>
 
             <ItemButton
-              dict={dict}
               handleToggleItem={handleToggleItem}
             />
           </div>

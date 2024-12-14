@@ -1,0 +1,64 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "image": "/img/minecraft_tools.png",
+      "repo": "https://github.com/vnxcius/vnciusdev",
+      "link": "/minecraft",
+      "date": "2024-12",
+      "stack": [
+        "Nextjs",
+        "TypeScript",
+        "TailwindCSS"
+      ]
+    },
+    {
+      "id": 2,
+      "image": "/img/soft_skills_check.webp",
+      "repo": "https://github.com/senac-volunteers/soft-skills-app",
+      "link": "https://softskillscheck.app.br",
+      "date": "2024-08",
+      "stack": [
+        "Nextjs",
+        "TypeScript",
+        "TailwindCSS"
+      ]
+    },
+    {
+      "id": 3,
+      "image": "/img/medellin.webp",
+      "repo": "",
+      "link": "https://medellincompany.com.br",
+      "date": "2024-08",
+      "stack": [
+        "nextjs",
+        "typescript",
+        "prisma",
+        "tailwindcss",
+        "postgresql"
+      ]
+    },
+    {
+      "id": 4,
+      "image": "/img/jvlf_site.webp",
+      "repo": "https://github.com/vnxcius/jvlf",
+      "link": "https://jvlf.site",
+      "date": "2024-08",
+      "stack": [
+        "react",
+        "typescript",
+        "tailwindcss"
+      ]
+    },
+    {
+      "id": 5,
+      "image": "/img/api_gin.webp",
+      "repo": "https://github.com/vnxcius/rest-api-gin",
+      "link": "https://github.com/vnxcius/rest-api-gin",
+      "date": "2024-08",
+      "stack": [
+        "go"
+      ]
+    }
+  ]
+}

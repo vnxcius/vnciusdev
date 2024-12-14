@@ -7,10 +7,11 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import AnimatedIcon from "@/components/ui/animated-icon";
 import ProjectCard from "@/components/ui/project-card";
-import { DictionaryJSON } from "@/types/locales";
 import { Adamina } from "next/font/google";
 import Image from "next/image";
 import Separator from "@/components/ui/separator";
+import { useLocale, useTranslations } from "next-intl";
+import data from "@/assets/data/projects.json";
 
 const adamina = Adamina({
   subsets: ["latin"],
@@ -18,11 +19,10 @@ const adamina = Adamina({
   variable: "--font-adamina",
 })
 
-export default function Home({
-  dict
-}: {
-  dict: DictionaryJSON
-}) {
+export default function Home() {
+  const t = useTranslations("portfolio");
+  const locale = useLocale();
+  const projects = data.projects;
   const [clicks, setClicks] = useState(0);
   const easterEgg = () => setClicks(clicks + 1);
 
@@ -55,10 +55,10 @@ export default function Home({
         </button>
         <div className="space-y-2">
           <div className={`${adamina.className} text-3xl`}>
-            <span>{dict.portfolio.keywords.hi} Vinícius Hilton</span>
+            <span>{t('hi')} Vinícius Hilton</span>
           </div>
           <p className="text-2xl text-neutral-600 dark:text-neutral-400">
-            {dict.portfolio.keywords.role}
+            {t('role')}
           </p>
           <a
             href="mailto:contato@vncius.dev"
@@ -75,7 +75,7 @@ export default function Home({
             ${adamina.className}
           `}
           >
-            {dict.portfolio.keywords.socials}
+            {t('socials')}
           </h3>
 
           <div className="flex space-x-5">
@@ -132,7 +132,7 @@ export default function Home({
                 ${adamina.className}
               `}
             >
-              {dict.portfolio.keywords.shortcuts}
+              {t('shortcuts')}
             </h3>
 
             <ul className="list-disc list-inside text-neutral-500 dark:text-neutral-400">
@@ -171,7 +171,7 @@ export default function Home({
                   href="#projects"
                   className="underline-offset-2 hover:underline"
                 >
-                  {dict.portfolio.keywords.myProjects}
+                  {t('myProjects')}
                 </Link>
               </motion.li>
             </ul>
@@ -197,7 +197,7 @@ export default function Home({
                 ${adamina.className}
               `}
             >
-              {dict.portfolio.keywords.curriculumVitae}
+              {t('curriculumVitae')}
             </h3>
 
             <Link
@@ -209,13 +209,13 @@ export default function Home({
               "
               target="_blank"
               rel="noopener noreferrer"
-              download={dict.locale === 'br' ?
+              download={locale === 'br' ?
                 'vinicius-hilton-cv-2024.pdf'
                 :
                 'vinicius-hilton-cv-2024-EN.pdf'
               }
             >
-              {dict.portfolio.keywords.downloadCV}
+              {t('downloadCV')}
               <DownloadIcon className="size-4 ml-2" />
             </Link>
           </motion.div>
@@ -223,7 +223,7 @@ export default function Home({
       </div>
       <div className="space-y-3">
         <p className={`${adamina.className} text-2xl pb-5`}>
-          {dict.portfolio.keywords.description}
+          {t('description')}
         </p>
 
         <div className="space-x-4 pb-16">
@@ -238,7 +238,7 @@ export default function Home({
               duration-300 hover:brightness-95 hover:cursor-pointer
             "
           >
-            {dict.portfolio.keywords.contact}
+            {t('contact')}
           </Link>
           <Link
             href="#projects"
@@ -250,7 +250,7 @@ export default function Home({
               dark:border-gray-800
             "
           >
-            {dict.portfolio.keywords.myWork}
+            {t('myWork')}
           </Link>
         </div>
 
@@ -269,7 +269,7 @@ export default function Home({
             dark:text-neutral-400
           "
           >
-            {dict.portfolio.keywords.stackPrimary}
+            {t('stackPrimary')}
           </motion.p>
           <div
             className="
@@ -315,7 +315,7 @@ export default function Home({
             dark:text-neutral-400
           "
           >
-            {dict.portfolio.keywords.stackSecondary}
+            {t('stackSecondary')}
           </motion.p>
 
           <div
@@ -349,16 +349,16 @@ export default function Home({
         </section>
         <section>
           <h2 id="projects" className={`${adamina.className} text-2xl mb-7`}>
-            {dict.portfolio.keywords.myProjects}
+            {t('myProjects')}
           </h2>
           <div className="space-y-5">
-            {dict.portfolio.projects.map((project) => (
+            {projects.map((project) => (
               <ProjectCard
                 key={project.id}
-                title={project.name}
+                title={t(`project${project.id}`)}
                 link={project.link}
                 image={project.image}
-                description={project.description}
+                description={t(`project${project.id}Description`)}
                 date={project.date}
                 stack={project.stack}
               />

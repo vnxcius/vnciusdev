@@ -1,37 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-const locales = ['en', 'br']
-
-// Get the preferred locale, similar to the above or using a library
-function getLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get('accept-language') ?? '';
-  const preferredLocales = acceptLanguage
-    .split(',')
-    .map((lang) => lang.split(';')[0]);
-
-  // Find the first supported locale
-  return locales.find((locale) => preferredLocales.includes(locale)) ?? 'en'; // Default to 'en'
-};
-
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Check if pathname has a locale
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
-
-  if (pathnameHasLocale) return;
-
-  // Get preferred locale
-  const locale = getLocale(request);
-
-  // Clone the URL and set the new pathname
-  const newUrl = request.nextUrl.clone();
-  newUrl.pathname = `/${locale}${pathname}`;
-
-  return NextResponse.redirect(newUrl);
-};
+export default createMiddleware(routing);
 
 export const config = {
   matcher: [

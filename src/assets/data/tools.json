@@ -1,0 +1,14 @@
+{
+  "tools": [
+    {
+      "id": 1,
+      "icon": "/img/minecraft/stack_calculator_icon.png",
+      "link": "/minecraft/stack-calculator"
+    },
+    {
+      "id": 2,
+      "icon": "/img/minecraft/items_list_icon.png",
+      "link": "/minecraft/stack-calculator#items-list"
+    }
+  ]
+}

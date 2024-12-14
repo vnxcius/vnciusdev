@@ -3,15 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Howl } from "howler";
-import { DictionaryJSON } from "@/types/locales";
+import { useTranslations } from "next-intl";
+import data from "@/assets/data/tools.json";
 
 const Button = ({
-  locale,
   icon,
   content,
   link,
 }: {
-  locale: string;
   icon: string;
   content: string;
   link: string;
@@ -32,7 +31,7 @@ const Button = ({
       className="w-full max-w-md mx-auto"
     >
       <Link
-        href={`/${locale + link}`}
+        href={link}
         className="
           text-2xl flex w-full h-16 items-center px-6 py-2
           bg-green-600 border-y-[6px] text-white border-t-green-500
@@ -54,28 +53,24 @@ const Button = ({
   )
 };
 
-export default function Tools({
-  dict
-}: {
-  dict: DictionaryJSON
-}) {
-  const tools = dict.minecraft.tools;
-  const locale = dict.locale;
+export default function Tools() {
+  const t = useTranslations("minecraft");
+  const tools = data.tools;
+
   return (
     <>
       <div className="flex flex-col gap-8 justify-center w-full">
         {tools.map((tool) => (
           <Button
             key={tool.id}
-            locale={locale}
             icon={tool.icon}
-            content={tool.name}
+            content={t(`tool${tool.id}`)}
             link={tool.link}
           />
         ))}
       </div>
       <p className="text-center mt-10 text-gray-500">
-        {dict.minecraft.keywords.moreTools}...
+        {t("moreTools")}...
       </p>
     </>
   );

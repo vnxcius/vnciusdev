@@ -1,15 +1,12 @@
 "use client"
 
 import Image from "next/image";
-import { DictionaryJSON } from "@/types/locales";
 import { useState, useEffect } from "react";
 import Separator from "@/components/ui/separator";
+import { useTranslations } from "next-intl";
 
-export default function StackCalculator({
-  dict
-}: {
-  dict: DictionaryJSON
-}) {
+export default function StackCalculator() {
+  const t = useTranslations("minecraft");
   const [items, setItems] = useState<number>(0);
   const [result, setResult] = useState({ stacks: 0, remainingItems: 0 });
   const [stacks, setStacks] = useState<number>(0);
@@ -61,20 +58,22 @@ export default function StackCalculator({
   return (
     <>
       <h1 className="text-4xl">
-        {dict.minecraft.keywords.stackCalculator}
+        {t('stackCalculator')}
       </h1>
-      <p className="text-neutral-400">{dict.minecraft.keywords.stackCalculatorDescription}</p>
+      <p className="text-neutral-400">
+        {t('stackCalculatorDescription')}
+      </p>
       <Separator className="mt-5" />
       <div className="flex flex-col mt-7 space-y-1.5 text-lg">
         <label htmlFor="items">
-          {dict.minecraft.keywords.items}
+          {t('items')}
         </label>
         <input
           id="items"
           type="number"
           value={items === 0 ? "" : items}
           autoFocus
-          placeholder={dict.minecraft.keywords.enterItems}
+          placeholder={t('enterItems')}
           className="
             focus:outline-none [appearance:textfield] p-3 bg-black
             placeholder:text-neutral-400 border-2 border-neutral-400
@@ -94,7 +93,7 @@ export default function StackCalculator({
               height={28}
             />
             <span className="lowercase">
-              {result.stacks} {dict.minecraft.keywords.stacks}
+              {result.stacks} {t('stacks')}
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -108,7 +107,7 @@ export default function StackCalculator({
               height={28}
             />
             <span className="lowercase">
-              {result.remainingItems} {dict.minecraft.keywords.items}
+              {result.remainingItems} {t('items')}
             </span>
           </div>
         </div>
@@ -117,13 +116,13 @@ export default function StackCalculator({
       <div className="flex flex-wrap gap-4 mt-7 text-lg">
         <div className="flex flex-col gap-2 flex-1">
           <label htmlFor="stacks">
-            {dict.minecraft.keywords.stacks}
+            {t('stacks')}
           </label>
           <input
             id="stacks"
             type="number"
             value={stacks === 0 ? "" : stacks}
-            placeholder={dict.minecraft.keywords.enterPacks}
+            placeholder={t('enterPacks')}
             className="
               focus:outline-none [appearance:textfield] p-3 bg-black
               placeholder:text-neutral-400 border-2 border-neutral-400
@@ -134,13 +133,13 @@ export default function StackCalculator({
         </div>
         <div className="flex flex-col gap-2 w-full flex-1">
           <label htmlFor="stacksRemaining">
-            {dict.minecraft.keywords.items}
+            {t('items')}
           </label>
           <input
             id="stacksRemaining"
             type="number"
             value={stacksRemaining === 0 ? "" : stacksRemaining}
-            placeholder={dict.minecraft.keywords.enterItems}
+            placeholder={t('enterItems')}
             className="
               focus:outline-none [appearance:textfield] p-3 bg-black
               placeholder:text-neutral-400 border-2 border-neutral-400
@@ -162,11 +161,11 @@ export default function StackCalculator({
           height={28}
         />
         <p className="lowercase">
-          {stacksResult ?? "0"} {dict.minecraft.keywords.items}
+          {stacksResult ?? "0"} {t('items')}
         </p>
       </div>
       <p className="text-center">
-        {dict.minecraft.keywords.or}
+        {t('or')}
       </p>
       <div className="flex justify-center items-center flex-wrap max-sm:gap-7 mt-7">
         <div className="flex items-center text-lg gap-3 w-64">
@@ -181,9 +180,9 @@ export default function StackCalculator({
             style={{ width: '32px', height: "auto" }}
           />
           <p className="lowercase">
-            {shulkers || "0"} {dict.minecraft.keywords.shulkerBoxes}
+            {shulkers || "0"} {t('shulkerBoxes')}
             <span className="text-xs block text-neutral-400">
-              27 {dict.minecraft.keywords.stacksPerShulker}
+              27 {t('stacksPerShulker')}
             </span>
           </p>
         </div>
@@ -199,9 +198,9 @@ export default function StackCalculator({
             style={{ width: '32px', height: "auto" }}
           />
           <p className="lowercase">
-            {chests || "0"} {dict.minecraft.keywords.doubleChests}
+            {chests || "0"} {t('doubleChests')}
             <span className="text-xs block text-neutral-400">
-              54 {dict.minecraft.keywords.stacksPerDoubleChest}
+              54 {t('stacksPerDoubleChest')}
             </span>
           </p>
         </div>

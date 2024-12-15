@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import ChangelogItem from "@/components/ui/changelog-item";
-import { LanguagesIcon } from "lucide-react";
 
 export default function Page() {
   const t = useTranslations();

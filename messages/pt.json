@@ -54,5 +54,14 @@
     "totalQuantity": "Quantidade total",
     "tool1": "Calculadora de Packs",
     "tool2": "Lista de Itens"
+  },
+  "changelog": {
+    "description": "Mantenha-se atualizado com todas as novidades e melhorias",
+    "firstRelease": "🎉 Lançado a primeira versão",
+    "createdChangelog": "✨ Changelog criado",
+    "addedTool": "✨ Adicionado nova ferramenta",
+    "updatedTool": "📝 Atualizado ferramenta",
+    "removedTool": "🔥 Removido ferramenta",
+    "structureImprovement": "⚡️ Melhorias na estrutura do sistema"
   }
 }

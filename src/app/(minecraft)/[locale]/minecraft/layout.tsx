@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 import Header from "./header";
+import Github from '@/assets/icons/components/github';
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
@@ -58,7 +59,7 @@ export default async function MinecraftLayout({
     >
       <body
         className={clsx(
-          "text-neutral-700 dark:text-neutral-200 transition-colors px-3",
+          "text-neutral-700 dark:text-gray-200 transition-colors px-3",
           "duration-150 mx-auto max-sm:max-w-sm max-w-screen-md",
           mojangles.className
         )}
@@ -79,7 +80,7 @@ export default async function MinecraftLayout({
               <ScrollToTop />
             </main>
             <footer className={clsx(
-              "pb-5 w-fit mx-auto text-xs text-neutral-400",
+              "pb-5 w-fit mx-auto text-xs text-gray-400",
               inter.className
             )}>
               <p>
@@ -92,13 +93,28 @@ export default async function MinecraftLayout({
                   Vinicius Hilton.
                 </Link>
               </p>
-              <Link
-                className="my-3 flex items-center gap-1 w-fit mx-auto hover:underline"
-                href={"/minecraft/changelog"}
+              <div
+                className={clsx(
+                  "w-fit mx-auto flex items-center gap-2 leading-3",
+                  "divide-x divide-gray-500"
+                )}
               >
-                Changelog
-                <SquareArrowOutUpRightIcon className="size-3" />
-              </Link>
+                <Link
+                  className="my-3 flex items-center gap-1 hover:underline"
+                  href={"https://github.com/vnxcius/vnciusdev"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github Repo
+                  <SquareArrowOutUpRightIcon className="size-3" />
+                </Link>
+                <Link
+                  className="pl-2 hover:underline"
+                  href={"/minecraft/changelog"}
+                >
+                  Changelog
+                </Link>
+              </div>
             </footer>
           </NextIntlClientProvider>
         </ThemeProvider>

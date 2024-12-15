@@ -11,7 +11,6 @@ import clsx from "clsx";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 import Header from "./header";
-import Github from '@/assets/icons/components/github';
 import "@/app/globals.css";
 
 export const metadata: Metadata = {

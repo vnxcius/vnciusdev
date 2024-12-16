@@ -9,6 +9,11 @@
       "id": 2,
       "icon": "/img/minecraft/items_list_icon.png",
       "link": "/minecraft/stack-calculator#items-list"
+    },
+    {
+      "id": 3,
+      "icon": "/img/minecraft/1.21/silence_armor_trim_smithing_template.webp",
+      "link": "/minecraft/armor-trim-viewer"
     }
   ]
 }

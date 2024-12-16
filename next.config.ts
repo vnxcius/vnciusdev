@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true,
   },
+  // https://r3f.docs.pmnd.rs/getting-started/installation#next.js-13.1-or-latest-version
+  transpilePackages: ['three'],
 };
 
 export default withNextIntl(nextConfig);

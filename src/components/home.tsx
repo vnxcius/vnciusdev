@@ -201,7 +201,11 @@ export default function Home() {
             </h3>
 
             <Link
-              href="/pdf/vinicius-hilton-cv-2024.pdf"
+              href={locale === 'pt' ?
+                'vinicius-hilton-cv-pt.pdf'
+                :
+                'vinicius-hilton-cv.pdf'
+              }
               className="
                 my-2.5 py-2.5 px-5 flex w-fit items-center bg-neutral-800
                 text-neutral-50 dark:bg-neutral-200 dark:text-neutral-800
@@ -209,15 +213,16 @@ export default function Home() {
               "
               target="_blank"
               rel="noopener noreferrer"
-              download={locale === 'br' ?
-                'vinicius-hilton-cv-2024.pdf'
+              download={locale === 'pt' ?
+                'vinicius-hilton-cv-pt.pdf'
                 :
-                'vinicius-hilton-cv-2024-EN.pdf'
+                'vinicius-hilton-cv.pdf'
               }
             >
               {t('downloadCV')}
               <DownloadIcon className="size-4 ml-2" />
             </Link>
+            <p className="text-xs font-medium text-neutral-400">133KB</p>
           </motion.div>
         </div>
       </div>

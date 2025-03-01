@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        domain: "pbs.twimg.com",
+        hostname: "pbs.twimg.com",
       }
     ],
     unoptimized: true,

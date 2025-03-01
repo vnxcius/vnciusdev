@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>FUCK FIREFOX</title>
+  </head>
+  <script>
+    const setFavicon = (emoji) => {
+      const canvas = document.createElement("canvas");
+      canvas.height = 32;
+      canvas.width = 32;
+
+      const ctx = canvas.getContext("2d");
+      ctx.font = "28px serif";
+      ctx.fillText(emoji, -2, 24);
+
+      const favicon = document.querySelector("link[rel=icon]");
+      if (favicon) {
+        favicon.href = canvas.toDataURL();
+      }
+    };
+
+    setFavicon("🖕🏾");
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .inter {
+      font-family: "Inter", serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .title {
+      font-weight: 900;
+      text-align: center;
+      font-size: 4rem;
+      margin-block: 4rem;
+    }
+    #back-to-top {
+      position: fixed;
+      display: block;
+      text-align: center;
+      padding-top: .4rem;
+      text-decoration: none;
+      bottom: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #262626;
+      color: #dfdfdf;
+    }
+    main {
+      color: #262626;
+      max-width: 768px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem;
+      padding-bottom: 10rem;
+    }
+    h2,
+    h3 {
+      margin-block: 1rem;
+      margin-top: 2rem;
+    }
+    p,
+    em {
+      margin-block: 1rem;
+      width: 100%;
+      overflow-wrap: break-word;
+    }
+    em {
+      font-weight: 600;
+      color: #373737;
+    }
+    .image {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      border: #dfdfdf solid 1px;
+      border-radius: 8px;
+      margin-block: 2rem;
+    }
+    ul {
+      list-style-type: disc;
+      list-style-position: inside;
+    }
+  </style>
+  <body class="inter">
+    <a id="back-to-top" href="#title">
+      &uarr;
+    </a>
+    <main>
+      <h1 id="title" class="title">FUCK FIREFOX</h1>
+
+      <p style="text-align: center;">Links Rápidos</p>
+
+      <ul>
+        <li>
+          <a href="#como-se-livrar">
+            Como se livrar dessa merda?
+          </a>
+        </li>
+
+        <li>
+          <a href="#extensoes">
+            Extensões que eu recomendo
+          </a>
+        </li>
+      </ul>
+
+      <h2>2025...</h2>
+      <p>
+        <em>Google Chrome</em> é uma merda, <em>Opera GX</em> é uma merda,
+        <em>Microsoft Edge</em> é uma merda, <em>Vivaldi</em> é uma merda,
+        <em>Ungoogled Chrome</em> é uma merda e o <em>Firefox</em>, que um dia
+        já defendi muito, agora também é uma merda.
+      </p>
+
+      <p>
+        TODOS sem exceção, não têm respeito a sua privacidade e muito
+        provalvamente vendem seus dados.
+      </p>
+
+      <h2>Por que o Firefox agora é uma merda?</h2>
+      <p>
+        Agora eles não te garantem que não vendem seus dados e se tornou igual
+        qualquer outro browser Chromium-based (Chrome, Edge, Opera, Vivaldi,
+        etc). Na última atualização dos termos de uso, todo e qualquer dado
+        enviado por você no Firefox, poderá ser analisado e manipulado, bem como
+        vendido, por eles.
+      </p>
+
+      <p>
+        E uma das questões mais preocupantes, deletaram a pergunta do FAQ onde
+        dizia:
+        <em>"O Firefox vende meus dados? Não, nunca foi, nunca será.[...]"</em>
+      </p>
+
+      <img
+        src="https://pbs.twimg.com/media/Gk1mZMvWUAA7TLD?format=jpg&name=large"
+        alt="merda"
+        class="image"
+      />
+      <img
+        src="https://pbs.twimg.com/media/Gk4YHwyXMAAdcbq?format=jpg&name=large"
+        alt="merda"
+        class="image"
+      />
+
+      <h2 id="como-se-livrar">Como se livrar dessa merda?</h2>
+      <p>
+        A melhor alternativa que encontrei foi o Brave, com algumas modificações
+        para tornar a experiência mais privada. Segue o tutorial:
+      </p>
+
+      <h3>1. Baixar o Brave</h3>
+      <p>
+        Baixe o Brave em
+        <a href="https://brave.com/download/" target="_blank"
+          >https://brave.com/download/</a
+        >
+      </p>
+
+      <h3>2. Desbostifique o Brave</h3>
+      <p>
+        Após o download do Brave, com ele fechado, baixe esse script e
+        execute-o. O windows vai pedir permissão de administrador e pode dar
+        algum aviso, mas não se preocupe, é normal e não tem nenhum vírus.
+      </p>
+      <a
+        href="https://github.com/MulesGaming/brave-debullshitinator/releases/download/1.0.4/brave_debullshitinator-policies.reg"
+        target="_blank"
+      >
+        Brave debullshitinator v1.4
+      </a>
+      <p>
+        Feito isso, o Brave agora terá algumas políticas ativadas que remove
+        lixo do Brave e torna a experiência um pouco mais privada. Para
+        verificar essas políticas basta acessar <em>brave://policy</em> na barra
+        de pesquisa do Brave.
+      </p>
+
+      <h3>3. Desbostifique AINDA MAIS o Brave</h3>
+      <p>
+        Agora você precisa desabilitar mais algumas funções bosta do Brave. Para
+        isso, vá em <em>brave://flags</em> e na barra de pesquisa, pesquise os
+        seguintes termos:
+      </p>
+      <p style="font-size: 14px; font-weight: 700">
+        DESABILITE TODAS QUE APARECEM QUANDO VOCÊ PESQUISAR O TERMO
+      </p>
+
+      <ul>
+        <li>brave-ads (não confunda com brave-adblock)</li>
+        <li>brave-rewards</li>
+        <li>brave-ai</li>
+        <li>brave-wallet</li>
+        <li>native-brave-wallet</li>
+        <li>brave-news</li>
+        <li>brave-ntp</li>
+        <li>brave-super-referral</li>
+      </ul>
+
+      <h3>4. Instale o uBlock Origin</h3>
+      <p>O melhor adblock que existe, burla o youtube e é foda.</p>
+      <p>
+        As extensões do Brave, como o uBlock Origin, podem ser instaladas da
+        loja de extensões do Chrome.
+      </p>
+      <a
+        href="https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm"
+      >
+        uBlock Origin
+      </a>
+
+      <h3>5. Remover ads da Twitch.tv (OPCIONAL)</h3>
+      <p>
+        Se você assim como eu odeia a porra dos anúncios da Twitch, é muito
+        fácil adicionar um script ao uBlock Origin para remover os anúncios
+        dessa desgraça.
+      </p>
+
+      <p>
+        Pra isso você precisar entrar nas configurações (dashboard) do uBlock
+        Origin, ir em <em>My Filters</em> e adicionar a seguinte linha:
+      </p>
+
+      <em> twitch.tv##+js(twitch-videoad) </em>
+
+      <p>
+        Depois disso, volte pra Settings e habilite a opção
+        <em>I am an advanced user</em>. Uma engrenagem ao fim dessa opção vai
+        aparecer, clique nela e na última linha
+        <em>useResourcesLocation</em> substitua <em>unset</em> para este link:
+      </p>
+
+      <em
+        >https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/0b5ea5ed8959a6b4eb4c1ea406aaa56313c9c907/vaft/vaft-ublock-origin.js
+      </em>
+
+      <p>Feche a abra o Brave e pronto, já está funcionando.</p>
+
+      <h2 id="extensoes">
+        Extensões que eu recomendo para desbostificar sua experiência em redes
+        que eu uso
+      </h2>
+
+      <em>Twitter:</em>
+      <a
+        href="https://chromewebstore.google.com/detail/control-panel-for-twitter/kpmjjdhbcfebfjgdnpjagcndoelnidfj"
+        target="_blank"
+      >
+        Control Panel for Twitter
+      </a>
+      <p>
+        Permite que você desative e reorganize recursos, botões, feed entre
+        outras coisas. E o mais importante, remove o rebranding lixo do Twitter.
+        Volta os ícones antigos, a logo, etc.
+      </p>
+      <em>Youtube:</em>
+      <a
+        href="https://chromewebstore.google.com/detail/enhancer-for-youtube/ponfpcnoihfmfllpaingbgckeeldkhle"
+        target="_blank"
+      >
+        Enhancer for Youtube&trade;
+      </a>
+      <p>
+        Permite mudar o layout e o funcionamento do player do Youtube. Adiciona
+        picture-in-picture ao scrollar, entre outros.
+      </p>
+      <em>Youtube:</em>
+      <a
+        href="https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi"
+        target="_blank"
+      >
+        Return Youtube Dislike
+      </a>
+      <p>Volta os dislikes.</p>
+    </main>
+</body>
+</html>

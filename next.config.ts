@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         pathname: "/img/**",
       },
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        domain: "pbs.twimg.com",
+      }
+    ],
     unoptimized: true,
   },
 };

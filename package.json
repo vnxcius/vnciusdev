@@ -1,5 +1,5 @@
 {
-  "name": "luke-berry-blog",
+  "name": "vncius-dev",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,21 +10,23 @@
     "generate:rss": "node src/scripts/gen-rss.js"
   },
   "dependencies": {
-    "@icons-pack/react-simple-icons": "^9.5.0",
-    "@vercel/analytics": "^1.5.0",
-    "dotenv": "^16.4.5",
+    "@icons-pack/react-simple-icons": "^9.7.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.6.1",
     "gray-matter": "^4.0.3",
-    "lucide-react": "^0.395.0",
     "moment": "^2.30.1",
-    "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^16.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "rss": "^1.2.2",
-    "sugar-high": "^0.7.0"
+    "sugar-high": "^0.7.5",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.11",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -32,9 +34,11 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5"
-  }
+    "typescript": "^5",
+    "ultracite": "7.0.8"
+  },
+  "trustedDependencies": [
+    "unrs-resolver"
+  ]
 }

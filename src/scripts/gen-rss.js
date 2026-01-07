@@ -20,7 +20,7 @@ function getPosts() {
     return {
       title: data.title,
       date: data.date,
-      content: content,
+      content,
       slug: fileName.replace(/\.md$/, ""),
     };
   });

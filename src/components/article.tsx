@@ -17,7 +17,9 @@ export function Article({ html }: { html: string }) {
       title.id = title.textContent?.toLowerCase().replace(/\s/g, "-") as string;
     });
 
-    const links = document.querySelectorAll("article a") as NodeListOf<HTMLAnchorElement>;
+    const links = document.querySelectorAll(
+      "article a"
+    ) as NodeListOf<HTMLAnchorElement>;
     links.forEach((link) => {
       link.target = "_blank";
       link.rel = "noopener noreferrer";

@@ -5,10 +5,10 @@ export default function NotFound() {
         This page doesn&apos;t exist.
       </h1>
       <a
-        href="/"
         className="underline decoration-sky-500 underline-offset-4 dark:decoration-sky-600"
+        href="/"
       >
-        Take me home, country road...
+        Just take me back already...
       </a>
     </div>
   );

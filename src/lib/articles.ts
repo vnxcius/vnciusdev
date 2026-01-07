@@ -1,7 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
 import moment from "moment";
+import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
@@ -15,7 +15,7 @@ export type Article = {
 const ARTICLES_DIR = path.join(process.cwd(), "src/articles");
 
 export function getAllTags() {
-  let tags = new Set();
+  const tags = new Set();
   const files = fs.readdirSync(ARTICLES_DIR);
 
   for (const file of files) {
@@ -54,11 +54,11 @@ export function getArticles() {
   return allArticlesData.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
-    } else if (a.date > b.date) {
-      return -1;
-    } else {
-      return 0;
     }
+    if (a.date > b.date) {
+      return -1;
+    }
+    return 0;
   });
 }
 

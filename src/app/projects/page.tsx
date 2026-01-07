@@ -69,7 +69,7 @@ const projects: Project[] = [
         <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
           TailwindCSS
         </span>
-        <span className="rounded-full bg-gradient-to-r from-[#926AFE] to-[#49C7FF] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-none dark:ring-1 dark:ring-zinc-500">
+        <span className="rounded-full bg-linear-to-r from-[#926AFE] to-[#49C7FF] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-none dark:ring-1 dark:ring-zinc-500">
           Vite
         </span>
       </div>
@@ -86,7 +86,7 @@ function ProjectCard({
   technologies,
 }: Project) {
   return (
-    <div className="flex-col divide-y divide-zinc-400 dark:divide-zinc-500 overflow-hidden rounded ring-1 dark:zinc-500 dark:ring-zinc-500 ring-zinc-400">
+    <div className="flex-col divide-y divide-zinc-400 dark:divide-zinc-500 overflow-hidden rounded-sm ring-1 dark:zinc-500 dark:ring-zinc-500 ring-zinc-400">
       <div className="flex items-center justify-between gap-4 p-4 max-sm:flex-col">
         <h2 className="text-xl">{name}</h2>
         {technologies}

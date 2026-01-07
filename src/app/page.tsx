@@ -130,7 +130,7 @@ export default function HomePage() {
         Software Engineer for half that time. I love Raycast, TailwindCSS,
         DJing, playing football, and creating pretty websites.
       </p>
-      <div className="divide-y divide-zinc-400 overflow-hidden rounded ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
+      <div className="divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
         {externalLinks.map((link: Link) => (
           <ExternalLink key={link.url} {...link} />
         ))}
@@ -161,7 +161,7 @@ export default function HomePage() {
           <a
             href="/luke-berry-cv.pdf"
             download="Luke-Berry-CV.pdf"
-            className="flex flex-row items-center justify-center gap-3 rounded bg-sky-300 p-4 text-sky-800 ring-1 ring-sky-500 transition-transform sm:hover:bg-sky-400 dark:bg-inherit dark:text-sky-500 dark:ring-sky-500 sm:sm:dark:hover:bg-zinc-800"
+            className="flex flex-row items-center justify-center gap-3 rounded-sm bg-sky-300 p-4 text-sky-800 ring-1 ring-sky-500 transition-transform sm:hover:bg-sky-400 dark:bg-inherit dark:text-sky-500 dark:ring-sky-500 sm:sm:dark:hover:bg-zinc-800"
           >
             <span className="text-nowrap">Download my CV</span>
             <Download strokeWidth={1.4} className="size-5 max-sm:hidden" />

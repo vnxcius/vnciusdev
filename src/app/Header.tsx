@@ -44,7 +44,7 @@ export default function Header() {
     <header className="mx-auto max-w-prose py-8 max-sm:pt-4">
       <nav className="flex items-center justify-between max-sm:flex-col max-sm:gap-6">
         <Link
-          className={`group relative -m-12 -my-2 -mr-4 flex items-center rounded py-2 pl-12 pr-4 ${isHome ? "ring-0" : "sm:hover:ring-1"} ring-sky-500 transition-transform max-sm:text-center dark:ring-sky-600`}
+          className={`group relative -m-12 -my-2 -mr-4 flex items-center rounded-sm py-2 pl-12 pr-4 ${isHome ? "ring-0" : "sm:hover:ring-1"} ring-sky-500 transition-transform max-sm:text-center dark:ring-sky-600`}
           href="/"
           aria-label="Back to home"
         >
@@ -79,7 +79,7 @@ export default function Header() {
             )}
           </button>
           <Link
-            className="group relative rounded px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
+            className="group relative rounded-sm px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
             href="/projects"
             aria-label="View projects"
             aria-current={path === "/projects" ? "page" : undefined}
@@ -91,7 +91,7 @@ export default function Header() {
             />
           </Link>
           <Link
-            className="group relative rounded px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
+            className="group relative rounded-sm px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
             href="/articles"
             aria-label="View articles"
             aria-current={path.startsWith("/articles") ? "page" : undefined}
@@ -103,7 +103,7 @@ export default function Header() {
             />
           </Link>
           <Link
-            className="group relative rounded px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
+            className="group relative rounded-sm px-2 py-px sm:hover:ring-1 ring-sky-500 transition-transform dark:ring-sky-600"
             href="/about"
             aria-label="View about page"
             aria-current={path === "/about" ? "page" : undefined}

@@ -1,4 +1,3 @@
-
 import { GitBranchIcon, GlobeIcon } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import type { ReactNode } from "react";
@@ -14,12 +13,11 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: "css2wind",
-    description:
-      "Learn TailwindCSS by playing a minigame: there are eight CSS properties that you must translate to the equivalent TailwindCSS utility. Bet you can't get 8/8.",
-    url: "https://css2wind.com",
-    imageUrl: "/projects/css2wind.png",
-    githubUrl: "https://github.com/LukeberryPi/css2wind",
+    name: "Minecraft Tools",
+    description: "Useful tools for the Minecraft game.",
+    url: "https://vncius.dev/minecraft",
+    imageUrl: "/projects/minecraft_tools.png",
+    githubUrl: "https://github.com/vnxcius/blog",
     technologies: (
       <div className="flex items-center gap-x-3">
         <span className="rounded-full bg-[#007ACC] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
@@ -35,43 +33,55 @@ const projects: Project[] = [
     ),
   },
   {
-    name: "King's Cross Cinema Schedule",
+    name: "Soft Skills Check",
     description:
-      "A simpler way to visualize the movies in the Everyman in the Canal 2025 in London. I watched Mean Girls and it was amazing.",
-    url: "https://kings-cross-cinema-schedule-2025.vercel.app/",
-    imageUrl: "/projects/cinema-schedule.png",
-    githubUrl: "https://github.com/LukeberryPi/kings-cross-cinema-website",
+      "Developed by a volunteer team of students from Faculdade de Tecnologia e Inovação SENAC DF, I was the development leader for this project. This web app aims to provide self-assessments of soft skills.",
+    url: "https://softskillscheck.app.br/",
+    imageUrl: "/projects/soft_skills_check.png",
+    githubUrl: "https://github.com/senac-volunteers/soft-skills-app",
     technologies: (
       <div className="flex items-center gap-x-3">
-        <span className="rounded-full bg-[#FF5D01] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
-          Astro
+        <span className="rounded-full bg-[#007ACC] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
+          TypeScript
         </span>
-        <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
-          Tailwind
+        <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
+          TailwindCSS
         </span>
-        <span className="rounded-full bg-black px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-none dark:ring-1 dark:ring-zinc-500">
-          Vercel
+        <span className="rounded-full bg-black px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
+          Next.js
         </span>
       </div>
     ),
   },
   {
-    name: "phived",
+    name: "MC Panel Backend",
     description:
-      "Stop procrastinating by dealing with five tasks at a time. If you want to add more tasks you need to resolve a previous one. Surprisingly effective.",
-    url: "https://phived.com",
-    imageUrl: "/projects/phived.png",
-    githubUrl: "https://github.com/LukeberryPi/phived",
+      "A project where some friends could control a Minecraft server hosted in my home. It also had a frontend.",
+    url: "https://github.com/vnxcius/mcpanel-back",
+    imageUrl: "/projects/mcpanel_back.png",
+    githubUrl: "https://github.com/vnxcius/mcpanel-back",
     technologies: (
       <div className="flex items-center gap-x-3">
-        <span className="rounded-full bg-[#00D8FE] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
-          React
+        <span className="rounded-full bg-[#00ADD8] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
+          Go
         </span>
-        <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
+      </div>
+    ),
+  },
+  {
+    name: "Unfinished Go E-commerce",
+    description:
+      "In this project I was willing to make a web application for an e-commerce platform using Go only. I got tired and never finished it, but I learned a lot with it.",
+    url: "https://github.com/vnxcius/ecommerce-go",
+    imageUrl: "/projects/ecommerce_go.png",
+    githubUrl: "https://github.com/vnxcius/ecommerce-go",
+    technologies: (
+      <div className="flex items-center gap-x-3">
+        <span className="rounded-full bg-[#00ADD8] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
+          Go
+        </span>
+        <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
           TailwindCSS
-        </span>
-        <span className="rounded-full bg-linear-to-r from-[#926AFE] to-[#49C7FF] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-none dark:ring-1 dark:ring-zinc-500">
-          Vite
         </span>
       </div>
     ),

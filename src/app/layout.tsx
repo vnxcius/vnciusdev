@@ -3,9 +3,12 @@ import { Karla } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
+import { headers } from "next/headers";
+import { getDictionary } from "@/dictionaries";
+import type { Locale } from "@/i18n.config";
 import LocaleSwitcher from "../components/locale-switcher";
 import { ScrollToTop } from "../components/scroll-to-top";
-import Header from "./[lang]/header";
+import Header from "./[locale]/header";
 
 export const metadata: Metadata = {
   title: "Vinícius Hilton",
@@ -17,11 +20,17 @@ const karla = Karla({
   weight: "400",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const h = await headers();
+  const pathname = h.get("x-pathname");
+  const locale = pathname?.split("/")[1] as Locale;
+
+  const dict = await getDictionary(locale);
+
   const date = new Date();
   const year = date.getFullYear();
   return (
@@ -52,15 +61,16 @@ export default function RootLayout({
         />
       </head>
       <body className={`${karla.className} min-h-full px-6`}>
-        <Header />
+        <Header dict={dict} />
         <main className="mx-auto max-w-prose pb-4">
           {children}
           <ScrollToTop />
         </main>
         <footer className="mx-auto flex max-w-prose flex-col items-center gap-6 py-6 text-sm text-zinc-700 max-sm:items-start dark:text-zinc-400">
           <div className="flex items-center gap-4 *:decoration-zinc-500 *:underline-offset-4 *:transition-transform *:sm:hover:underline *:dark:decoration-zinc-400">
+            <LocaleSwitcher />
             <a
-              href="https://github.com/vnxcius/blog"
+              href="https://github.com/vnxcius/vnciusdev"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -69,7 +79,6 @@ export default function RootLayout({
             <Link href="/rss.xml" target="_blank">
               RSS Feed
             </Link>
-            <LocaleSwitcher />
           </div>
 
           <div className="-mt-4 text-zinc-500">

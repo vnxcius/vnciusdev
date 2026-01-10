@@ -2,7 +2,14 @@
 // import Link from "next/link";
 // import { type Article, getArticles } from "@/src/lib/articles";
 
-export default async function ArticlesPage() {
+import { notFound } from "next/navigation";
+import { getDictionary, hasLocale } from "@/dictionaries";
+
+export default async function ArticlesPage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+
+  const dict = await getDictionary(locale);
   // const articles = getArticles();
   return (
     <>

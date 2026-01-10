@@ -24,7 +24,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
-import { getDictionary, hasLocale } from "./dictionaries";
+import { getDictionary, hasLocale } from "../../../dictionaries";
 
 interface Link {
   name: string;
@@ -55,11 +55,11 @@ const ExternalLink = (link: Link) => {
   );
 };
 
-export default async function Page({ params }: PageProps<"/[lang]">) {
-  const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
+export default async function Page({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
 
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary(locale);
 
   const externalLinks: Link[] = [
     {

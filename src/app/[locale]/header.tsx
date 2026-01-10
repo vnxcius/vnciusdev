@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { dictionaries } from "@/dictionaries";
 import { i18n } from "@/i18n.config";
 
 function isThemeSetToDark() {
@@ -17,7 +18,11 @@ function isThemeSetToDark() {
   );
 }
 
-export default function Header() {
+export default function Header({
+  dict,
+}: {
+  dict: Awaited<ReturnType<(typeof dictionaries)["en"]>>;
+}) {
   const path = usePathname();
   const isHome = i18n.locales.some((locale) => path === `/${locale}`);
   const [isDarkMode, setIsDarkMode] = useState<boolean | undefined>(false);
@@ -63,7 +68,7 @@ export default function Header() {
               <p>Vinícius Simon G. Hilton</p>
             </div>
             <span className="text-zinc-500 dark:text-zinc-400">
-              Frontend Developer Jr.
+              {dict.header.role}
             </span>
           </div>
         </Link>
@@ -93,7 +98,7 @@ export default function Header() {
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/projects"
           >
-            /projects
+            /{dict.header.projects}
             <div
               aria-hidden="true"
               className="absolute left-1/3 mx-auto mt-1 hidden size-2 h-0.5 w-1/3 rounded-full bg-emerald-500 text-zinc-800 group-aria-[current=page]:block dark:fill-emerald-600 dark:text-transparent"
@@ -105,7 +110,7 @@ export default function Header() {
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/articles"
           >
-            /articles
+            /{dict.header.articles}
             <div
               aria-hidden="true"
               className="absolute left-1/3 mx-auto mt-1 hidden size-2 h-0.5 w-1/3 rounded-full bg-emerald-500 text-zinc-800 group-aria-[current=page]:block dark:fill-emerald-600 dark:text-transparent"
@@ -117,7 +122,7 @@ export default function Header() {
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/about"
           >
-            /about
+            /{dict.header.about}
             <div
               aria-hidden="true"
               className="absolute left-1/3 mx-auto mt-1 hidden size-2 h-0.5 w-1/3 rounded-full bg-emerald-500 text-zinc-800 group-aria-[current=page]:block dark:fill-emerald-600 dark:text-transparent"

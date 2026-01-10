@@ -16,5 +16,28 @@
     "email": "contact@vncius.dev",
     "download": "Download my CV",
     "code": "Code"
+  },
+  "projects": {
+    "title": "Projects",
+    "visit": "Visit website",
+    "viewCode": "View code",
+    "projects": {
+      "minecraftTools": {
+        "name": "Minecraft Tools",
+        "description": "Useful tools for the Minecraft game."
+      },
+      "softSkillsCheck": {
+        "name": "Soft Skills Check",
+        "description": "Developed by a volunteer team of students from Faculdade de Tecnologia e Inovação SENAC DF, I was the development leader for this project. This web app aims to provide self-assessments of soft skills."
+      },
+      "mcPanelBackend": {
+        "name": "MC Panel Backend",
+        "description": "A project where some friends could control a Minecraft server hosted in my home. It also had a frontend."
+      },
+      "ecommerce": {
+        "name": "Unfinished Go E-commerce",
+        "description": "In this project I was willing to make a web application for an e-commerce platform using Go only. Eventually, I focused on other things and never finished it, but I learned a lot with it."
+      }
+    }
   }
 }

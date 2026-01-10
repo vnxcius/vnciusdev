@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { ScrollToTop } from "../components/scroll-to-top";
-import Header from "./Header";
+import Header from "./header";
 
 export const metadata: Metadata = {
   title: "Vinícius Hilton",

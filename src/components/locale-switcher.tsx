@@ -1,31 +1,22 @@
 "use client";
 
 import { GlobeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/dictionaries";
-import { i18n, LocaleLabel } from "../../i18n.config";
-import { cn } from "../lib/cn";
+import { i18n, LocaleLabel } from "@/i18n.config";
+import { useLocaleChange } from "@/src/hooks/use-locale-change";
+import { cn } from "@/src/lib/cn";
 
 export default function LocaleSwitcher({
   currentLocale,
 }: {
   currentLocale: Locale;
 }) {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const router = useRouter();
-
-  const redirectedPathname = (locale: Locale) => {
-    if (!pathname) return "/";
-
-    const segments = pathname.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
+  const { changeLocale } = useLocaleChange(currentLocale);
 
   const openDropdownMenu = () => {
     setOpen((v) => {
@@ -92,8 +83,7 @@ export default function LocaleSwitcher({
                 onClick={() => {
                   if (locale === currentLocale) return;
                   setOpen(false);
-
-                  router.push(redirectedPathname(locale), { scroll: false });
+                  changeLocale(locale);
                 }}
               >
                 {LocaleLabel[locale]}

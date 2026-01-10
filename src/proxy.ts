@@ -1,6 +1,7 @@
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { type NextRequest, NextResponse } from "next/server";
+import type { Locale } from "@/i18n.config";
 
 const locales = ["en", "pt"];
 const defaultLocale = "en";
@@ -13,25 +14,29 @@ function getLocale(request: NextRequest) {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const currentPathLocale = pathname.split("/")[1] as Locale | undefined;
 
   const hasLocale = locales.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
+    (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
   );
 
-  const forwardedHeaders = new Headers(request.headers);
-  forwardedHeaders.set("x-pathname", pathname);
-
-  if (!hasLocale) {
-    const locale = getLocale(request);
-    request.nextUrl.pathname = `/${locale}${pathname}`;
-    return NextResponse.redirect(request.nextUrl);
+  if (hasLocale && currentPathLocale) {
+    const res = NextResponse.next();
+    res.cookies.set("locale", currentPathLocale, {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      sameSite: "lax",
+    });
+    return res;
   }
 
-  return NextResponse.next({
-    request: {
-      headers: forwardedHeaders,
-    },
-  });
+  const cookieLocale = request.cookies.get("locale")?.value;
+  const locale = locales.includes(cookieLocale as Locale)
+    ? cookieLocale
+    : getLocale(request);
+
+  request.nextUrl.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {

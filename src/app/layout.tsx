@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import { SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
 import { ScrollToTop } from "../components/scroll-to-top";
-import Script from "next/script";
-import dynamic from "next/dynamic";
-// import { Analytics } from "@vercel/analytics/next";
+import Header from "./Header";
 
 export const metadata: Metadata = {
-  title: "Luke Berry",
-  description: "Luke Berry's personal website",
+  title: "Vinícius Hilton",
+  description: "Vinícius Simon G. Hilton's personal website",
 };
 
 const karla = Karla({
@@ -17,18 +16,18 @@ const karla = Karla({
   weight: "400",
 });
 
-// https://www.reddit.com/r/nextjs/comments/1bhfikg/comment/kxwj9ou/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-const Header = dynamic(() => import("./Header"), { ssr: false });
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const date = new Date();
+  const year = date.getFullYear();
   return (
-    <html lang="en" className="min-h-screen" suppressHydrationWarning>
+    <html className="min-h-screen" lang="en" suppressHydrationWarning>
       <head>
         <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: No problem
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
@@ -52,39 +51,31 @@ export default function RootLayout({
         />
       </head>
       <body className={`${karla.className} min-h-full px-6`}>
-        {/*<Analytics />*/}
         <Header />
         <main className="mx-auto max-w-prose pb-4">
           {children}
           <ScrollToTop />
         </main>
-        <footer className="mx-auto flex max-w-prose flex-col max-sm:items-start items-center gap-2 py-6 text-sm text-zinc-500 dark:text-zinc-400">
-          <div className="flex items-center gap-4">
+        <footer className="mx-auto flex max-w-prose flex-col items-center gap-6 py-6 text-sm text-zinc-700 max-sm:items-start dark:text-zinc-400">
+          <div className="flex items-center gap-4 *:decoration-zinc-500 *:underline-offset-4 *:transition-transform *:sm:hover:underline *:dark:decoration-zinc-400">
             <a
-              className="decoration-zinc-500 underline-offset-4 transition-transform sm:hover:underline dark:decoration-zinc-400"
-              href="https://github.com/LukeberryPi/blog"
+              href="https://github.com/vnxcius/blog"
+              rel="noopener noreferrer"
               target="_blank"
             >
               Code
             </a>
-            <Link
-              className="decoration-zinc-500 underline-offset-4 transition-transform sm:hover:underline dark:decoration-zinc-400"
-              target="_blank"
-              href="/rss.xml"
-            >
+            <Link href="/rss.xml" target="_blank">
               RSS Feed
             </Link>
-            <a
-              className="decoration-zinc-500 underline-offset-4 transition-transform sm:hover:underline dark:decoration-zinc-400"
-              href="https://x.com/LukeberryPi"
-              target="_blank"
-            >
-              @LukeberryPi
-            </a>
           </div>
-          <blockquote className="text-zinc-800 dark:text-zinc-300">
-            Smile, you&apos;re alive :)
-          </blockquote>
+
+          <div className="-mt-4 text-zinc-500">
+            <p className="flex items-center gap-1">
+              <SealCheckIcon className="-ml-0.5 text-emerald-600" /> vncius.dev
+              / {year}
+            </p>
+          </div>
         </footer>
       </body>
     </html>

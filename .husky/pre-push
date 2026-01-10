@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+YELLOW="\033[0;33m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+printf "%b\n" "${YELLOW}INFO: Checking Next.js build...${NC}"
+pnpm build
+
+if [ $? -ne 0 ]; then
+  printf "%b\n" "${RED}ERROR: Build failed. Push canceled.${NC}"
+  exit 1
+fi
+
+printf "%b\n" "${GREEN}INFO: Build passed. Proceeding with push.${NC}"

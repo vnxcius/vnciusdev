@@ -1,7 +1,7 @@
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 import matter from "gray-matter";
 import moment from "moment";
-import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 

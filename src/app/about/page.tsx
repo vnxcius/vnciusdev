@@ -1,7 +1,8 @@
 export default function AboutPage() {
   return (
     <>
-      <h1 className="mb-16 mt-4 text-center text-5xl max-sm:text-4xl">
+      {/* MAYBE ADD THE PC SPECS */}
+      <h1 className="mt-4 mb-16 text-center text-5xl max-sm:text-4xl">
         About me
       </h1>
       <article>
@@ -18,7 +19,8 @@ export default function AboutPage() {
           <a href="https://open.spotify.com/artist/4ymHKBTThfeOL114lwCWPQ?si=c30897c35e404259">
             became a singer-songwriter
           </a>
-          , got a Karate blue belt, won two Carnaval trophies and reached Diamond IV in League of Legends.
+          , got a Karate blue belt, won two Carnaval trophies and reached
+          Diamond IV in League of Legends.
         </p>
         <p>
           Then I studied Economics at{" "}
@@ -73,8 +75,7 @@ export default function AboutPage() {
           live.
         </p>
         <p>
-          Send me a DM on{" "}
-          <a href="https://x.com/lukeberrypi">X</a> or an email{" "}
+          Send me a DM on <a href="https://x.com/lukeberrypi">X</a> or an email{" "}
           <a href="mailto:lukeberrypi@gmail.com">lukeberrypi@gmail.com</a>.
         </p>
         <p>Smile, you&apos;re alive :)</p>

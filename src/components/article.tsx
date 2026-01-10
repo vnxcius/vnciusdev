@@ -18,7 +18,7 @@ export function Article({ html }: { html: string }) {
     });
 
     const links = document.querySelectorAll(
-      "article a"
+      "article a",
     ) as NodeListOf<HTMLAnchorElement>;
     links.forEach((link) => {
       link.target = "_blank";
@@ -26,5 +26,6 @@ export function Article({ html }: { html: string }) {
     });
   };
   useEffect(handleFormatCode, []);
+  // biome-ignore lint: security/noDangerouslySetInnerHtml: No problem
   return <article dangerouslySetInnerHTML={{ __html: html }} />;
 }

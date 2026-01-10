@@ -1,8 +1,36 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "ignoreUnknown": false },
-  "formatter": { "enabled": true, "indentStyle": "space" },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "formatWithErrors": true
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -10,7 +38,7 @@
       "correctness": {
         "noUnusedImports": {
           "level": "error",
-          "fix":"safe"
+          "fix": "safe"
         }
       },
       "nursery": {
@@ -18,7 +46,9 @@
         "useSortedClasses": {
           "level": "warn",
           "fix": "safe",
-          "options": { "functions": ["clsx", "cva", "cn"] }
+          "options": {
+            "functions": ["clsx", "cva", "cn"]
+          }
         }
       },
       "performance": {
@@ -26,17 +56,15 @@
         "noUnwantedPolyfillio": "warn",
         "useGoogleFontPreconnect": "warn"
       },
-      "style": { "noHeadElement": "warn", "useBlockStatements": "off" },
+      "style": {
+        "noHeadElement": "warn",
+        "useBlockStatements": "off"
+      },
       "suspicious": {
         "noDocumentImportInPage": "error",
         "noHeadImportInDocument": "error",
         "useGoogleFontDisplay": "warn"
       }
     }
-  },
-  "javascript": { "formatter": { "quoteStyle": "double" } },
-  "assist": {
-    "enabled": true,
-    "actions": { "source": { "organizeImports": "on" } }
   }
 }

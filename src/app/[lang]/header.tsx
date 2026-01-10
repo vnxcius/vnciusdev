@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { i18n } from "@/i18n.config";
 
 function isThemeSetToDark() {
   if (typeof window === "undefined") return;
@@ -18,7 +19,7 @@ function isThemeSetToDark() {
 
 export default function Header() {
   const path = usePathname();
-  const isHome = path === "/";
+  const isHome = i18n.locales.some((locale) => path === `/${locale}`);
   const [isDarkMode, setIsDarkMode] = useState<boolean | undefined>(false);
 
   const toggleTheme = () => {

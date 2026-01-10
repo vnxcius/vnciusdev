@@ -22,7 +22,9 @@ import {
   DownloadSimpleIcon,
   PaperPlaneTiltIcon,
 } from "@phosphor-icons/react/ssr";
+import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { getDictionary, hasLocale } from "./dictionaries";
 
 interface Link {
   name: string;
@@ -30,27 +32,6 @@ interface Link {
   url: string;
   icon?: ReactNode;
 }
-
-const externalLinks: Link[] = [
-  {
-    name: "LinkedIn",
-    description: "follow my career",
-    url: "https://www.linkedin.com/in/vinicius-hilton",
-    icon: <SiLinkedin className="fill-[#0077B5] dark:fill-zinc-200" />,
-  },
-  {
-    name: "GitHub",
-    description: "steal my code",
-    url: "https://github.com/vnxcius",
-    icon: <SiGithub />,
-  },
-  {
-    name: "Instagram",
-    description: "see my handsome face",
-    url: "https://instagram.com/vncius.ts",
-    icon: <SiInstagram className="fill-[#FF0069] dark:fill-zinc-200" />,
-  },
-];
 
 const ExternalLink = (link: Link) => {
   return (
@@ -74,18 +55,39 @@ const ExternalLink = (link: Link) => {
   );
 };
 
-export default function Page() {
+export default async function Page({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+
+  const dict = await getDictionary(lang);
+
+  const externalLinks: Link[] = [
+    {
+      name: "LinkedIn",
+      description: dict.landing.followMyCareer,
+      url: "https://www.linkedin.com/in/vinicius-hilton",
+      icon: <SiLinkedin className="fill-[#0077B5] dark:fill-zinc-200" />,
+    },
+    {
+      name: "GitHub",
+      description: dict.landing.stealMyCode,
+      url: "https://github.com/vnxcius",
+      icon: <SiGithub />,
+    },
+    {
+      name: "Instagram",
+      description: dict.landing.seeMyHandsomeFace,
+      url: "https://instagram.com/vncius.ts",
+      icon: <SiInstagram className="fill-[#FF0069] dark:fill-zinc-200" />,
+    },
+  ];
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="mb-1.5 font-semibold">Who are you, dude?</h2>
+        <h2 className="mb-1.5 font-semibold">{dict.landing.who}</h2>
         <div className="flex flex-col *:flex *:items-center *:gap-1">
-          <p>
-            I&lsquo;m random guy that happens to love coding. I work mostly as
-            frontend developer, but I love building stuff in Go too. My main
-            knowledge:
-          </p>
-          <div className="my-3.5 flex flex-wrap space-x-1 *:flex *:items-center *:gap-1">
+          <p>{dict.landing.whoContent}</p>
+          <div className="my-3.5 flex flex-wrap space-x-1 *:flex *:items-center *:gap-1 *:font-medium">
             <span>
               <SiTypescript fill={SiTypescriptHex} className="size-4" />
               TypeScript,
@@ -118,11 +120,11 @@ export default function Page() {
               <SiPython fill={SiPythonHex} className="size-4" /> Python
             </span>{" "}
           </div>
-          <p>and other tools.</p>
+          <p>{dict.landing.whoOthers}</p>
         </div>
       </div>
       <div>
-        <h2 className="mb-1.5 font-semibold">Get to know me</h2>
+        <h2 className="mb-1.5 font-semibold">{dict.landing.knowMe}</h2>
         <div className="divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
           {externalLinks.map((link: Link) => (
             <ExternalLink key={link.url} {...link} />
@@ -132,7 +134,7 @@ export default function Page() {
       <div className="flex items-center justify-center gap-6 max-sm:flex-col-reverse sm:justify-between">
         <div className="flex flex-col justify-center max-sm:items-center">
           <div className="-m-8 flex select-all items-center gap-1 p-8 transition-transform">
-            contact@vncius.dev
+            {dict.landing.email}
             <a
               className="rounded p-1 text-zinc-800 hover:bg-zinc-800/5 dark:text-zinc-200"
               href="mailto:contact@vncius.dev"
@@ -151,7 +153,7 @@ export default function Page() {
           download="Vinicius-Hilton-CV.pdf"
           href="/cv-vinicius-hilton-2026-en.pdf"
         >
-          <span className="text-nowrap">Download my CV</span>
+          <span className="text-nowrap">{dict.landing.download}</span>
           <DownloadSimpleIcon
             className="size-5 max-sm:hidden"
             strokeWidth={1.4}

@@ -3,8 +3,9 @@ import { Karla } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
+import LocaleSwitcher from "../components/locale-switcher";
 import { ScrollToTop } from "../components/scroll-to-top";
-import Header from "./header";
+import Header from "./[lang]/header";
 
 export const metadata: Metadata = {
   title: "Vinícius Hilton",
@@ -68,6 +69,7 @@ export default function RootLayout({
             <Link href="/rss.xml" target="_blank">
               RSS Feed
             </Link>
+            <LocaleSwitcher />
           </div>
 
           <div className="-mt-4 text-zinc-500">

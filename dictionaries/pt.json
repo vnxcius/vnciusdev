@@ -1,0 +1,20 @@
+{
+  "header": {
+    "role": "Desenvolvedor Frontend Jr.",
+    "projects": "projetos",
+    "articles": "artigos",
+    "about": "sobre"
+  },
+  "landing": {
+    "who": "Quem que é você, cara?",
+    "whoContent": "Sou só um aleatório que ama programar. Trabalho principalmente como desenvolvedor frontend, mas também adoro construir coisas em Go. Meus principais conhecimentos:",
+    "whoOthers": "e outras ferramentas.",
+    "knowMe": "Conheça mais sobre mim!",
+    "followMyCareer": "acompanhe minha carreira",
+    "stealMyCode": "roube meu código",
+    "seeMyHandsomeFace": "veja meu lindo rosto",
+    "email": "contato@vncius.dev",
+    "download": "Baixar meu CV",
+    "code": "Código"
+  }
+}

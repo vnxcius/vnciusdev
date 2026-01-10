@@ -1,0 +1,20 @@
+{
+  "header": {
+    "role": "Frontend Developer Jr.",
+    "projects": "projects",
+    "articles": "articles",
+    "about": "about"
+  },
+  "landing": {
+    "who": "Who are you, dude?",
+    "whoContent": "I‘m just a random guy that loves to code. I work mostly as frontend developer, but I love building stuff in Go too. My main knowledge:",
+    "whoOthers": "and other tools.",
+    "knowMe": "Get to know me!",
+    "followMyCareer": "follow my career",
+    "stealMyCode": "steal my code",
+    "seeMyHandsomeFace": "see my handsome face",
+    "email": "contact@vncius.dev",
+    "download": "Download my CV",
+    "code": "Code"
+  }
+}

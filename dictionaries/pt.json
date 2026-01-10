@@ -5,6 +5,9 @@
     "articles": "artigos",
     "about": "sobre"
   },
+  "footer": {
+    "code": "Código"
+  },
   "landing": {
     "who": "Quem que é você, cara?",
     "whoContent": "Sou só um aleatório que ama programar. Trabalho principalmente como desenvolvedor frontend, mas também adoro construir coisas em Go. Meus principais conhecimentos:",

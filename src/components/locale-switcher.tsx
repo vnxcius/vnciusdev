@@ -7,11 +7,12 @@ import type { Locale } from "@/dictionaries";
 import { i18n, LocaleLabel } from "../../i18n.config";
 import { cn } from "../lib/cn";
 
-export default function LocaleSwitcher() {
+export default function LocaleSwitcher({
+  currentLocale,
+}: {
+  currentLocale: Locale;
+}) {
   const pathname = usePathname();
-  const segments = pathname.split("/");
-  const currentLocale = segments[1] as Locale;
-
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -20,6 +21,8 @@ export default function LocaleSwitcher() {
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return "/";
+
+    const segments = pathname.split("/");
     segments[1] = locale;
     return segments.join("/");
   };

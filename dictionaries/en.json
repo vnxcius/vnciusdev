@@ -5,6 +5,9 @@
     "articles": "articles",
     "about": "about"
   },
+  "footer": {
+    "code": "Code"
+  },
   "landing": {
     "who": "Who are you, dude?",
     "whoContent": "I‘m just a random guy that loves to code. I work mostly as frontend developer, but I love building stuff in Go too. My main knowledge:",

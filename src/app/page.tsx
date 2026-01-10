@@ -85,7 +85,7 @@ export default function Page() {
             frontend developer, but I love building stuff in Go too. My main
             knowledge:
           </p>
-          <div className="my-3.5 space-x-1 *:flex *:items-center *:gap-1">
+          <div className="my-3.5 flex flex-wrap space-x-1 *:flex *:items-center *:gap-1">
             <span>
               <SiTypescript fill={SiTypescriptHex} className="size-4" />
               TypeScript,

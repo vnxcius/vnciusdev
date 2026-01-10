@@ -1,0 +1,19 @@
+import RootLayout from "./layout";
+
+export default function NotFound() {
+  return (
+    <RootLayout>
+      <div className="flex flex-col items-center justify-center gap-6 py-16">
+        <h1 className="text-5xl max-sm:text-3xl">
+          This page doesn&apos;t exist.
+        </h1>
+        <a
+          className="underline decoration-sky-500 underline-offset-4 dark:decoration-sky-600"
+          href="/"
+        >
+          Just take me back already...
+        </a>
+      </div>
+    </RootLayout>
+  );
+}

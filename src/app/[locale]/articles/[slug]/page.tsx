@@ -1,8 +1,10 @@
+import { notFound } from "next/navigation";
+import { getDictionary, hasLocale } from "@/dictionaries";
+import { Article } from "@/src/components/article";
 import {
   type Article as ArticleType,
   getArticleData,
 } from "@/src/lib/articles";
-import { Article } from "../../../components/article";
 
 function Tag({ tag }: { tag: string }) {
   return (
@@ -15,8 +17,13 @@ function Tag({ tag }: { tag: string }) {
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+
+  const dict = await getDictionary(locale);
+
   let articleData: ArticleType & {
     location: string;
     contentHtml: string;
@@ -31,14 +38,12 @@ export default async function ArticlePage({
     }
     return (
       <div className="flex flex-col items-center justify-center gap-6 py-16">
-        <h1 className="text-5xl max-sm:text-3xl">
-          This article doesn&apos;t exist.
-        </h1>
+        <h1 className="text-5xl max-sm:text-3xl">{dict.articles.notExist}</h1>
         <a
           className="underline decoration-sky-500 underline-offset-4 dark:decoration-sky-600"
           href="/articles"
         >
-          Read something else
+          {dict.articles.readElse}
         </a>
       </div>
     );

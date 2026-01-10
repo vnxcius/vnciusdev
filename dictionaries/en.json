@@ -39,5 +39,11 @@
         "description": "In this project I was willing to make a web application for an e-commerce platform using Go only. Eventually, I focused on other things and never finished it, but I learned a lot with it."
       }
     }
+  },
+  "articles": {
+    "title": "Articles",
+    "empty": "Nothing here yet.",
+    "notExist": "This article does not exist.",
+    "readElse": "Read something else"
   }
 }

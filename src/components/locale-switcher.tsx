@@ -65,7 +65,7 @@ export default function LocaleSwitcher() {
       >
         <GlobeSimpleIcon
           size={24}
-          className="rounded-md bg-zinc-200/70 p-1 dark:bg-zinc-800/70"
+          className="rounded-md bg-zinc-200/70 p-1 text-emerald-700 dark:bg-zinc-800/70"
         />
         <p>{LocaleLabel[currentLocale]}</p>
       </button>

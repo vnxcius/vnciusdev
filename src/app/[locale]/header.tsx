@@ -93,7 +93,7 @@ export default function Header({
             )}
           </button>
           <Link
-            aria-current={path === "/projects" ? "page" : undefined}
+            aria-current={path.includes("/projects") ? "page" : undefined}
             aria-label="View projects"
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/projects"
@@ -105,7 +105,7 @@ export default function Header({
             />
           </Link>
           <Link
-            aria-current={path.startsWith("/articles") ? "page" : undefined}
+            aria-current={path.includes("/articles") ? "page" : undefined}
             aria-label="View articles"
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/articles"
@@ -117,7 +117,7 @@ export default function Header({
             />
           </Link>
           <Link
-            aria-current={path === "/about" ? "page" : undefined}
+            aria-current={path.includes("/about") ? "page" : undefined}
             aria-label="View about page"
             className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/about"

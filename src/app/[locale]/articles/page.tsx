@@ -14,7 +14,7 @@ export default async function ArticlesPage({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <h1 className="mt-4 mb-16 text-center text-5xl max-sm:text-4xl">
-        Articles
+        {dict.articles.title}
       </h1>
 
       <section className="flex flex-col divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
@@ -38,7 +38,7 @@ export default async function ArticlesPage({ params }: PageProps<"/[locale]">) {
           </Link>
         ))}*/}
 
-        <p className="p-6 text-center">Nothing here yet.</p>
+        <p className="p-6 text-center">{dict.articles.empty} 😔</p>
       </section>
     </>
   );

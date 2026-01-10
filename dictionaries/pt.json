@@ -39,5 +39,11 @@
         "description": "Neste projeto eu queria criar uma aplicação web para uma plataforma de e-commerce usando apenas Go. Acabei focando em outros coisas e nunca finalizei, mas aprendi muito com ele."
       }
     }
+  },
+  "articles": {
+    "title": "Artigos",
+    "empty": "Nada aqui ainda.",
+    "notExist": "Este artigo não existe.",
+    "readElse": "Leia outra coisa"
   }
 }

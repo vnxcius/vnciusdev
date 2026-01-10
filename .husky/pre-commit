@@ -1,1 +1,11 @@
-bun test
+#!/usr/bin/env sh
+
+YELLOW="\033[0;33m"
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+printf "%b\n" "${YELLOW}INFO: Running Biome checks...${NC}"
+
+pnpm biome check --write . || exit 1
+
+printf "%b\n" "${GREEN}INFO: Biome check passed.${NC}"

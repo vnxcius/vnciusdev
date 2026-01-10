@@ -12,10 +12,10 @@ const karla = Karla({
   weight: "400",
 });
 
-export default async function RootLayout({
+export default async function AppLayout({
   children,
   params,
-}: PageProps<"/[locale]"> & {
+}: LayoutProps<"/[locale]"> & {
   children: React.ReactNode;
 }) {
   const { locale } = await params;

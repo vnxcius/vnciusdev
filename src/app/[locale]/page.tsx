@@ -151,7 +151,7 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
         <a
           className="flex flex-row items-center justify-center gap-3 rounded-lg bg-emerald-100 px-4 py-2 text-emerald-700 ring-1 ring-emerald-500/80 transition-transform sm:hover:bg-emerald-200 dark:bg-inherit dark:text-emerald-500 dark:ring-emerald-500 sm:sm:dark:hover:bg-zinc-800"
           download="Vinicius-Hilton-CV.pdf"
-          href="/cv-vinicius-hilton-2026-en.pdf"
+          href={`/cv-vinicius-hilton-2026-${locale}.pdf`}
         >
           <span className="text-nowrap">{dict.landing.download}</span>
           <DownloadSimpleIcon

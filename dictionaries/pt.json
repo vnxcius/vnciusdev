@@ -1,4 +1,5 @@
 {
+  "backToTop": "Voltar ao topo",
   "header": {
     "role": "Desenvolvedor Frontend Jr.",
     "projects": "projetos",
@@ -48,5 +49,28 @@
     "empty": "Nada aqui ainda.",
     "notExist": "Este artigo não existe.",
     "readElse": "Leia outra coisa"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "signature": "Atenciosamente",
+    "paragraphs": {
+      "p1": "Nascido e criado em Brasília, atualmente (Jan 2026) continuo morando aqui.",
+      "p2": "Por volta dos meus 8 anos de idade, minha mãe me deu de presente o meu primeiro videogame, um Playstation 2 desbloqueado. Foi quando tive meu primeiro contato mais a fundo com a tecnologia, porque eu ficava, além de jogando muitos jogos aleatórios, interessado em saber como aquele aparelho retangular bonito funcionava. Eu lembro de fazer algumas pesquisas na internet ou perguntar para as pessoas, mas eu não conhecia ninguém que soubesse me explicar mais a fundo como aquilo funcionava.",
+      "p3": "Foi então quando meu interesse pela tecnologia despertou. Logo depois de um tempo, minha mãe comprou um computador. Lembro que ele era um computador de 512MB de RAM ou algo assim, mas sei que fiz muita besteira nele. Já enchi esse computador de vírus quando eu me aventurava em baixar e configurar mods, descobrir softwares e entre coisas fiz nesse computador guerreiro.",
+      "p4": {
+        "p4_1": "Desde então, meu interesse e amor pela tecnologia só aumentou,",
+        "p4_2": "para ver como eu lidaria com essa área e acabou que me saí muito bem. Muito do que aprendi no passado quando eu futucava o meu antigo e falecido PC me ajudou nessa área.",
+        "p4LinkText": "decidi cursar Gestão de TI"
+      },
+      "p5": {
+        "p5_1": "Comecei com alguns",
+        "p5_2": ", me aventurei em coisas que eu não fazia a menor ideia se eu consegueria fazer, mas nunca desisti. Hoje tenho o prazer e a oportunidade de trabalhar com o que gosto e não pretendo parar.",
+        "p5LinkText": "projetos pequenos"
+      },
+      "p6": {
+        "p6_1": "Fique a vontade para me mandar uma DM no",
+        "p6_2": "ou um email para"
+      }
+    }
   }
 }

@@ -56,9 +56,9 @@ export default async function AppLayout({
         <Header dict={dict} />
         <main className="mx-auto max-w-prose pb-4">
           {children}
-          <ScrollToTop />
+          <ScrollToTop text={dict.backToTop} />
         </main>
-        <footer className="mx-auto flex max-w-prose flex-col items-center gap-6 py-6 text-sm text-zinc-700 max-sm:items-start dark:text-zinc-400">
+        <footer className="mx-auto mb-32 flex max-w-prose flex-col items-center gap-6 py-6 text-sm text-zinc-700 max-sm:items-start dark:text-zinc-400">
           <div className="flex items-center gap-4 *:decoration-zinc-500 *:underline-offset-4 *:transition-transform *:sm:hover:underline *:dark:decoration-zinc-400">
             <LocaleSwitcher currentLocale={locale} />
             <a

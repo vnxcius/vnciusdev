@@ -1,4 +1,5 @@
 {
+  "backToTop": "Back to top",
   "header": {
     "role": "Frontend Developer Jr.",
     "projects": "projects",
@@ -48,5 +49,28 @@
     "empty": "Nothing here yet.",
     "notExist": "This article does not exist.",
     "readElse": "Read something else"
+  },
+  "about": {
+    "title": "About Me",
+    "signature": "Sincerely",
+    "paragraphs": {
+      "p1": "Born and raised in Brasília, I currently (Jan 2026) still live here.",
+      "p2": "Around the age of 8, my mother gave me my first video game as a gift, a modded PlayStation 2. That was when I had my first deeper contact with technology, because besides playing many random games, I was interested in understanding how that beautiful rectangular device worked. I remember doing some research on the internet or asking people, but I didn’t know anyone who could explain in more depth how it worked.",
+      "p3": "That’s when my interest in technology was sparked. Some time later, my mother bought a computer for us. I remember it had 512MB of RAM or something like that, but I know for a fact I messed it up a lot. I filled that computer with viruses while trying to download and configure mods, discover software, and many other things on that brave machine.",
+      "p4": {
+        "p4_1": "Since then, my interest and love for technology has only grown,",
+        "p4_2": "to see how I would deal with this field, and it turned out I did very well. A lot of what I learned in the past while tinkering with my old and now deceased PC helped me in this area.",
+        "p4LinkText": "I decided to study IT Management"
+      },
+      "p5": {
+        "p5_1": "I started with some",
+        "p5_2": ", I ventured into things I had no idea if I would be able to do, but I never gave up. Today I have the pleasure and opportunity to work with what I love, and I don’t intend to stop.",
+        "p5LinkText": "small projects"
+      },
+      "p6": {
+        "p6_1": "Feel free to send me a DM on",
+        "p6_2": "or an email to"
+      }
+    }
   }
 }

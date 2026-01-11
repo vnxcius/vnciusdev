@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { getDictionary, hasLocale } from "@/dictionaries";
+import type { Locale } from "@/i18n.config";
 
 interface Project {
   name: string;
@@ -11,6 +12,7 @@ interface Project {
   githubUrl: string;
   url: string;
   technologies: ReactNode;
+  locale: Locale;
 }
 
 function ProjectCard({
@@ -20,6 +22,7 @@ function ProjectCard({
   githubUrl,
   url,
   technologies,
+  locale,
 }: Project) {
   return (
     <div className="dark:zinc-500 flex-col divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
@@ -42,14 +45,16 @@ function ProjectCard({
           href={url}
           target="_blank"
         >
-          <GlobeIcon className="size-5" strokeWidth={1.4} /> Visit website
+          <GlobeIcon className="size-5" strokeWidth={1.4} />{" "}
+          {locale === "pt" ? "Visitar site" : "Visit website"}
         </a>
         <a
           className="flex grow items-center justify-center gap-2 py-4 transition-transform sm:hover:bg-zinc-100 sm:dark:hover:bg-zinc-800"
           href={githubUrl}
           target="_blank"
         >
-          <GitBranchIcon className="size-5" strokeWidth={1.4} /> View code
+          <GitBranchIcon className="size-5" strokeWidth={1.4} />{" "}
+          {locale === "pt" ? "Ver código" : "View code"}
         </a>
       </div>
     </div>
@@ -64,6 +69,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
 
   const projects: Project[] = [
     {
+      locale,
       name: dict.projects.projects.minecraftTools.name,
       description: dict.projects.projects.minecraftTools.description,
       url: "https://vncius.dev/minecraft",
@@ -84,6 +90,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
       ),
     },
     {
+      locale,
       name: dict.projects.projects.softSkillsCheck.name,
       description: dict.projects.projects.softSkillsCheck.description,
       url: "https://softskillscheck.app.br/",
@@ -104,6 +111,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
       ),
     },
     {
+      locale,
       name: dict.projects.projects.mcPanelBackend.name,
       description: dict.projects.projects.mcPanelBackend.description,
       url: "https://github.com/vnxcius/mcpanel-back",
@@ -118,6 +126,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
       ),
     },
     {
+      locale,
       name: dict.projects.projects.ecommerce.name,
       description: dict.projects.projects.ecommerce.description,
       url: "https://github.com/vnxcius/ecommerce-go",

@@ -6,7 +6,7 @@ RED="\033[0;31m"
 NC="\033[0m"
 
 printf "%b\n" "${YELLOW}INFO: Checking Next.js build...${NC}"
-pnpm build
+bun build
 
 if [ $? -ne 0 ]; then
   printf "%b\n" "${RED}ERROR: Build failed. Push canceled.${NC}"

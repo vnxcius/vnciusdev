@@ -6,6 +6,6 @@ NC="\033[0m"
 
 printf "%b\n" "${YELLOW}INFO: Running Biome checks...${NC}"
 
-pnpm biome check --write . || exit 1
+bunx biome check --write . || exit 1
 
 printf "%b\n" "${GREEN}INFO: Biome check passed.${NC}"

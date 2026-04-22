@@ -10,16 +10,28 @@
     "code": "Code"
   },
   "landing": {
-    "who": "Who are you, dude?",
+    "who": "Who am I",
     "whoContent": "I‘m just a random guy that loves to code. I work mostly as frontend developer, but I love building stuff in Go too. My main knowledge:",
-    "whoOthers": "and other tools.",
+    "whoOthers": "and other development tools.",
     "knowMe": "Get to know me!",
-    "followMyCareer": "follow my career",
-    "stealMyCode": "steal my code",
-    "seeMyHandsomeFace": "see my handsome face",
     "email": "contact@vncius.dev",
-    "download": "Download my CV",
-    "code": "Code"
+    "download": "Download CV - EN",
+    "code": "Code",
+    "experience": "Experience",
+    "journey": "Follow my journey",
+    "experiences": {
+      "0": {
+        "title": "eTopocart",
+        "description": "Joined eTopocart in September 2025 as System Development Assistant",
+        "link": "https://etopocart.com/"
+      },
+      "1": {
+        "title": "Technologist in IT Management",
+        "description": "Graduated from Faculdade de Tecnologia e Inovação SENAC DF",
+        "link": null
+      }
+    },
+    "present": "Present"
   },
   "projects": {
     "title": "Projects",

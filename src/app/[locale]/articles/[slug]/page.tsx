@@ -1,10 +1,7 @@
 import { notFound } from "next/navigation";
+import { Article } from "@/components/article";
 import { getDictionary, hasLocale } from "@/dictionaries";
-import { Article } from "@/src/components/article";
-import {
-  type Article as ArticleType,
-  getArticleData,
-} from "@/src/lib/articles";
+import { type Article as ArticleType, getArticleData } from "@/lib/articles";
 
 function Tag({ tag }: { tag: string }) {
   return (

@@ -22,7 +22,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
       <h1 className="mt-4 mb-16 text-center text-5xl max-sm:text-4xl">
         {about.title}
       </h1>
-      <div className="my-8">
+      <div className="my-1">
         <div className="flex items-center gap-1 dark:text-zinc-400">
           <DesktopTowerIcon size={20} weight="duotone" />
           <p className="font-semibold">PC Specs:</p>
@@ -46,7 +46,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
                 weight="duotone"
                 className="text-neutral-500 dark:text-zinc-400"
               />
-              <p>NVIDIA RTX 2060 6GB OC</p>
+              <p>NVIDIA RTX 5060 8GB OC</p>
             </div>
           </li>
           <li>
@@ -92,9 +92,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
         </ul>
       </div>
 
-      <hr className="my-8 dark:border-zinc-700" />
+      <hr className="my-6 dark:border-zinc-700" />
 
-      <article>
+      <article className="flex h-full flex-col overflow-y-auto">
         <p>{about.paragraphs.p1}</p>
 
         <p>{about.paragraphs.p2}</p>

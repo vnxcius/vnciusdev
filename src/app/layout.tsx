@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { JetBrains_Mono } from "next/font/google";
+import { cn } from "@/lib/cn";
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: "Vinícius Hilton",
@@ -12,7 +19,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="min-h-screen" lang="en" suppressHydrationWarning>
+    <html
+      className={cn("min-h-screen", "font-mono", jetbrainsMono.variable)}
+      lang="en"
+      suppressHydrationWarning
+    >
       {children}
     </html>
   );

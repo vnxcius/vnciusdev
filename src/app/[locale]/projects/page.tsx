@@ -22,7 +22,7 @@ function ProjectCard({
   technologies,
 }: Project) {
   return (
-    <div className="dark:zinc-500 flex-col divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
+    <div className="dark:zinc-500 divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
       <div className="flex items-center justify-between gap-4 p-4 max-sm:flex-col">
         <h2 className="text-xl">{name}</h2>
         {technologies}
@@ -140,10 +140,12 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
       <h1 className="mt-4 mb-16 text-center text-5xl max-sm:text-4xl">
         {dict.projects.title}
       </h1>
-      <div className="space-y-20">
-        {projects.map((project) => (
-          <ProjectCard key={project.url} {...project} />
-        ))}
+      <div className="flex h-full flex-col overflow-y-auto p-1">
+        <div className="space-y-20">
+          {projects.map((project) => (
+            <ProjectCard key={project.url} {...project} />
+          ))}
+        </div>
       </div>
     </>
   );

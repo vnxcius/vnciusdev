@@ -3,9 +3,9 @@
 import { GlobeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/dictionaries";
+import { useLocaleChange } from "@/hooks/use-locale-change";
 import { i18n, LocaleLabel } from "@/i18n.config";
-import { useLocaleChange } from "@/src/hooks/use-locale-change";
-import { cn } from "@/src/lib/cn";
+import { cn } from "@/lib/cn";
 
 export default function LocaleSwitcher({
   currentLocale,
@@ -57,10 +57,7 @@ export default function LocaleSwitcher({
         onClick={openDropdownMenu}
         className="relative flex cursor-pointer items-center gap-1"
       >
-        <GlobeSimpleIcon
-          size={24}
-          className="rounded-md bg-zinc-200/70 p-1 text-emerald-700 dark:bg-zinc-800/70"
-        />
+        <GlobeSimpleIcon className="size-3.5" />
         <p>{LocaleLabel[currentLocale]}</p>
       </button>
 

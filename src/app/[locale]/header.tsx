@@ -1,12 +1,16 @@
 "use client";
 
 import { CaretLeftIcon, MoonIcon, SunIcon } from "@phosphor-icons/react";
+import { Roboto_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { dictionaries } from "@/dictionaries";
 import { i18n } from "@/i18n.config";
+import { cn } from "@/lib/cn";
+
+const robotoMono = Roboto_Mono({ weight: "variable", subsets: ["latin"] });
 
 function isThemeSetToDark() {
   if (typeof window === "undefined") return;
@@ -44,16 +48,17 @@ export default function Header({
     setIsDarkMode(dark);
   }, []);
   return (
-    <header className="mx-auto max-w-prose py-8 max-sm:pt-4">
-      <nav className="flex items-center justify-between max-sm:flex-col max-sm:gap-6">
+    <header className="mx-auto max-w-prose">
+      <nav className="flex flex-col gap-4">
         <Link
           aria-label="Back to home"
-          className={`group relative -m-12 -my-2 -mr-4 flex items-center rounded-sm py-2 pr-4 pl-12 ${isHome ? "ring-0" : "sm:hover:ring-1"} ring-emerald-500 transition-transform max-sm:text-center dark:ring-emerald-600`}
+          className={cn(
+            "group relative flex items-center rounded-sm py-2 ring-emerald-500 transition-transform max-sm:text-center dark:ring-emerald-600",
+            isHome ? "ring-0" : "sm:hover:ring-1",
+          )}
           href="/"
         >
-          <div
-            className={`${isHome ? "hidden" : "absolute"} left-1 flex size-4 h-full w-12 items-center px-2`}
-          >
+          <div className={cn(`mr-4 size-4 h-full`, isHome ? "hidden" : "")}>
             <CaretLeftIcon strokeWidth={1.4} />
           </div>
           <div className="flex flex-col max-sm:items-center">
@@ -72,10 +77,11 @@ export default function Header({
             </span>
           </div>
         </Link>
-        <div className="flex items-center gap-4">
+
+        <div className={cn("flex items-center gap-2", robotoMono.className)}>
           <button
             aria-label="Toggle theme"
-            className="group relative flex items-center"
+            className="group relative flex cursor-pointer items-center rounded-lg p-1.5 hover:bg-foreground/15"
             onClick={() => toggleTheme()}
             type="button"
           >
@@ -92,10 +98,11 @@ export default function Header({
               />
             )}
           </button>
+          <div className="h-5 w-px bg-muted" />
           <Link
             aria-current={path.includes("/projects") ? "page" : undefined}
             aria-label="View projects"
-            className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
+            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/projects"
           >
             /{dict.header.projects}
@@ -107,7 +114,7 @@ export default function Header({
           <Link
             aria-current={path.includes("/articles") ? "page" : undefined}
             aria-label="View articles"
-            className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
+            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/articles"
           >
             /{dict.header.articles}
@@ -119,7 +126,7 @@ export default function Header({
           <Link
             aria-current={path.includes("/about") ? "page" : undefined}
             aria-label="View about page"
-            className="group relative rounded-sm px-2 py-px ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
+            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/about"
           >
             /{dict.header.about}

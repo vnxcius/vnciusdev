@@ -65,6 +65,7 @@ export default async function AppLayout({
               className="h-[60svh] w-full object-cover"
               src="/adam.jpg"
               alt=""
+              loading="eager"
               width={400}
               height={800}
             />

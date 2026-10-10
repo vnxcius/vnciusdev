@@ -84,7 +84,7 @@
   }
 
   article ul li {
-    @apply relative pl-4 before:absolute before:left-0 before:top-0 before:text-emerald-500 before:content-['>'] dark:before:text-emerald-600;
+    @apply relative pl-4 before:absolute before:top-0 before:left-0 before:text-emerald-500 before:content-['>'] dark:before:text-emerald-600;
   }
 
   article ol {
@@ -96,7 +96,7 @@
   }
 
   article :not(pre) > code {
-    @apply mx-1 select-all text-nowrap rounded-sm px-1.5 py-0.5 text-sm text-zinc-950 ring-1 ring-zinc-300 dark:text-zinc-200 dark:ring-zinc-600;
+    @apply mx-1 rounded-sm px-1.5 py-0.5 text-sm text-nowrap text-zinc-950 ring-1 ring-zinc-300 select-all dark:text-zinc-200 dark:ring-zinc-600;
   }
 
   article pre {
@@ -104,7 +104,7 @@
   }
 
   article a {
-    @apply text-zinc-950 underline decoration-emerald-500 font-semibold underline-offset-4 dark:text-zinc-200 dark:decoration-emerald-600;
+    @apply font-semibold text-zinc-950 underline decoration-emerald-500 underline-offset-4 dark:text-zinc-200 dark:decoration-emerald-600;
   }
 }
 

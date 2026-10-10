@@ -7,7 +7,9 @@ import { Karla } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { getDictionary, hasLocale } from "@/dictionaries";
+
 import LocaleSwitcher from "../../components/locale-switcher";
 import { ScrollToTop } from "../../components/scroll-to-top";
 import Header from "./header";
@@ -28,13 +30,13 @@ export default async function AppLayout({
 
   const dict = await getDictionary(locale);
 
-  const date = new Date();
-  const year = date.getFullYear();
+  // Server Component: rendered once per request, never re-rendered.
+  // oxlint-disable-next-line react/purity
+  const year = new Date().getFullYear();
   return (
     <>
       <head>
         <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: No problem
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

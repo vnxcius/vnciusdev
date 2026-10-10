@@ -4,8 +4,9 @@ YELLOW="\033[0;33m"
 GREEN="\033[0;32m"
 NC="\033[0m"
 
-printf "%b\n" "${YELLOW}INFO: Running Biome checks...${NC}"
+printf "%b\n" "${YELLOW}INFO: Running Oxlint and Oxfmt...${NC}"
 
-bunx biome check --write . || exit 1
+bunx oxlint --fix . || exit 1
+bunx oxfmt . || exit 1
 
-printf "%b\n" "${GREEN}INFO: Biome check passed.${NC}"
+printf "%b\n" "${GREEN}INFO: Oxlint and Oxfmt passed.${NC}"

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import RootLayout from "./layout";
 
 export default function NotFound() {
@@ -7,12 +9,12 @@ export default function NotFound() {
         <h1 className="text-5xl max-sm:text-3xl">
           This page doesn&apos;t exist.
         </h1>
-        <a
+        <Link
           className="underline decoration-sky-500 underline-offset-4 dark:decoration-sky-600"
           href="/"
         >
           Just take me back already...
-        </a>
+        </Link>
       </div>
     </RootLayout>
   );

@@ -9,6 +9,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { getDictionary, hasLocale } from "@/dictionaries";
 
 export default async function AboutPage({ params }: PageProps<"/[locale]">) {
@@ -101,28 +102,8 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
 
         <p>{about.paragraphs.p3}</p>
 
-        <p>
-          {about.paragraphs.p4.p4_1}{" "}
-          <Link
-            target="_blank"
-            referrerPolicy="no-referrer"
-            href="https://www.linkedin.com/posts/vinicius-hilton_gostaria-de-compartilhar-que-finalizei-meu-activity-7221974297945210880-f16o"
-          >
-            {about.paragraphs.p4.p4LinkText}
-          </Link>{" "}
-          {about.paragraphs.p4.p4_2}
-        </p>
-
-        <p>
-          {about.paragraphs.p5.p5_1}{" "}
-          <Link target="_blank" referrerPolicy="no-referrer" href="/projects">
-            {about.paragraphs.p5.p5LinkText}
-          </Link>
-          {about.paragraphs.p5.p5_2}
-        </p>
-
         <p className="my-4">
-          {about.paragraphs.p6.p6_1}{" "}
+          {about.paragraphs.contact.dm}{" "}
           <Link
             target="_blank"
             referrerPolicy="no-referrer"
@@ -130,7 +111,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
           >
             Instagram
           </Link>{" "}
-          {about.paragraphs.p6.p6_2}{" "}
+          {about.paragraphs.contact.email}{" "}
           <Link
             target="_blank"
             referrerPolicy="no-referrer"

@@ -4,6 +4,7 @@ import {
   CalendarBlankIcon,
   GraduationCapIcon,
 } from "@phosphor-icons/react/dist/ssr";
+
 import {
   Timeline,
   TimelineContent,
@@ -66,7 +67,7 @@ export default async function ExperienceTimeline({
                 <span>{item.title}</span>
               )}
             </TimelineTitle>
-            <TimelineIndicator className="flex size-6 items-center justify-center border-none group-data-[orientation=vertical]/timeline:-left-7 group-data-completed/timeline-item:bg-green-500 group-data-completed/timeline-item:text-black">
+            <TimelineIndicator className="flex size-6 items-center justify-center border-none group-data-completed/timeline-item:bg-green-500 group-data-completed/timeline-item:text-black group-data-[orientation=vertical]/timeline:-left-7">
               <item.icon size={14} />
             </TimelineIndicator>
           </TimelineHeader>

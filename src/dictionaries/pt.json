@@ -3,7 +3,6 @@
   "header": {
     "role": "Desenvolvedor Frontend Jr.",
     "projects": "projetos",
-    "articles": "artigos",
     "about": "sobre"
   },
   "footer": {
@@ -40,48 +39,36 @@
     "projects": {
       "minecraftTools": {
         "name": "Minecraft Tools",
-        "description": "Ferramentas úteis para o jogo Minecraft."
+        "description": "Várias ferramentas para o dia a dia no Minecraft: mapa de seeds, guias de encantamentos e trocas com aldeões, geradores de banners, escudos e fogos, calculadoras e mais. Tudo roda no navegador."
       },
-      "softSkillsCheck": {
-        "name": "Soft Skills Check",
-        "description": "Desenvolvido por uma equipe voluntária de estudantes da Faculdade de Tecnologia e Inovação SENAC DF, eu fui o líder de desenvolvimento deste projeto. Este aplicativo web tem como objetivo fornecer autoavaliações de soft skills."
+      "vndl": {
+        "name": "vndl",
+        "description": "Um downloader de vídeo/áudio para YouTube, Twitter/X, TikTok e Instagram. Cola o link, escolhe a qualidade e baixa. Também converte imagens e vídeos direto no navegador. Nada fica salvo no servidor."
       },
-      "mcPanelBackend": {
-        "name": "MC Panel Backend",
-        "description": "Um projeto onde alguns amigos podiam controlar um servidor de Minecraft hospedado na minha casa. Também possuía um frontend."
+      "mcManager": {
+        "name": "mc-manager",
+        "description": "Um painel web self-hosted para eu e meus amigos gerenciarmos um servidor de Minecraft sem acesso ao terminal: ligar e desligar, console ao vivo, mods, modpacks, jogadores, backups, gráficos e suspensão automática quando não tem ninguém online."
       },
-      "ecommerce": {
-        "name": "E-commerce em Go Inacabado",
-        "description": "Neste projeto eu queria criar uma aplicação web para uma plataforma de e-commerce usando apenas Go. Acabei focando em outros coisas e nunca finalizei, mas aprendi muito com ele."
+      "ultimateTrainer": {
+        "name": "Payday 2 Ultimate Trainer 7",
+        "description": "Um mod para PAYDAY 2 com uma coleção de cheats e ferramentas, controlado por um overlay dentro do jogo ou por qualquer navegador, até pelo celular. Baseado no Ultimate Trainer 6 de Pierre Josselin."
+      },
+      "siteBlocker": {
+        "name": "Simple Site Blocker",
+        "description": "Uma extensão de navegador para bloquear sites que distraem, com regras de domínio, wildcard e regex."
       }
     }
-  },
-  "articles": {
-    "title": "Artigos",
-    "empty": "Nada aqui ainda.",
-    "notExist": "Este artigo não existe.",
-    "readElse": "Leia outra coisa"
   },
   "about": {
     "title": "Sobre Mim",
     "signature": "Atenciosamente",
     "paragraphs": {
-      "p1": "Nascido e criado em Brasília, atualmente (Jan 2026) continuo morando aqui.",
-      "p2": "Por volta dos meus 8 anos de idade, minha mãe me deu de presente o meu primeiro videogame, um Playstation 2 desbloqueado. Foi quando tive meu primeiro contato mais a fundo com a tecnologia, porque eu ficava, além de jogando muitos jogos aleatórios, interessado em saber como aquele aparelho retangular bonito funcionava. Eu lembro de fazer algumas pesquisas na internet ou perguntar para as pessoas, mas eu não conhecia ninguém que soubesse me explicar mais a fundo como aquilo funcionava.",
-      "p3": "Foi então quando meu interesse pela tecnologia despertou. Logo depois de um tempo, minha mãe comprou um computador. Lembro que ele era um computador de 512MB de RAM ou algo assim, mas sei que fiz muita besteira nele. Já enchi esse computador de vírus quando eu me aventurava em baixar e configurar mods, descobrir softwares e entre coisas fiz nesse computador guerreiro.",
-      "p4": {
-        "p4_1": "Desde então, meu interesse e amor pela tecnologia só aumentou,",
-        "p4_2": "para ver como eu lidaria com essa área e acabou que me saí muito bem. Muito do que aprendi no passado quando eu futucava o meu antigo e falecido PC me ajudou nessa área.",
-        "p4LinkText": "decidi cursar Gestão de TI"
-      },
-      "p5": {
-        "p5_1": "Comecei com alguns",
-        "p5_2": ", me aventurei em coisas que eu não fazia a menor ideia se eu consegueria fazer, mas nunca desisti. Hoje tenho o prazer e a oportunidade de trabalhar com o que gosto e não pretendo parar.",
-        "p5LinkText": "projetos pequenos"
-      },
-      "p6": {
-        "p6_1": "Fique a vontade para me mandar uma DM no",
-        "p6_2": "ou um email para"
+      "p1": "Nascido e criado em Brasília, continuo morando aqui.",
+      "p2": "Por volta dos meus 8 anos, minha mãe me deu um Playstation 2 desbloqueado. Além de jogar muitos jogos aleatórios, eu queria saber como aquilo funcionava, e ninguém perto de mim sabia explicar.",
+      "p3": "Um tempo depois ela comprou um computador de 512MB de RAM ou algo assim. Enchi ele de vírus tentando baixar mods e futucar em softwares. Foi aí que tudo começou, e nunca mais parei.",
+      "contact": {
+        "dm": "Fique a vontade para me mandar uma DM no",
+        "email": "ou um email para"
       }
     }
   }

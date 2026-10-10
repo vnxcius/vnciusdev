@@ -1,0 +1,53 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "typescript",
+    "unicorn",
+    "oxc",
+    "react",
+    "nextjs",
+    "jsx-a11y",
+    "import"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    // Removing unused imports is a safe fix, so `oxlint --fix` and the
+    // editor's `source.fixAll.oxc` code action strip them automatically.
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true,
+        "fix": { "imports": "safe-fix", "variables": "off" }
+      }
+    ],
+    "no-shadow": "off",
+    "import/no-unassigned-import": "off",
+    "react/react-in-jsx-scope": "off",
+    "nextjs/no-img-element": "warn",
+    "nextjs/no-head-element": "warn",
+    "nextjs/no-unwanted-polyfillio": "warn",
+    "nextjs/google-font-preconnect": "warn",
+    "nextjs/google-font-display": "warn",
+    "nextjs/no-document-import-in-page": "error",
+    "nextjs/no-head-import-in-document": "error"
+  },
+  "overrides": [
+    {
+      // Primitives that receive their content through spread props.
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "jsx-a11y/heading-has-content": "off"
+      }
+    }
+  ],
+  "ignorePatterns": [".next", "out", "build", "next-env.d.ts"]
+}

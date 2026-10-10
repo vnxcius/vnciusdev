@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+
 import "./globals.css";
 import { JetBrains_Mono } from "next/font/google";
+
 import { cn } from "@/lib/cn";
 
 const jetbrainsMono = JetBrains_Mono({

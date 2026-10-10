@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+
 import type { Locale } from "@/dictionaries";
 
 export async function setLocaleCookie(locale: Locale) {

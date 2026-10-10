@@ -23,6 +23,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+
 import { getDictionary, hasLocale } from "../../dictionaries";
 import ExperienceTimeline from "./_components/timeline";
 
@@ -83,7 +84,7 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
     <div className="flex flex-col gap-6 overflow-y-auto p-1">
       <div className="my-3 flex flex-col">
         <h2 className="font-semibold">{dict.landing.knowMe}</h2>
-        <div className="mb-5 flex select-all items-center gap-1 transition-transform dark:text-zinc-500">
+        <div className="mb-5 flex items-center gap-1 transition-transform select-all dark:text-zinc-500">
           {dict.landing.email}
           <a
             className="rounded p-1 dark:hover:bg-zinc-600/30"
@@ -144,7 +145,7 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
 
       <div>
         <h2 className="font-semibold">{dict.landing.experience}</h2>
-        <p className="mb-4 text-muted-foreground text-sm">
+        <p className="mb-4 text-sm text-muted-foreground">
           {dict.landing.journey}
         </p>
         <ExperienceTimeline locale={locale} />

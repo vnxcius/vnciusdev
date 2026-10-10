@@ -1,6 +1,8 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
+
 import type { Locale } from "@/dictionaries";
+
 import { setLocaleCookie } from "../app/actions/set-locale";
 
 export function useLocaleChange(currentLocale: Locale) {

@@ -1,60 +1,86 @@
 import { GitBranchIcon, GlobeIcon } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
+
 import { getDictionary, hasLocale } from "@/dictionaries";
-import type { Locale } from "@/i18n.config";
+import { cn } from "@/lib/cn";
+
+const technologyColors = {
+  TypeScript: "bg-[#007ACC] text-zinc-100",
+  React: "bg-[#61DAFB] text-zinc-950",
+  TailwindCSS: "bg-[#38BDF9] text-zinc-950",
+  Go: "bg-[#00ADD8] text-zinc-950",
+  Rust: "bg-[#DEA584] text-zinc-950",
+  Lua: "bg-[#000080] text-zinc-100",
+};
+
+type Technology = keyof typeof technologyColors;
 
 interface Project {
   name: string;
   description: string;
-  imageUrl: string;
-  githubUrl: string;
-  url: string;
-  technologies: ReactNode;
-  locale: Locale;
+  image?: { src: string; width: number; height: number };
+  codeUrl: string;
+  url?: string;
+  technologies: Technology[];
 }
 
 function ProjectCard({
   name,
   description,
-  imageUrl,
-  githubUrl,
+  image,
+  codeUrl,
   url,
   technologies,
-  locale,
-}: Project) {
+  labels,
+}: Project & { labels: { visit: string; viewCode: string } }) {
   return (
     <div className="dark:zinc-500 divide-y divide-zinc-400 overflow-hidden rounded-sm ring-1 ring-zinc-400 dark:divide-zinc-500 dark:ring-zinc-500">
       <div className="flex items-center justify-between gap-4 p-4 max-sm:flex-col">
         <h2 className="text-xl">{name}</h2>
-        {technologies}
+        <div className="flex items-center gap-x-3">
+          {technologies.map((technology) => (
+            <span
+              className={cn(
+                "rounded-full px-2.5 py-0.5 text-sm dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500",
+                technologyColors[technology],
+              )}
+              key={technology}
+            >
+              {technology}
+            </span>
+          ))}
+        </div>
       </div>
       <div>
         <p className="p-4">{description}</p>
       </div>
-      <Image
-        alt="Logo for css2wind website"
-        height={630}
-        src={imageUrl}
-        width={1200}
-      />
+      {image && (
+        <Image
+          alt={name}
+          className="h-auto w-full"
+          height={image.height}
+          src={image.src}
+          width={image.width}
+        />
+      )}
       <div className="flex w-full justify-between divide-x divide-zinc-400 dark:divide-zinc-500">
+        {url && (
+          <a
+            className="flex grow items-center justify-center gap-2 py-4 transition-transform sm:hover:bg-zinc-100 sm:dark:hover:bg-zinc-800"
+            href={url}
+            target="_blank"
+          >
+            <GlobeIcon className="size-5" strokeWidth={1.4} /> {labels.visit}
+          </a>
+        )}
         <a
           className="flex grow items-center justify-center gap-2 py-4 transition-transform sm:hover:bg-zinc-100 sm:dark:hover:bg-zinc-800"
-          href={url}
-          target="_blank"
-        >
-          <GlobeIcon className="size-5" strokeWidth={1.4} />{" "}
-          {locale === "pt" ? "Visitar site" : "Visit website"}
-        </a>
-        <a
-          className="flex grow items-center justify-center gap-2 py-4 transition-transform sm:hover:bg-zinc-100 sm:dark:hover:bg-zinc-800"
-          href={githubUrl}
+          href={codeUrl}
           target="_blank"
         >
           <GitBranchIcon className="size-5" strokeWidth={1.4} />{" "}
-          {locale === "pt" ? "Ver código" : "View code"}
+          {labels.viewCode}
         </a>
       </div>
     </div>
@@ -66,82 +92,42 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
   if (!hasLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
+  const { projects: content, visit, viewCode } = dict.projects;
 
   const projects: Project[] = [
     {
-      locale,
-      name: dict.projects.projects.minecraftTools.name,
-      description: dict.projects.projects.minecraftTools.description,
-      url: "https://vncius.dev/minecraft",
-      imageUrl: "/projects/minecraft_tools.png",
-      githubUrl: "https://github.com/vnxcius/blog",
-      technologies: (
-        <div className="flex items-center gap-x-3">
-          <span className="rounded-full bg-[#007ACC] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            TypeScript
-          </span>
-          <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            TailwindCSS
-          </span>
-          <span className="rounded-full bg-black px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            Next.js
-          </span>
-        </div>
-      ),
+      ...content.minecraftTools,
+      url: "https://minecraft-tools.cc",
+      image: { src: "/projects/minecraft_tools.png", width: 1200, height: 630 },
+      codeUrl: "https://gitlab.com/vncius/minecraft-tools",
+      technologies: ["TypeScript", "React", "TailwindCSS"],
     },
     {
-      locale,
-      name: dict.projects.projects.softSkillsCheck.name,
-      description: dict.projects.projects.softSkillsCheck.description,
-      url: "https://softskillscheck.app.br/",
-      imageUrl: "/projects/soft_skills_check.png",
-      githubUrl: "https://github.com/senac-volunteers/soft-skills-app",
-      technologies: (
-        <div className="flex items-center gap-x-3">
-          <span className="rounded-full bg-[#007ACC] px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            TypeScript
-          </span>
-          <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            TailwindCSS
-          </span>
-          <span className="rounded-full bg-black px-2.5 py-0.5 text-sm text-zinc-100 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            Next.js
-          </span>
-        </div>
-      ),
+      ...content.vndl,
+      url: "https://dl.vncius.dev",
+      image: { src: "/projects/vndl.png", width: 1200, height: 630 },
+      codeUrl: "https://gitlab.com/vncius/vndl",
+      technologies: ["Go", "React", "TailwindCSS"],
     },
     {
-      locale,
-      name: dict.projects.projects.mcPanelBackend.name,
-      description: dict.projects.projects.mcPanelBackend.description,
-      url: "https://github.com/vnxcius/mcpanel-back",
-      imageUrl: "/projects/mcpanel_back.png",
-      githubUrl: "https://github.com/vnxcius/mcpanel-back",
-      technologies: (
-        <div className="flex items-center gap-x-3">
-          <span className="rounded-full bg-[#00ADD8] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
-            Go
-          </span>
-        </div>
-      ),
+      ...content.mcManager,
+      codeUrl: "https://gitlab.com/vncius/mc-selfhosted-manager",
+      technologies: ["TypeScript", "React"],
     },
     {
-      locale,
-      name: dict.projects.projects.ecommerce.name,
-      description: dict.projects.projects.ecommerce.description,
-      url: "https://github.com/vnxcius/ecommerce-go",
-      imageUrl: "/projects/ecommerce_go.png",
-      githubUrl: "https://github.com/vnxcius/ecommerce-go",
-      technologies: (
-        <div className="flex items-center gap-x-3">
-          <span className="rounded-full bg-[#00ADD8] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-inherit dark:ring-1 dark:ring-zinc-500">
-            Go
-          </span>
-          <span className="rounded-full bg-[#38BDF9] px-2.5 py-0.5 text-sm text-zinc-950 dark:bg-inherit dark:text-zinc-200 dark:ring-1 dark:ring-zinc-500">
-            TailwindCSS
-          </span>
-        </div>
-      ),
+      ...content.ultimateTrainer,
+      image: {
+        src: "/projects/ultimate_trainer_7.png",
+        width: 1000,
+        height: 660,
+      },
+      codeUrl: "https://gitlab.com/vncius/payday-2-ultimate-trainer",
+      technologies: ["Rust", "Lua", "React"],
+    },
+    {
+      ...content.siteBlocker,
+      codeUrl: "https://gitlab.com/vncius/simple-site-blocker",
+      technologies: ["TypeScript"],
     },
   ];
   return (
@@ -152,7 +138,11 @@ export default async function ProjectsPage({ params }: PageProps<"/[locale]">) {
       <div className="flex h-full flex-col overflow-y-auto p-1">
         <div className="space-y-20">
           {projects.map((project) => (
-            <ProjectCard key={project.url} {...project} />
+            <ProjectCard
+              key={project.codeUrl}
+              labels={{ visit, viewCode }}
+              {...project}
+            />
           ))}
         </div>
       </div>

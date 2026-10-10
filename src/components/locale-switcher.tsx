@@ -2,6 +2,7 @@
 
 import { GlobeSimpleIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useRef, useState } from "react";
+
 import type { Locale } from "@/dictionaries";
 import { useLocaleChange } from "@/hooks/use-locale-change";
 import { i18n, LocaleLabel } from "@/i18n.config";

@@ -5,21 +5,31 @@ import { Roboto_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
 import type { dictionaries } from "@/dictionaries";
 import { i18n } from "@/i18n.config";
 import { cn } from "@/lib/cn";
 
 const robotoMono = Roboto_Mono({ weight: "variable", subsets: ["latin"] });
 
-function isThemeSetToDark() {
-  if (typeof window === "undefined") return;
+// The `dark` class on <html> is the source of truth: the inline script in
+// the layout sets it before hydration and the toggle below updates it.
+function subscribeToTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
 
-  return (
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
+function getIsDarkMode() {
+  return document.documentElement.classList.contains("dark");
+}
+
+function getServerIsDarkMode() {
+  return false;
 }
 
 export default function Header({
@@ -29,7 +39,11 @@ export default function Header({
 }) {
   const path = usePathname();
   const isHome = i18n.locales.some((locale) => path === `/${locale}`);
-  const [isDarkMode, setIsDarkMode] = useState<boolean | undefined>(false);
+  const isDarkMode = useSyncExternalStore(
+    subscribeToTheme,
+    getIsDarkMode,
+    getServerIsDarkMode,
+  );
 
   const toggleTheme = () => {
     const next = !isDarkMode;
@@ -39,14 +53,8 @@ export default function Header({
       localStorage.theme = "light";
     }
     document.documentElement.classList.toggle("dark", next);
-    setIsDarkMode(next);
   };
 
-  useEffect(() => {
-    const dark = isThemeSetToDark();
-    document.documentElement.classList.toggle("dark", dark);
-    setIsDarkMode(dark);
-  }, []);
   return (
     <header className="mx-auto max-w-prose">
       <nav className="flex flex-col gap-4">
@@ -102,7 +110,7 @@ export default function Header({
           <Link
             aria-current={path.includes("/projects") ? "page" : undefined}
             aria-label="View projects"
-            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
+            className="group relative rounded-sm px-2 py-px text-sm font-medium tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/projects"
           >
             /{dict.header.projects}
@@ -112,21 +120,9 @@ export default function Header({
             />
           </Link>
           <Link
-            aria-current={path.includes("/articles") ? "page" : undefined}
-            aria-label="View articles"
-            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
-            href="/articles"
-          >
-            /{dict.header.articles}
-            <div
-              aria-hidden="true"
-              className="absolute left-1/3 mx-auto mt-1 hidden size-2 h-0.5 w-1/3 rounded-full bg-emerald-500 text-zinc-800 group-aria-[current=page]:block dark:fill-emerald-600 dark:text-transparent"
-            />
-          </Link>
-          <Link
             aria-current={path.includes("/about") ? "page" : undefined}
             aria-label="View about page"
-            className="group relative rounded-sm px-2 py-px font-medium text-sm tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
+            className="group relative rounded-sm px-2 py-px text-sm font-medium tracking-tighter ring-emerald-500 transition-transform sm:hover:ring-1 dark:ring-emerald-600"
             href="/about"
           >
             /{dict.header.about}

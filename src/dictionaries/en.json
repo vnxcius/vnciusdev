@@ -1,66 +1,99 @@
 {
-  "backToTop": "Back to top",
-  "header": {
-    "role": "Frontend Developer Jr.",
-    "projects": "projects",
-    "about": "about"
+  "meta": {
+    "title": "Vinícius Simon – Fullstack Developer",
+    "description": "I’m Vinícius, a fullstack developer from Brasília that loves to code. Projects, experience and activity."
   },
+  "role": "Fullstack Developer Jr.",
   "footer": {
-    "code": "Code"
+    "code": "Code",
+    "theme": "Toggle theme"
   },
   "landing": {
-    "who": "Who am I",
-    "whoContent": "I‘m just a random guy that loves to code. I work mostly as frontend developer, but I love building stuff in Go too. My main knowledge:",
-    "whoOthers": "and other development tools.",
-    "knowMe": "Get to know me!",
+    "bio": {
+      "intro": "I’m Vinícius, just a random guy from Brasília that loves to code. I work as a fullstack developer, and I love building stuff in Go too.",
+      "freeTime": "In my free time I build things like",
+      "and": "and",
+      "more": "You can also read more",
+      "aboutLink": "about me"
+    },
+    "download": "Download CV",
+    "sendEmail": "Send an email",
     "email": "contact@vncius.dev",
-    "download": "Download CV - EN",
-    "code": "Code",
+    "activity": "Activity",
+    "contributions": "contributions in the last year",
     "experience": "Experience",
-    "journey": "Follow my journey",
+    "seeMore": "See more",
+    "seeLess": "See less",
     "experiences": {
       "0": {
         "title": "eTopocart",
-        "description": "Joined eTopocart in September 2025 as System Development Assistant",
-        "link": "https://etopocart.com/"
+        "role": "System Development Assistant",
+        "description": "Developing and maintaining a web GIS application (Geo360 Pro).",
+        "date": "Sep 25 - Now",
+        "link": "https://etopocart.com/",
+        "bullets": [
+          "Built and updated features using Next.js for the web application.",
+          "Supported dynamic web map maintenance with the OpenLayers lib.",
+          "Designed and implemented interfaces for monitoring and managing public street sweeping services."
+        ]
       },
       "1": {
-        "title": "Technologist in IT Management",
-        "description": "Graduated from Faculdade de Tecnologia e Inovação SENAC DF",
-        "link": null
+        "title": "IT Management",
+        "role": "Technologist degree",
+        "description": "Faculdade de Tecnologia e Inovação Senac DF",
+        "date": "2022 - 2024",
+        "link": null,
+        "bullets": [
+          "Key coursework: Web Development, Computer Fundamentals, IT Management."
+        ]
       }
     },
-    "present": "Present"
+    "skills": {
+      "title": "Skills",
+      "language": "Language",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "workflow": "Workflow",
+      "ai": "AI agents"
+    },
+    "now": "Lately pushing to"
   },
   "projects": {
     "title": "Projects",
-    "visit": "Visit website",
-    "viewCode": "View code",
     "projects": {
       "minecraftTools": {
         "name": "Minecraft Tools",
-        "description": "A bunch of tools for everyday Minecraft play: seed map, enchanting and villager trading guides, banner, shield and firework generators, calculators and more. Everything runs in the browser."
+        "description": "Everyday tools for Minecraft, all in the browser",
+        "details": "A bunch of tools for everyday Minecraft play: seed map, enchanting and villager trading guides, banner, shield and firework generators, calculators and more. Everything runs in the browser."
       },
       "vndl": {
         "name": "vndl",
-        "description": "A video/audio downloader for YouTube, Twitter/X, TikTok and Instagram. Paste a link, pick a quality and download. It also converts images and videos right in the browser. Nothing is stored on the server."
+        "description": "Video and audio downloader that stores nothing",
+        "details": "A video/audio downloader for YouTube, Twitter/X, TikTok and Instagram. Paste a link, pick a quality and download. It also converts images and videos right in the browser. Nothing is stored on the server."
       },
       "mcManager": {
         "name": "mc-manager",
-        "description": "A self-hosted web panel so my friends and I can manage a Minecraft server without shell access: start and stop, live console, mods, modpacks, players, backups, charts and auto-sleep when nobody is online."
+        "description": "Self-hosted panel to manage a Minecraft server with friends",
+        "details": "A self-hosted web panel so my friends and I can manage a Minecraft server without shell access: start and stop, live console, mods, modpacks, players, backups, charts and auto-sleep when nobody is online."
       },
       "ultimateTrainer": {
         "name": "Payday 2 Ultimate Trainer 7",
-        "description": "A mod for PAYDAY 2 with a collection of cheats and tools, controlled from an overlay inside the game or from any browser, even on your phone. Based on Ultimate Trainer 6 by Pierre Josselin."
+        "description": "Cheats and tools mod for PAYDAY 2",
+        "details": "A mod for PAYDAY 2 with a collection of cheats and tools, controlled from an overlay inside the game or from any browser, even on your phone. Based on Ultimate Trainer 6 by Pierre Josselin."
       },
       "siteBlocker": {
         "name": "Simple Site Blocker",
-        "description": "A browser extension to block distracting websites with domain, wildcard and regex rules."
+        "description": "Browser extension to block distracting websites",
+        "details": "A browser extension to block distracting websites with domain, wildcard and regex rules."
       }
-    }
+    },
+    "visit": "Visit website",
+    "viewCode": "View code"
   },
   "about": {
-    "title": "About Me",
+    "title": "About me",
+    "back": "Back",
+    "specs": "PC specs",
     "signature": "Sincerely",
     "paragraphs": {
       "p1": "Born and raised in Brasília, still live here.",

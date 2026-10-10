@@ -10,7 +10,12 @@ const defaultLocale = "en";
 function getLocale(request: NextRequest) {
   const negotiatorHeaders = Object.fromEntries(request.headers);
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  return match(languages, locales, defaultLocale);
+  // `match` throws on values like "*", sent when there is no Accept-Language.
+  try {
+    return match(languages, locales, defaultLocale);
+  } catch {
+    return defaultLocale;
+  }
 }
 
 export function proxy(request: NextRequest) {
@@ -22,7 +27,10 @@ export function proxy(request: NextRequest) {
   );
 
   if (hasLocale && currentPathLocale) {
-    const res = NextResponse.next();
+    // Lets the root layout set <html lang> for the locale in the URL.
+    const headers = new Headers(request.headers);
+    headers.set("x-locale", currentPathLocale);
+    const res = NextResponse.next({ request: { headers } });
     res.cookies.set("locale", currentPathLocale, {
       path: "/",
       maxAge: 60 * 60 * 24 * 365, // 1 year

@@ -1,3 +1,5 @@
+export const SITE_URL = "https://vncius.dev";
+
 export const i18n = {
   defaultLocale: "en",
   locales: ["en", "pt"],

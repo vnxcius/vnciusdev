@@ -1,66 +1,99 @@
 {
-  "backToTop": "Voltar ao topo",
-  "header": {
-    "role": "Desenvolvedor Frontend Jr.",
-    "projects": "projetos",
-    "about": "sobre"
+  "meta": {
+    "title": "Vinícius Simon – Desenvolvedor Fullstack",
+    "description": "Sou o Vinícius, desenvolvedor fullstack de Brasília que ama programar. Projetos, experiência e atividade."
   },
+  "role": "Desenvolvedor Fullstack Jr.",
   "footer": {
-    "code": "Código"
+    "code": "Código",
+    "theme": "Alternar tema"
   },
   "landing": {
-    "who": "Quem sou eu",
-    "whoContent": "Sou só um aleatório que ama programar. Trabalho principalmente como desenvolvedor frontend, mas também adoro construir coisas em Go. Meus principais conhecimentos:",
-    "whoOthers": "e outras ferramentas de desenvolvimento.",
-    "knowMe": "Conheça mais sobre mim!",
-    "email": "contato@vncius.dev",
+    "bio": {
+      "intro": "Sou o Vinícius, só um aleatório de Brasília que ama programar. Trabalho como desenvolvedor fullstack e também adoro construir coisas em Go.",
+      "freeTime": "No tempo livre eu construo coisas como",
+      "and": "e",
+      "more": "Você também pode ler mais",
+      "aboutLink": "sobre mim"
+    },
     "download": "Baixar CV",
-    "code": "Código",
+    "sendEmail": "Enviar email",
+    "email": "contato@vncius.dev",
+    "activity": "Atividade",
+    "contributions": "contribuições no último ano",
     "experience": "Experiência",
-    "journey": "Acompanhe minha jornada",
+    "seeMore": "Ver mais",
+    "seeLess": "Ver menos",
     "experiences": {
       "0": {
         "title": "eTopocart",
-        "description": "Entrei na eTopocart em setembro de 2025 como Assistente de Desenvolvimento de Sistemas",
-        "link": "https://etopocart.com/"
+        "role": "Assistente de Desenvolvimento de Sistemas",
+        "description": "Desenvolvimento e manutenção de uma aplicação SIG Web (Geo360 Pro).",
+        "date": "Set 25 - Atual",
+        "link": "https://etopocart.com/",
+        "bullets": [
+          "Uso do Next.js para o desenvolvimento e manutenção de novas versões da aplicação web.",
+          "Auxiliei na manutenção de mapas web dinâmicos utilizando a lib OpenLayers.",
+          "Desenvolvi e projetei telas para o acompanhamento e gestão de serviços de varrição de vias públicas."
+        ]
       },
       "1": {
-        "title": "Tecnólogo em Gestão de TI",
-        "description": "Graduado em Gestão de Tecnologia da Informação pela Faculdade de Tecnologia e Inovação SENAC DF",
-        "link": null
+        "title": "Gestão de TI",
+        "role": "Tecnólogo",
+        "description": "Faculdade de Tecnologia e Inovação Senac DF",
+        "date": "2022 - 2024",
+        "link": null,
+        "bullets": [
+          "Principais disciplinas: Desenvolvimento web, Fundamentos da Computação e Gestão de TI."
+        ]
       }
     },
-    "present": "Presente"
+    "skills": {
+      "title": "Habilidades",
+      "language": "Linguagem",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "workflow": "Ferramentas",
+      "ai": "Agentes de IA"
+    },
+    "now": "Ultimamente mexendo em"
   },
   "projects": {
     "title": "Projetos",
-    "visit": "Visitar site",
-    "viewCode": "Ver código",
     "projects": {
       "minecraftTools": {
         "name": "Minecraft Tools",
-        "description": "Várias ferramentas para o dia a dia no Minecraft: mapa de seeds, guias de encantamentos e trocas com aldeões, geradores de banners, escudos e fogos, calculadoras e mais. Tudo roda no navegador."
+        "description": "Ferramentas para o dia a dia no Minecraft, tudo no navegador",
+        "details": "Várias ferramentas para o dia a dia no Minecraft: mapa de seeds, guias de encantamentos e trocas com aldeões, geradores de banners, escudos e fogos, calculadoras e mais. Tudo roda no navegador."
       },
       "vndl": {
         "name": "vndl",
-        "description": "Um downloader de vídeo/áudio para YouTube, Twitter/X, TikTok e Instagram. Cola o link, escolhe a qualidade e baixa. Também converte imagens e vídeos direto no navegador. Nada fica salvo no servidor."
+        "description": "Downloader de vídeo e áudio que não salva nada",
+        "details": "Um downloader de vídeo/áudio para YouTube, Twitter/X, TikTok e Instagram. Cola o link, escolhe a qualidade e baixa. Também converte imagens e vídeos direto no navegador. Nada fica salvo no servidor."
       },
       "mcManager": {
         "name": "mc-manager",
-        "description": "Um painel web self-hosted para eu e meus amigos gerenciarmos um servidor de Minecraft sem acesso ao terminal: ligar e desligar, console ao vivo, mods, modpacks, jogadores, backups, gráficos e suspensão automática quando não tem ninguém online."
+        "description": "Painel self-hosted para gerenciar um servidor de Minecraft com os amigos",
+        "details": "Um painel web self-hosted para eu e meus amigos gerenciarmos um servidor de Minecraft sem acesso ao terminal: ligar e desligar, console ao vivo, mods, modpacks, jogadores, backups, gráficos e suspensão automática quando não tem ninguém online."
       },
       "ultimateTrainer": {
         "name": "Payday 2 Ultimate Trainer 7",
-        "description": "Um mod para PAYDAY 2 com uma coleção de cheats e ferramentas, controlado por um overlay dentro do jogo ou por qualquer navegador, até pelo celular. Baseado no Ultimate Trainer 6 de Pierre Josselin."
+        "description": "Mod de cheats e ferramentas para PAYDAY 2",
+        "details": "Um mod para PAYDAY 2 com uma coleção de cheats e ferramentas, controlado por um overlay dentro do jogo ou por qualquer navegador, até pelo celular. Baseado no Ultimate Trainer 6 de Pierre Josselin."
       },
       "siteBlocker": {
         "name": "Simple Site Blocker",
-        "description": "Uma extensão de navegador para bloquear sites que distraem, com regras de domínio, wildcard e regex."
+        "description": "Extensão de navegador para bloquear sites que distraem",
+        "details": "Uma extensão de navegador para bloquear sites que distraem, com regras de domínio, wildcard e regex."
       }
-    }
+    },
+    "visit": "Visitar site",
+    "viewCode": "Ver código"
   },
   "about": {
-    "title": "Sobre Mim",
+    "title": "Sobre mim",
+    "back": "Voltar",
+    "specs": "Specs do PC",
     "signature": "Atenciosamente",
     "paragraphs": {
       "p1": "Nascido e criado em Brasília, continuo morando aqui.",

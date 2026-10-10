@@ -1,23 +1,42 @@
-import { SiGithub } from "@icons-pack/react-simple-icons";
-import {
-  DownloadSimpleIcon,
-  SealCheckIcon,
-} from "@phosphor-icons/react/dist/ssr";
-import { Karla } from "next/font/google";
-import Image from "next/image";
-import Link from "next/link";
+import { SiGitlab } from "@icons-pack/react-simple-icons";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import LocaleSwitcher from "@/components/locale-switcher";
+import { Oneko } from "@/components/oneko";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { buttonVariants, ExternalLink } from "@/components/ui";
 import { getDictionary, hasLocale } from "@/dictionaries";
+import { i18n, SITE_URL } from "@/i18n.config";
 
-import LocaleSwitcher from "../../components/locale-switcher";
-import { ScrollToTop } from "../../components/scroll-to-top";
-import Header from "./header";
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(locale)) return {};
 
-const karla = Karla({
-  subsets: ["latin"],
-  weight: "400",
-});
+  const { meta } = await getDictionary(locale);
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: Object.fromEntries(
+        i18n.locales.map((language) => [language, `/${language}`]),
+      ),
+    },
+    openGraph: {
+      type: "website",
+      siteName: "vncius.dev",
+      title: meta.title,
+      description: meta.description,
+      url: `/${locale}`,
+      locale: locale === "pt" ? "pt_BR" : "en_US",
+    },
+    twitter: { card: "summary_large_image" },
+  };
+}
 
 export default async function AppLayout({
   children,
@@ -30,83 +49,34 @@ export default async function AppLayout({
 
   const dict = await getDictionary(locale);
 
-  // Server Component: rendered once per request, never re-rendered.
-  // oxlint-disable-next-line react/purity
-  const year = new Date().getFullYear();
   return (
-    <>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('theme');
-                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    <body>
+      <main className="mx-auto flex min-h-svh w-full max-w-page stagger flex-col gap-section px-5 pt-8 sm:px-8 md:pt-14">
+        {children}
 
-                  if (theme === 'dark' || (!theme && systemPrefersDark)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {
-                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.classList.add('dark');
-                  }
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body className={`${karla.className} h-svh px-6`}>
-        <div className="mx-auto max-w-4xl flex-col gap-10 sm:flex sm:flex-row">
-          <aside className="top-10 mx-auto my-5 flex h-full w-full max-w-xs flex-col space-y-4 sm:sticky">
-            <Header dict={dict} />
-            <Image
-              className="h-[60svh] w-full object-cover"
-              src="/adam.jpg"
-              alt=""
-              loading="eager"
-              width={400}
-              height={800}
-            />
-            <footer className="mx-auto flex max-w-prose flex-col items-center gap-6 text-sm text-zinc-700 max-sm:items-start dark:text-zinc-400">
-              <div className="flex flex-wrap items-center justify-center gap-4 *:decoration-zinc-500 *:underline-offset-4 *:transition-transform *:sm:hover:underline *:dark:decoration-zinc-400">
-                <LocaleSwitcher currentLocale={locale} />
-                <Link
-                  className="flex items-center gap-1"
-                  href="https://github.com/vnxcius/vnciusdev"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <SiGithub className="size-3.5" />
-                  {dict.footer.code}
-                </Link>
-                <Link
-                  className="flex items-center gap-1"
-                  download="Vinicius-Hilton-CV.pdf"
-                  href="/cv-vinicius-hilton-2026-en.pdf"
-                >
-                  <DownloadSimpleIcon className="size-3.5" />
-                  <span className="text-nowrap">{dict.landing.download}</span>
-                </Link>
-              </div>
-
-              <div className="text-zinc-500">
-                <p className="flex items-center gap-1">
-                  <SealCheckIcon className="-ml-0.5 text-emerald-600" />{" "}
-                  vncius.dev / {year}
-                </p>
-              </div>
-            </footer>
-          </aside>
-          <main className="m-auto flex h-svh max-w-prose flex-1 flex-col py-16">
-            {children}
-            <ScrollToTop text={dict.backToTop} />
-          </main>
-        </div>
-      </body>
-    </>
+        <footer className="mt-auto pt-12">
+          <div className="-mx-2 flex items-center justify-between">
+            <LocaleSwitcher currentLocale={locale} />
+            <div className="flex items-center gap-px">
+              <ExternalLink
+                className={buttonVariants.ghost}
+                href="https://gitlab.com/vncius/vnciusdev"
+              >
+                <SiGitlab className="size-3.5" />
+                {dict.footer.code}
+              </ExternalLink>
+              <ThemeToggle label={dict.footer.theme} />
+            </div>
+          </div>
+          <p
+            aria-hidden="true"
+            className="overflow-hidden pt-6 text-center font-signature text-[min(21vw,8.75rem)] leading-[1.1] whitespace-nowrap opacity-(--signature-opacity) select-none"
+          >
+            vncius.dev
+          </p>
+        </footer>
+      </main>
+      <Oneko />
+    </body>
   );
 }

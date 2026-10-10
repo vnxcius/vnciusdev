@@ -19,6 +19,7 @@ export function useLocaleChange(currentLocale: Locale) {
   const changeLocale = async (locale: Locale) => {
     if (locale === currentLocale) return;
     await setLocaleCookie(locale);
+    document.documentElement.lang = locale;
     router.push(redirectPath(locale), { scroll: false });
   };
 

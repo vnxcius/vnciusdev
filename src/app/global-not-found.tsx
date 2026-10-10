@@ -1,21 +1,23 @@
 import Link from "next/link";
 
+import { inlineLinkClass } from "@/components/ui";
+
 import RootLayout from "./layout";
 
 export default function NotFound() {
   return (
     <RootLayout>
-      <div className="flex flex-col items-center justify-center gap-6 py-16">
-        <h1 className="text-5xl max-sm:text-3xl">
-          This page doesn&apos;t exist.
-        </h1>
-        <Link
-          className="underline decoration-sky-500 underline-offset-4 dark:decoration-sky-600"
-          href="/"
-        >
-          Just take me back already...
-        </Link>
-      </div>
+      <body>
+        <main className="mx-auto flex min-h-svh w-full max-w-page flex-col justify-center gap-2.5 px-5 sm:px-8">
+          <h1 className="font-medium">This page doesn&apos;t exist.</h1>
+          <Link
+            className={`${inlineLinkClass} w-fit text-foreground-secondary`}
+            href="/"
+          >
+            Just take me back already...
+          </Link>
+        </main>
+      </body>
     </RootLayout>
   );
 }

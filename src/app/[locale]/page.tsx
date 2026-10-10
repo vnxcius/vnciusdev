@@ -1,155 +1,253 @@
 import {
+  SiAnthropic,
+  SiBun,
+  SiDocker,
   SiGithub,
+  SiGitlab,
   SiGo,
-  SiGoHex,
   SiInstagram,
   SiLinkedin,
   SiNextdotjs,
-  SiNextdotjsHex,
   SiPostgresql,
-  SiPostgresqlHex,
   SiPython,
-  SiPythonHex,
   SiReact,
-  SiReactHex,
+  SiReactquery,
+  SiShadcnui,
   SiTailwindcss,
-  SiTailwindcssHex,
   SiTypescript,
-  SiTypescriptHex,
+  SiVite,
+  SiZedindustries,
 } from "@icons-pack/react-simple-icons";
 import {
-  ArrowUpRightIcon,
-  PaperPlaneTiltIcon,
-} from "@phosphor-icons/react/ssr";
+  CodeIcon,
+  EnvelopeSimpleIcon,
+  FileTextIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
 
-import { getDictionary, hasLocale } from "../../dictionaries";
-import ExperienceTimeline from "./_components/timeline";
-
-interface Link {
-  name: string;
-  url: string;
-  icon?: ReactNode;
-}
-
-const ExternalLink = (link: Link) => {
-  return (
-    <a
-      className="flex items-center justify-between gap-3 rounded-full py-1 pr-3 pl-4 ring ring-zinc-700 hover:bg-muted dark:hover:bg-zinc-900"
-      href={link.url}
-      key={link.url}
-      target="_blank"
-    >
-      <span className="flex items-center gap-3">
-        {link.icon} {link.name}
-      </span>
-      <ArrowUpRightIcon
-        className="shrink-0 text-zinc-800 dark:text-zinc-200"
-        strokeWidth={1.4}
-        size={16}
-      />
-    </a>
-  );
-};
+import { Activity } from "@/components/activity";
+import { Experience, type ExperienceItem } from "@/components/experience";
+import { Now } from "@/components/now";
+import { Projects } from "@/components/projects";
+import { buttonVariants, ExternalLink, inlineLinkClass } from "@/components/ui";
+import { getDictionary, hasLocale } from "@/dictionaries";
 
 export default async function Page({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   if (!hasLocale(locale)) notFound();
 
   const dict = await getDictionary(locale);
+  const { landing, projects: projectsDict } = dict;
+  const cvUrl = `/cv-vinicius-hilton-2026-${locale}.pdf`;
+  const emailUrl = `mailto:${landing.email}`;
 
-  const externalLinks: Link[] = [
+  const socialLinks = [
+    { name: "GitLab", url: "https://gitlab.com/vncius", icon: SiGitlab },
     {
       name: "LinkedIn",
       url: "https://www.linkedin.com/in/vinicius-hilton",
-      icon: (
-        <SiLinkedin size={16} className="fill-[#0077B5] dark:fill-zinc-200" />
-      ),
-    },
-    {
-      name: "GitHub",
-      url: "https://github.com/vnxcius",
-      icon: <SiGithub size={16} />,
+      icon: SiLinkedin,
     },
     {
       name: "Instagram",
       url: "https://instagram.com/vncius.ts",
-      icon: (
-        <SiInstagram size={16} className="fill-[#FF0069] dark:fill-zinc-200" />
-      ),
+      icon: SiInstagram,
+    },
+    { name: "Email", url: emailUrl, icon: EnvelopeSimpleIcon },
+    { name: "CV", url: cvUrl, icon: FileTextIcon },
+  ];
+
+  const experiences: ExperienceItem[] = [
+    { ...landing.experiences[0], kind: "work" },
+    { ...landing.experiences[1], kind: "education" },
+  ];
+
+  const skills = [
+    {
+      category: landing.skills.language,
+      items: [
+        {
+          name: "TypeScript",
+          url: "https://www.typescriptlang.org",
+          icon: SiTypescript,
+        },
+        { name: "Go", url: "https://go.dev", icon: SiGo },
+        { name: "Python", url: "https://www.python.org", icon: SiPython },
+      ],
+    },
+    {
+      category: landing.skills.frontend,
+      items: [
+        { name: "React", url: "https://react.dev", icon: SiReact },
+        { name: "Next.js", url: "https://nextjs.org", icon: SiNextdotjs },
+        {
+          name: "Tailwind CSS",
+          url: "https://tailwindcss.com",
+          icon: SiTailwindcss,
+        },
+        { name: "shadcn/ui", url: "https://ui.shadcn.com", icon: SiShadcnui },
+        { name: "TanStack", url: "https://tanstack.com", icon: SiReactquery },
+        { name: "Vite", url: "https://vite.dev", icon: SiVite },
+      ],
+    },
+    {
+      category: landing.skills.backend,
+      items: [
+        { name: "Bun", url: "https://bun.sh", icon: SiBun },
+        {
+          name: "PostgreSQL",
+          url: "https://www.postgresql.org",
+          icon: SiPostgresql,
+        },
+        { name: "Docker", url: "https://www.docker.com", icon: SiDocker },
+      ],
+    },
+    {
+      category: landing.skills.workflow,
+      items: [
+        { name: "GitLab", url: "https://gitlab.com", icon: SiGitlab },
+        { name: "GitHub", url: "https://github.com", icon: SiGithub },
+        { name: "Zed", url: "https://zed.dev", icon: SiZedindustries },
+        {
+          name: "VS Code",
+          url: "https://code.visualstudio.com",
+          icon: CodeIcon,
+        },
+      ],
+    },
+    {
+      category: landing.skills.ai,
+      items: [{ name: "Claude", url: "https://claude.ai", icon: SiAnthropic }],
     },
   ];
+
   return (
-    <div className="flex flex-col gap-6 overflow-y-auto p-1">
-      <div className="my-3 flex flex-col">
-        <h2 className="font-semibold">{dict.landing.knowMe}</h2>
-        <div className="mb-5 flex items-center gap-1 transition-transform select-all dark:text-zinc-500">
-          {dict.landing.email}
+    <>
+      <section aria-label="Hero" className="flex flex-col">
+        <div className="flex flex-row items-center justify-between">
+          <div>
+            <h1 className="flex items-center gap-2 font-medium">
+              Vinícius Simon
+              <Image
+                alt=""
+                className="size-5 rounded-full"
+                height={40}
+                src="/quack.webp"
+                width={40}
+              />
+            </h1>
+            <p className="mt-1 text-muted-foreground">{dict.role}</p>
+          </div>
+          <nav aria-label="Social links">
+            <ul className="flex flex-wrap gap-px">
+              {socialLinks.map((link) => (
+                <li key={link.name}>
+                  <ExternalLink
+                    aria-label={link.name}
+                    className={buttonVariants.icon}
+                    href={link.url}
+                  >
+                    <link.icon />
+                  </ExternalLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="mt-6 space-y-2.5 text-foreground-secondary">
+          <p>{landing.bio.intro}</p>
+          <p>
+            {landing.bio.freeTime}{" "}
+            <ExternalLink
+              className={inlineLinkClass}
+              href="https://minecraft-tools.cc"
+            >
+              Minecraft Tools
+            </ExternalLink>{" "}
+            {landing.bio.and}{" "}
+            <ExternalLink
+              className={inlineLinkClass}
+              href="https://dl.vncius.dev"
+            >
+              vndl
+            </ExternalLink>
+            . {landing.bio.more}{" "}
+            <Link className={inlineLinkClass} href={`/${locale}/about`}>
+              {landing.bio.aboutLink}
+            </Link>
+            .
+          </p>
+        </div>
+
+        <Now label={landing.now} locale={locale} />
+
+        <div className="mt-5.5 flex flex-wrap gap-2">
           <a
-            className="rounded p-1 dark:hover:bg-zinc-600/30"
-            href="mailto:contact@vncius.dev"
+            className={buttonVariants.primary}
+            download={`Vinicius-Hilton-CV-${locale}.pdf`}
+            href={cvUrl}
           >
-            <PaperPlaneTiltIcon className="size-4" strokeWidth={1.4} />
+            {landing.download}
+          </a>
+          <a className={buttonVariants.outline} href={emailUrl}>
+            {landing.sendEmail}
           </a>
         </div>
-        <div className="flex flex-wrap items-center gap-4">
-          {externalLinks.map((link: Link) => (
-            <ExternalLink key={link.url} {...link} />
+      </section>
+
+      <Activity
+        heading={landing.activity}
+        label={landing.contributions}
+        locale={locale}
+      />
+
+      <Experience
+        heading={landing.experience}
+        items={experiences}
+        labels={{ seeMore: landing.seeMore, seeLess: landing.seeLess }}
+      />
+
+      <section aria-labelledby="skills-heading" className="flex flex-col gap-5">
+        <h2 id="skills-heading">{landing.skills.title}</h2>
+        <div className="space-y-4">
+          {skills.map((group) => (
+            <div
+              className="grid grid-cols-[clamp(6.4rem,20vw,8rem)_minmax(0,1fr)] gap-2"
+              key={group.category}
+            >
+              <h3 className="text-[13px] text-foreground-tertiary">
+                {group.category}
+              </h3>
+              <ul className="flex flex-wrap gap-x-3 gap-y-1.5 sm:gap-x-4 sm:gap-y-2">
+                {group.items.map((skill) => (
+                  <li key={skill.name}>
+                    <ExternalLink
+                      className="flex items-center gap-1.5 text-[13px] text-foreground-secondary hover:text-foreground"
+                      href={skill.url}
+                    >
+                      <skill.icon
+                        aria-hidden="true"
+                        className="size-[13px] shrink-0 opacity-70 sm:size-3.5"
+                        color="currentColor"
+                      />
+                      {skill.name}
+                    </ExternalLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <hr className="dark:border-[#1b202a]" />
-
-      <div>
-        <h2 className="mb-1.5 font-semibold">{dict.landing.who}</h2>
-        <div className="flex flex-col *:flex *:items-center *:gap-1">
-          <p>{dict.landing.whoContent}</p>
-          <div className="my-3.5 flex flex-wrap space-x-1 *:flex *:items-center *:gap-1 *:font-medium">
-            <span>
-              <SiTypescript fill={SiTypescriptHex} className="size-4" />
-              TypeScript,
-            </span>
-            <span>
-              <SiReact fill={SiReactHex} className="size-4" /> React,
-            </span>
-            <span>
-              <SiNextdotjs
-                fill={SiNextdotjsHex}
-                className="size-4 dark:fill-zinc-100"
-              />
-              Next.js,
-            </span>
-            <span>
-              <SiTailwindcss fill={SiTailwindcssHex} className="size-4" />
-              TailwindCSS,
-            </span>
-            <span>
-              <SiGo fill={SiGoHex} className="size-4" /> Go,
-            </span>
-            <span>
-              <SiPostgresql
-                fill={SiPostgresqlHex}
-                className="size-4 dark:brightness-150"
-              />{" "}
-              SQL,
-            </span>
-            <span>
-              <SiPython fill={SiPythonHex} className="size-4" /> Python
-            </span>{" "}
-          </div>
-          <p>{dict.landing.whoOthers}</p>
-        </div>
-      </div>
-
-      <div>
-        <h2 className="font-semibold">{dict.landing.experience}</h2>
-        <p className="mb-4 text-sm text-muted-foreground">
-          {dict.landing.journey}
-        </p>
-        <ExperienceTimeline locale={locale} />
-      </div>
-    </div>
+      <Projects
+        heading={projectsDict.title}
+        labels={{ visit: projectsDict.visit, viewCode: projectsDict.viewCode }}
+        projects={projectsDict.projects}
+      />
+    </>
   );
 }

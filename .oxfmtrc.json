@@ -9,8 +9,8 @@
   "arrowParens": "always",
   "sortImports": true,
   "sortTailwindcss": {
-    "stylesheet": "./src/app/globals.css",
+    "stylesheet": "./src/globals.css",
     "functions": ["clsx", "cva", "cn"]
   },
-  "ignorePatterns": []
+  "ignorePatterns": ["src/routeTree.gen.ts"]
 }

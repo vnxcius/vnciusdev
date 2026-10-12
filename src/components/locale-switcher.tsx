@@ -1,7 +1,6 @@
-"use client";
+import { useNavigate } from "@tanstack/react-router";
 
 import type { Locale } from "@/dictionaries";
-import { useLocaleChange } from "@/hooks/use-locale-change";
 import { i18n, LocaleLabel } from "@/i18n.config";
 import { cn } from "@/lib/cn";
 
@@ -12,7 +11,17 @@ export default function LocaleSwitcher({
 }: {
   currentLocale: Locale;
 }) {
-  const { changeLocale } = useLocaleChange(currentLocale);
+  const navigate = useNavigate();
+
+  // Same page, other locale.
+  const changeLocale = (locale: Locale) => {
+    if (locale === currentLocale) return;
+    void navigate({
+      to: ".",
+      params: (params) => ({ ...params, locale }),
+      resetScroll: false,
+    });
+  };
 
   return (
     <div className="flex items-center gap-px">

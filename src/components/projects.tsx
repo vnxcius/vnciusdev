@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ArrowUpRightIcon,
   CaretDownIcon,
@@ -10,7 +8,6 @@ import {
   HardDrivesIcon,
   ProhibitIcon,
 } from "@phosphor-icons/react";
-import Image from "next/image";
 import { useState } from "react";
 
 import { cn } from "@/lib/cn";
@@ -128,10 +125,12 @@ export function Projects({
                       {project.details}
                     </p>
                     {image && (
-                      <Image
+                      <img
                         alt={project.name}
                         className="h-auto w-full rounded-xl border border-border squircle"
+                        decoding="async"
                         height={image.height}
+                        loading="lazy"
                         src={image.src}
                         width={image.width}
                       />

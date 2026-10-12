@@ -1,4 +1,7 @@
+import { createServerFn } from "@tanstack/react-start";
+
 import type { Locale } from "@/dictionaries";
+import { cachedFetch } from "@/lib/cached-fetch";
 
 import { ExternalLink, inlineLinkClass } from "./ui";
 
@@ -12,9 +15,7 @@ interface Push {
 }
 
 async function fetchJson(url: string) {
-  const response = await fetch(url, { next: { revalidate: 3600 } });
-  if (!response.ok) throw new Error(`${url}: ${response.status}`);
-  return response.json();
+  return JSON.parse(await cachedFetch(url));
 }
 
 async function getGitlabPush(): Promise<Push | null> {
@@ -46,16 +47,25 @@ async function getGithubPush(): Promise<Push | null> {
   };
 }
 
-// The most recent public push on either account, or null if neither answers.
-async function getLatestPush() {
-  const results = await Promise.allSettled([getGitlabPush(), getGithubPush()]);
-  const pushes = results.flatMap((result) =>
-    result.status === "fulfilled" && result.value ? [result.value] : [],
-  );
-  if (pushes.length === 0) return null;
-  const latest = pushes.reduce((a, b) => (b.time > a.time ? b : a));
-  return { ...latest, elapsed: Date.now() - latest.time };
+export interface LatestPush extends Push {
+  elapsed: number;
 }
+
+// The most recent public push on either account, or null if neither answers.
+export const getLatestPush = createServerFn().handler(
+  async (): Promise<LatestPush | null> => {
+    const results = await Promise.allSettled([
+      getGitlabPush(),
+      getGithubPush(),
+    ]);
+    const pushes = results.flatMap((result) =>
+      result.status === "fulfilled" && result.value ? [result.value] : [],
+    );
+    if (pushes.length === 0) return null;
+    const latest = pushes.reduce((a, b) => (b.time > a.time ? b : a));
+    return { ...latest, elapsed: Date.now() - latest.time };
+  },
+);
 
 function formatElapsed(elapsed: number, locale: Locale) {
   const format = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
@@ -66,16 +76,15 @@ function formatElapsed(elapsed: number, locale: Locale) {
   return format.format(-Math.round(days / 30), "month");
 }
 
-export async function Now({
+export function Now({
   label,
   locale,
+  push,
 }: {
   label: string;
   locale: Locale;
+  push: LatestPush;
 }) {
-  const push = await getLatestPush();
-  if (!push) return null;
-
   return (
     <p className="mt-4 flex items-center gap-2 text-[13px] text-muted-foreground">
       <span aria-hidden="true" className="relative flex size-2">

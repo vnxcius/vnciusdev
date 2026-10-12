@@ -1,4 +1,7 @@
+import { createServerFn } from "@tanstack/react-start";
+
 import type { Locale } from "@/dictionaries";
+import { cachedFetch } from "@/lib/cached-fetch";
 import { cn } from "@/lib/cn";
 
 const GITLAB_USERS = ["vncius"];
@@ -16,15 +19,9 @@ const levels = [
 
 type Counts = Record<string, number>;
 
-async function fetchText(url: string) {
-  const response = await fetch(url, { next: { revalidate: 3600 } });
-  if (!response.ok) throw new Error(`${url}: ${response.status}`);
-  return response.text();
-}
-
 async function getGitlabCounts(user: string): Promise<Counts> {
   return JSON.parse(
-    await fetchText(`https://gitlab.com/users/${user}/calendar.json`),
+    await cachedFetch(`https://gitlab.com/users/${user}/calendar.json`),
   );
 }
 
@@ -32,7 +29,7 @@ async function getGitlabCounts(user: string): Promise<Counts> {
 // each day is a cell with an id and a date, and its count sits in a tooltip
 // that points back at that id.
 async function getGithubCounts(user: string): Promise<Counts> {
-  const html = await fetchText(
+  const html = await cachedFetch(
     `https://github.com/users/${user}/contributions`,
   );
   const dates = new Map<string, string>();
@@ -54,47 +51,57 @@ async function getGithubCounts(user: string): Promise<Counts> {
   return counts;
 }
 
-async function getContributions() {
-  const sources = await Promise.allSettled([
-    ...GITLAB_USERS.map(getGitlabCounts),
-    ...GITHUB_USERS.map(getGithubCounts),
-  ]);
-  // A source that is down is left out; the rest still add up.
-  const loaded = sources.flatMap((source) =>
-    source.status === "fulfilled" ? [source.value] : [],
-  );
-  if (loaded.length === 0) return null;
-
-  // Weeks run Sunday to Saturday; the last column is the current week.
-  const today = new Date();
-  const end = Date.UTC(
-    today.getUTCFullYear(),
-    today.getUTCMonth(),
-    today.getUTCDate(),
-  );
-  const start = end - (new Date(end).getUTCDay() + (WEEKS - 1) * 7) * DAY;
-
-  const days = [];
-  for (let time = start; time <= end; time += DAY) {
-    const date = new Date(time);
-    const key = date.toISOString().slice(0, 10);
-    const count = loaded.reduce((sum, counts) => sum + (counts[key] ?? 0), 0);
-    days.push({ date, count });
-  }
-  return days;
+export interface Contributions {
+  // Midnight UTC of the first day; `counts` has one entry per day after it.
+  start: number;
+  counts: number[];
 }
 
-export async function Activity({
+export const getContributions = createServerFn().handler(
+  async (): Promise<Contributions | null> => {
+    const sources = await Promise.allSettled([
+      ...GITLAB_USERS.map(getGitlabCounts),
+      ...GITHUB_USERS.map(getGithubCounts),
+    ]);
+    // A source that is down is left out; the rest still add up.
+    const loaded = sources.flatMap((source) =>
+      source.status === "fulfilled" ? [source.value] : [],
+    );
+    if (loaded.length === 0) return null;
+
+    // Weeks run Sunday to Saturday; the last column is the current week.
+    const today = new Date();
+    const end = Date.UTC(
+      today.getUTCFullYear(),
+      today.getUTCMonth(),
+      today.getUTCDate(),
+    );
+    const start = end - (new Date(end).getUTCDay() + (WEEKS - 1) * 7) * DAY;
+
+    const counts = [];
+    for (let time = start; time <= end; time += DAY) {
+      const key = new Date(time).toISOString().slice(0, 10);
+      counts.push(loaded.reduce((sum, source) => sum + (source[key] ?? 0), 0));
+    }
+    return { start, counts };
+  },
+);
+
+export function Activity({
+  contributions,
   heading,
   label,
   locale,
 }: {
+  contributions: Contributions;
   heading: string;
   label: string;
   locale: Locale;
 }) {
-  const days = await getContributions();
-  if (!days) return null;
+  const days = contributions.counts.map((count, index) => ({
+    date: new Date(contributions.start + index * DAY),
+    count,
+  }));
 
   const total = days.reduce((sum, day) => sum + day.count, 0);
   const max = Math.max(...days.map((day) => day.count), 1);

@@ -1,5 +1,3 @@
-"use client";
-
 // The cat that chases the cursor. A port of oneko.js
 // (https://github.com/adryd325/oneko.js), which also provides the sprite sheet
 // in /public/oneko.gif.

@@ -1,12 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist/wght.css";
+@import "@fontsource/nothing-you-could-do/400.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-geist);
-  --font-signature: var(--font-signature);
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-signature: "Nothing You Could Do", cursive;
   --container-page: 43.75rem;
   --color-background: var(--background);
   --color-foreground: var(--foreground);

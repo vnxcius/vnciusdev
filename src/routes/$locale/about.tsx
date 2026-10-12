@@ -6,15 +6,17 @@ import {
   HardDriveIcon,
   LightningIcon,
   MemoryIcon,
-} from "@phosphor-icons/react/dist/ssr";
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+} from "@phosphor-icons/react";
+import {
+  createFileRoute,
+  getRouteApi,
+  Link,
+  notFound,
+} from "@tanstack/react-router";
 
 import { buttonVariants, ExternalLink, inlineLinkClass } from "@/components/ui";
 import { getDictionary, hasLocale } from "@/dictionaries";
-import { i18n } from "@/i18n.config";
+import { localeLinks } from "@/lib/seo";
 
 const specs = [
   { icon: CpuIcon, text: "AMD Ryzen 7 3700x, 8 Cores, 16 Threads, 3.6GHz" },
@@ -25,29 +27,27 @@ const specs = [
   { icon: HardDriveIcon, text: "SSD Kingston 1TB NVMe M.2" },
 ];
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[locale]">): Promise<Metadata> {
-  const { locale } = await params;
-  if (!hasLocale(locale)) return {};
+const localeRoute = getRouteApi("/$locale");
 
-  const { about } = await getDictionary(locale);
-  return {
-    title: `${about.title} – Vinícius Simon`,
-    alternates: {
-      canonical: `/${locale}/about`,
-      languages: Object.fromEntries(
-        i18n.locales.map((language) => [language, `/${language}/about`]),
-      ),
-    },
-  };
-}
+export const Route = createFileRoute("/$locale/about")({
+  loader: async ({ params: { locale } }) => {
+    if (!hasLocale(locale)) throw notFound();
+    const { about } = await getDictionary(locale);
+    return { locale, title: about.title };
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    return {
+      meta: [{ title: `${loaderData.title} – Vinícius Simon` }],
+      links: localeLinks(loaderData.locale, "/about"),
+    };
+  },
+  component: AboutPage,
+});
 
-export default async function AboutPage({ params }: PageProps<"/[locale]">) {
-  const { locale } = await params;
-  if (!hasLocale(locale)) notFound();
-
-  const { about, landing } = await getDictionary(locale);
+function AboutPage() {
+  const { locale, dict } = localeRoute.useLoaderData();
+  const { about, landing } = dict;
   const email = landing.email;
 
   return (
@@ -55,7 +55,11 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
       <section className="flex flex-col">
         <div className="flex items-center justify-between">
           <h1 className="font-medium">{about.title}</h1>
-          <Link className={`${buttonVariants.ghost} -mr-2`} href={`/${locale}`}>
+          <Link
+            className={`${buttonVariants.ghost} -mr-2`}
+            params={{ locale }}
+            to="/$locale"
+          >
             <ArrowLeftIcon className="size-3.5" />
             {about.back}
           </Link>
@@ -63,13 +67,13 @@ export default async function AboutPage({ params }: PageProps<"/[locale]">) {
 
         {/* Cropped to the two hands of the portrait-shaped original. */}
         <div className="group relative mt-6 aspect-5/2 overflow-hidden rounded-xl border border-border squircle">
-          <Image
+          <img
             alt="Detail of Michelangelo's The Creation of Adam"
-            className="object-cover object-[50%_45%] saturate-[0.9] transition-transform duration-700 ease-smooth group-hover:scale-105 dark:brightness-[0.85]"
-            fill
-            priority
-            sizes="(min-width: 700px) 636px, 100vw"
+            className="absolute inset-0 size-full object-cover object-[50%_45%] saturate-[0.9] transition-transform duration-700 ease-smooth group-hover:scale-105 dark:brightness-[0.85]"
+            fetchPriority="high"
+            height={800}
             src="/adam.jpg"
+            width={451}
           />
         </div>
 

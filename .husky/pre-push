@@ -5,8 +5,8 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 NC="\033[0m"
 
-printf "%b\n" "${YELLOW}INFO: Checking Next.js build...${NC}"
-next build
+printf "%b\n" "${YELLOW}INFO: Checking build...${NC}"
+bun run build
 
 if [ $? -ne 0 ]; then
   printf "%b\n" "${RED}ERROR: Build failed. Push canceled.${NC}"

@@ -1,14 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript",
-    "unicorn",
-    "oxc",
-    "react",
-    "nextjs",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["typescript", "unicorn", "oxc", "react", "jsx-a11y", "import"],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -31,14 +23,7 @@
     ],
     "no-shadow": "off",
     "import/no-unassigned-import": "off",
-    "react/react-in-jsx-scope": "off",
-    "nextjs/no-img-element": "warn",
-    "nextjs/no-head-element": "warn",
-    "nextjs/no-unwanted-polyfillio": "warn",
-    "nextjs/google-font-preconnect": "warn",
-    "nextjs/google-font-display": "warn",
-    "nextjs/no-document-import-in-page": "error",
-    "nextjs/no-head-import-in-document": "error"
+    "react/react-in-jsx-scope": "off"
   },
   "overrides": [
     {
@@ -49,5 +34,5 @@
       }
     }
   ],
-  "ignorePatterns": [".next", "out", "build", "next-env.d.ts"]
+  "ignorePatterns": [".output", ".vercel", ".wrangler", "src/routeTree.gen.ts"]
 }

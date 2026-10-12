@@ -22,23 +22,43 @@ import {
   CodeIcon,
   EnvelopeSimpleIcon,
   FileTextIcon,
-} from "@phosphor-icons/react/dist/ssr";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+} from "@phosphor-icons/react";
+import {
+  createFileRoute,
+  getRouteApi,
+  Link,
+  notFound,
+} from "@tanstack/react-router";
 
-import { Activity } from "@/components/activity";
+import { Activity, getContributions } from "@/components/activity";
 import { Experience, type ExperienceItem } from "@/components/experience";
-import { Now } from "@/components/now";
+import { getLatestPush, Now } from "@/components/now";
 import { Projects } from "@/components/projects";
 import { buttonVariants, ExternalLink, inlineLinkClass } from "@/components/ui";
-import { getDictionary, hasLocale } from "@/dictionaries";
+import { hasLocale } from "@/dictionaries";
+import { localeLinks } from "@/lib/seo";
 
-export default async function Page({ params }: PageProps<"/[locale]">) {
-  const { locale } = await params;
-  if (!hasLocale(locale)) notFound();
+const localeRoute = getRouteApi("/$locale");
 
-  const dict = await getDictionary(locale);
+export const Route = createFileRoute("/$locale/")({
+  loader: async ({ params: { locale } }) => {
+    if (!hasLocale(locale)) throw notFound();
+    const [contributions, push] = await Promise.all([
+      getContributions(),
+      getLatestPush(),
+    ]);
+    return { locale, contributions, push };
+  },
+  // Coming back from another page reuses what was loaded.
+  staleTime: 5 * 60 * 1000,
+  head: ({ loaderData }) =>
+    loaderData ? { links: localeLinks(loaderData.locale) } : {},
+  component: Page,
+});
+
+function Page() {
+  const { locale, dict } = localeRoute.useLoaderData();
+  const { contributions, push } = Route.useLoaderData();
   const { landing, projects: projectsDict } = dict;
   const cvUrl = `/cv-vinicius-hilton-2026-${locale}.pdf`;
   const emailUrl = `mailto:${landing.email}`;
@@ -130,7 +150,7 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
           <div>
             <h1 className="flex items-center gap-2 font-medium">
               Vinícius Simon
-              <Image
+              <img
                 alt=""
                 className="size-5 rounded-full"
                 height={40}
@@ -175,14 +195,18 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
               vndl
             </ExternalLink>
             . {landing.bio.more}{" "}
-            <Link className={inlineLinkClass} href={`/${locale}/about`}>
+            <Link
+              className={inlineLinkClass}
+              params={{ locale }}
+              to="/$locale/about"
+            >
               {landing.bio.aboutLink}
             </Link>
             .
           </p>
         </div>
 
-        <Now label={landing.now} locale={locale} />
+        {push && <Now label={landing.now} locale={locale} push={push} />}
 
         <div className="mt-5.5 flex flex-wrap gap-2">
           <a
@@ -198,11 +222,14 @@ export default async function Page({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-      <Activity
-        heading={landing.activity}
-        label={landing.contributions}
-        locale={locale}
-      />
+      {contributions && (
+        <Activity
+          contributions={contributions}
+          heading={landing.activity}
+          label={landing.contributions}
+          locale={locale}
+        />
+      )}
 
       <Experience
         heading={landing.experience}

@@ -1,5 +1,3 @@
-"use client";
-
 import { MoonIcon, SunIcon } from "@phosphor-icons/react";
 import { useSyncExternalStore } from "react";
 

@@ -3,10 +3,12 @@
     "title": "Vinícius Simon – Desenvolvedor Fullstack",
     "description": "Sou o Vinícius, desenvolvedor fullstack de Brasília que ama programar. Projetos, experiência e atividade."
   },
+  "away": "Volta, o gato está com saudade",
   "role": "Desenvolvedor Fullstack Jr.",
   "footer": {
     "code": "Código",
-    "theme": "Alternar tema"
+    "theme": "Alternar tema",
+    "cat": "Alternar o gato"
   },
   "landing": {
     "bio": {
@@ -24,9 +26,14 @@
     "experience": "Experiência",
     "seeMore": "Ver mais",
     "seeLess": "Ver menos",
+    "play": "Jogar",
+    "stop": "Parar",
+    "score": "Pontos",
+    "gameOver": "Fim de jogo",
     "experiences": {
       "0": {
         "title": "eTopocart",
+        "away": "Volta, o gato está com saudade",
         "role": "Assistente de Desenvolvimento de Sistemas",
         "description": "Desenvolvimento e manutenção de uma aplicação SIG Web (Geo360 Pro).",
         "date": "Set 25 - Atual",
@@ -39,6 +46,7 @@
       },
       "1": {
         "title": "Gestão de TI",
+        "away": "Volta, o gato está com saudade",
         "role": "Tecnólogo",
         "description": "Faculdade de Tecnologia e Inovação Senac DF",
         "date": "2022 - 2024",

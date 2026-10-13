@@ -8,11 +8,12 @@ import {
 import { useEffect } from "react";
 
 import LocaleSwitcher from "@/components/locale-switcher";
-import { Oneko } from "@/components/oneko";
+import { Oneko, OnekoToggle } from "@/components/oneko";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants, ExternalLink } from "@/components/ui";
 import { getDictionary, hasLocale } from "@/dictionaries";
 import { SITE_URL } from "@/i18n.config";
+import { greetConsole, useAwayTitle } from "@/lib/easter-eggs";
 import { getPreferredLocale, rememberLocale } from "@/lib/locale";
 
 export const Route = createFileRoute("/$locale")({
@@ -66,6 +67,8 @@ function LocaleLayout() {
   const { locale, dict } = Route.useLoaderData();
 
   useEffect(() => rememberLocale(locale), [locale]);
+  useEffect(greetConsole, []);
+  useAwayTitle(dict.away);
 
   return (
     <>
@@ -83,6 +86,7 @@ function LocaleLayout() {
                 <SiGitlab className="size-3.5" />
                 {dict.footer.code}
               </ExternalLink>
+              <OnekoToggle label={dict.footer.cat} />
               <ThemeToggle label={dict.footer.theme} />
             </div>
           </div>

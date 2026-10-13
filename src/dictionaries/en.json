@@ -3,10 +3,12 @@
     "title": "Vinícius Simon – Fullstack Developer",
     "description": "I’m Vinícius, a fullstack developer from Brasília that loves to code. Projects, experience and activity."
   },
+  "away": "Come back, the cat misses you",
   "role": "Fullstack Developer Jr.",
   "footer": {
     "code": "Code",
-    "theme": "Toggle theme"
+    "theme": "Toggle theme",
+    "cat": "Toggle the cat"
   },
   "landing": {
     "bio": {
@@ -24,9 +26,14 @@
     "experience": "Experience",
     "seeMore": "See more",
     "seeLess": "See less",
+    "play": "Play",
+    "stop": "Stop",
+    "score": "Score",
+    "gameOver": "Game over",
     "experiences": {
       "0": {
         "title": "eTopocart",
+        "away": "Come back, the cat misses you",
         "role": "System Development Assistant",
         "description": "Developing and maintaining a web GIS application (Geo360 Pro).",
         "date": "Sep 25 - Now",
@@ -39,6 +46,7 @@
       },
       "1": {
         "title": "IT Management",
+        "away": "Come back, the cat misses you",
         "role": "Technologist degree",
         "description": "Faculdade de Tecnologia e Inovação Senac DF",
         "date": "2022 - 2024",

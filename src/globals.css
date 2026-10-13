@@ -37,6 +37,7 @@
   --animate-enter: enter 0.6s var(--ease-smooth) both;
   --animate-cell: cell 0.5s var(--ease-smooth) both;
   --animate-draw: draw 0.9s var(--ease-smooth) 0.3s both;
+  --animate-heart: heart 0.9s ease-out both;
 
   @keyframes enter {
     from {
@@ -54,6 +55,19 @@
   @keyframes draw {
     from {
       transform: translateY(-50%) scaleX(0);
+    }
+  }
+  @keyframes heart {
+    from {
+      opacity: 0;
+      transform: translateY(0) scale(0.6);
+    }
+    20% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-28px) scale(1.1);
     }
   }
 }

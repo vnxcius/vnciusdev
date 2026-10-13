@@ -14,7 +14,12 @@
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 
-import { useEffect, useRef } from "react";
+import { CatIcon } from "@phosphor-icons/react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+
+import { cn } from "@/lib/cn";
+
+import { buttonVariants } from "./ui";
 
 const SIZE = 32;
 const SPEED = 10;
@@ -86,14 +91,74 @@ const sprites = {
 
 type Sprite = keyof typeof sprites;
 
+// The cat is on unless the visitor turned it off; the choice is remembered.
+const STORAGE_KEY = "oneko";
+const listeners = new Set<() => void>();
+
+function subscribeToCat(onChange: () => void) {
+  listeners.add(onChange);
+  return () => listeners.delete(onChange);
+}
+
+function getIsCatEnabled() {
+  try {
+    return localStorage.getItem(STORAGE_KEY) !== "off";
+  } catch {
+    return true;
+  }
+}
+
+function getServerIsCatEnabled() {
+  return true;
+}
+
+function useCat() {
+  return useSyncExternalStore(
+    subscribeToCat,
+    getIsCatEnabled,
+    getServerIsCatEnabled,
+  );
+}
+
+// Only shown where the cat can show up: with a mouse, and with motion allowed.
+export function OnekoToggle({ label }: { label: string }) {
+  const enabled = useCat();
+
+  const toggleCat = () => {
+    try {
+      localStorage.setItem(STORAGE_KEY, enabled ? "off" : "on");
+    } catch {
+      return;
+    }
+    for (const listener of listeners) listener();
+  };
+
+  return (
+    <button
+      aria-label={label}
+      aria-pressed={enabled}
+      className={cn(
+        buttonVariants.icon,
+        "hidden motion-reduce:hidden pointer-fine:inline-flex",
+      )}
+      onClick={toggleCat}
+      type="button"
+    >
+      <CatIcon weight={enabled ? "fill" : "regular"} />
+    </button>
+  );
+}
+
 export function Oneko() {
   const ref = useRef<HTMLDivElement>(null);
+  const enabled = useCat();
 
   useEffect(() => {
     const cat = ref.current;
     // No cat without a mouse to chase, or for people who asked for less motion.
     if (
       !cat ||
+      !enabled ||
       !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
@@ -110,10 +175,45 @@ export function Oneko() {
     let idleAnimationFrame = 0;
     let lastFrame = 0;
     let request = 0;
+    // A fish dropped by a click, which the cat goes after instead of the mouse.
+    let fish: HTMLSpanElement | null = null;
+    let fishX = 0;
+    let fishY = 0;
 
     const setSprite = (name: Sprite, frame: number) => {
       const [column, row] = sprites[name][frame % sprites[name].length];
       cat.style.backgroundPosition = `${column * SIZE}px ${row * SIZE}px`;
+    };
+
+    const spawnHearts = () => {
+      for (const offset of [-10, 0, 10]) {
+        const heart = document.createElement("span");
+        heart.textContent = "♥";
+        heart.ariaHidden = "true";
+        heart.className =
+          "pointer-events-none fixed z-50 animate-heart text-[12px] leading-none text-brand select-none";
+        heart.style.left = `${catX + offset - 4}px`;
+        heart.style.top = `${catY - SIZE / 2 - 10}px`;
+        heart.style.animationDelay = `${Math.abs(offset) * 12}ms`;
+        heart.addEventListener("animationend", () => heart.remove());
+        document.body.append(heart);
+      }
+    };
+
+    const dropFish = (x: number, y: number) => {
+      if (!fish) {
+        fish = document.createElement("span");
+        fish.textContent = "🐟";
+        fish.ariaHidden = "true";
+        fish.className =
+          "pointer-events-none fixed z-40 text-[16px] leading-none select-none";
+        document.body.append(fish);
+      }
+      // Kept where the cat can reach it.
+      fishX = Math.min(Math.max(SIZE / 2, x), window.innerWidth - SIZE / 2);
+      fishY = Math.min(Math.max(SIZE / 2, y), window.innerHeight - SIZE / 2);
+      fish.style.left = `${fishX - 8}px`;
+      fish.style.top = `${fishY - 8}px`;
     };
 
     const idle = () => {
@@ -153,11 +253,17 @@ export function Oneko() {
 
     const frame = () => {
       frameCount += 1;
-      const diffX = catX - mouseX;
-      const diffY = catY - mouseY;
+      const diffX = catX - (fish ? fishX : mouseX);
+      const diffY = catY - (fish ? fishY : mouseY);
       const distance = Math.hypot(diffX, diffY);
 
-      if (distance < 48) {
+      // The cat keeps its distance from the mouse, but walks right up to food.
+      if (distance < (fish ? SPEED : 48)) {
+        if (fish) {
+          fish.remove();
+          fish = null;
+          spawnHearts();
+        }
         idle();
         return;
       }
@@ -201,21 +307,40 @@ export function Oneko() {
       mouseY = event.clientY;
     };
 
+    // Clicking the cat pets it; clicking an empty spot drops a fish there.
+    const onClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+      if (event.target === cat) {
+        spawnHearts();
+        return;
+      }
+      const interactive = "a, button, input, textarea, select";
+      if (event.target.closest(interactive)) return;
+      if (window.getSelection()?.toString()) return;
+      dropFish(event.clientX, event.clientY);
+    };
+
+    cat.style.left = `${catX - SIZE / 2}px`;
+    cat.style.top = `${catY - SIZE / 2}px`;
     cat.style.display = "block";
     setSprite("idle", 0);
     document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("click", onClick);
     request = window.requestAnimationFrame(onAnimationFrame);
 
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("click", onClick);
+      fish?.remove();
       window.cancelAnimationFrame(request);
+      cat.style.display = "";
     };
-  }, []);
+  }, [enabled]);
 
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed top-4 left-4 z-50 hidden size-8 bg-[url(/oneko.gif)] [image-rendering:pixelated]"
+      className="fixed top-4 left-4 z-50 hidden size-8 cursor-pointer bg-[url(/oneko.gif)] [image-rendering:pixelated]"
       ref={ref}
     />
   );

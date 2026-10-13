@@ -226,6 +226,12 @@ function Page() {
         <Activity
           contributions={contributions}
           heading={landing.activity}
+          labels={{
+            play: landing.play,
+            stop: landing.stop,
+            score: landing.score,
+            gameOver: landing.gameOver,
+          }}
           label={landing.contributions}
           locale={locale}
         />

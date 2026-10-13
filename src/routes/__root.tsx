@@ -65,6 +65,7 @@ function RootLayout() {
       suppressHydrationWarning
     >
       <head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="d263ab52-09c3-40ae-8c83-395cce53b015"></script>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <HeadContent />
       </head>
